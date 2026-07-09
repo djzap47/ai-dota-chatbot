@@ -5,7 +5,6 @@ from langchain_community.utilities import SQLDatabase
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_community.agent_toolkits import create_sql_agent
 
-# Load environment variables
 load_dotenv()
 
 DB_URL = os.getenv("SUPABASE_DB_URL")
@@ -18,7 +17,6 @@ if not DB_URL or not GOOGLE_API_KEY or "your-gemini-api-key" in GOOGLE_API_KEY:
 print("Connecting to Supabase database...")
 try:
     db = SQLDatabase.from_uri(DB_URL)
-    # Check connection
     db.get_usable_table_names()
 except Exception as e:
     print(f"Error connecting to the database: {e}")

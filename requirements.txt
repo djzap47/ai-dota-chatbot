@@ -3,3 +3,7 @@ langchain-google-genai
 langchain-community
 psycopg2-binary
 python-dotenv
+django
+requests
+dj-database-url
+schedule
