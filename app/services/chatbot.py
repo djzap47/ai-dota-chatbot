@@ -42,12 +42,15 @@ def get_agent():
             temperature=0
         )
         
+        # zero-shot-react-description ensures turns strictly alternate and never end on a model message,
+        # perfectly matching Google Gemini's strict conversational API requirements.
         _agent = create_sql_agent(
             llm=llm,
             db=db,
-            agent_type="tool-calling",
+            agent_type="zero-shot-react-description",
             verbose=False,
-            max_iterations=4,
+            max_iterations=5,
+            agent_executor_kwargs={"handle_parsing_errors": True},
             prefix=PREFIX
         )
     return _agent
