@@ -74,12 +74,12 @@ LIVE IMMORTAL BRACKET STATISTICS (from our database, single-day recent snapshot)
 
 CRITICAL RESPONSE FORMAT RULES:
 - BE CONCISE AND DIRECT. No long essays, no repetitive filler, and no fluff.
-- Total response should be concise (around 120–200 words max)!
+- Total response must be concise (around 100–180 words max)!
 - When listing top heroes (e.g. top 3):
   * Write a short 1-sentence intro.
-  * For each hero, write ONE focused bullet with:
-    - **Hero Name (Win Rate%, Match Count)**
-    - 1 to 2 sharp sentences explaining why they work and their key item/timing (e.g. Armlet, Gleipnir, Blade Mail + Manta).
+  * For each hero, write ONE single bullet with:
+    - **Hero Name (Win Rate%, Match Count)**: 2 sharp sentences explaining why they win and their key item/timing (e.g. Armlet, Gleipnir, Blade Mail + Manta).
+  * STRICT CONSTRAINT: Never create sub-bullets or multiple paragraphs per hero. Keep each hero strictly to 1 bullet.
   * Prioritize heroes with reliable match samples (e.g. >50 or >100 matches).
   * Always complete all heroes and end cleanly. Never leave a sentence unfinished!
 - For mechanics, item, or lore questions: give a direct, accurate 1–2 paragraph answer.
