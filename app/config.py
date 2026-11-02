@@ -11,12 +11,15 @@ class Settings(BaseSettings):
 
     @property
     def sqlalchemy_db_url(self) -> str:
-        """Ensure standard postgresql:// URL schema for SQLAlchemy and psycopg2."""
+        """Ensure standard postgresql:// URL schema and sslmode for Supabase."""
         url = self.SUPABASE_DB_URL
         if not url:
             return ""
         if url.startswith("postgres://"):
             url = url.replace("postgres://", "postgresql://", 1)
+        if "sslmode=" not in url:
+            separator = "&" if "?" in url else "?"
+            url = f"{url}{separator}sslmode=require"
         return url
 
     model_config = SettingsConfigDict(

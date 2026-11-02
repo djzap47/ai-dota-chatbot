@@ -15,7 +15,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text, func
 
 from app.config import settings
-from app.database import get_db
+from app.database import get_db, SessionLocal
 from app.models import HeroStat
 from app.schemas import (
     ChatRequest,
@@ -61,10 +61,15 @@ def root():
 
 
 @app.get("/health", response_model=HealthResponse, tags=["General"])
-def health_check(db: Session = Depends(get_db)):
+def health_check():
+    """Health check endpoint that tests connectivity to Supabase without crashing."""
+    db_status = "connected"
     try:
-        db.execute(text("SELECT 1"))
-        db_status = "connected"
+        db = SessionLocal()
+        try:
+            db.execute(text("SELECT 1"))
+        finally:
+            db.close()
     except Exception as e:
         db_status = f"error: {str(e)}"
 

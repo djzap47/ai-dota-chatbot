@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker, Session
+from sqlalchemy.pool import NullPool
 from typing import Generator
 from app.config import settings
 
@@ -14,10 +15,13 @@ def get_engine():
         db_url = settings.sqlalchemy_db_url
         if not db_url:
             raise ValueError("SUPABASE_DB_URL is not set in environment variables.")
+        
+        # In serverless environments with Supabase transaction pooler (port 6543),
+        # NullPool is the official best practice to prevent connection exhaustion.
         _engine = create_engine(
             db_url,
-            pool_pre_ping=True,
-            pool_recycle=300
+            poolclass=NullPool,
+            connect_args={"sslmode": "require"}
         )
         _SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=_engine)
     return _engine
