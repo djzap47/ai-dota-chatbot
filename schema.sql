@@ -21,3 +21,19 @@ CREATE TABLE IF NOT EXISTS hero_stats (
     recorded_at TIMESTAMPTZ DEFAULT NOW(),
     CONSTRAINT unique_hero_id UNIQUE (hero_id)
 );
+
+-- Table: hero_documents
+-- Stores chunked Liquipedia knowledge with 768-dimension vector embeddings
+CREATE TABLE IF NOT EXISTS hero_documents (
+    id SERIAL PRIMARY KEY,
+    hero_id INTEGER REFERENCES heroes(id) ON DELETE CASCADE,
+    hero_name TEXT NOT NULL,
+    section_title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    embedding vector(768),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Index for fast approximate nearest neighbor vector search
+CREATE INDEX IF NOT EXISTS hero_documents_embedding_idx 
+ON hero_documents USING hnsw (embedding vector_cosine_ops);

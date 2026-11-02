@@ -121,12 +121,25 @@ def _extract_text(content: Any) -> str:
 
 def _run_chatbot_sync(user_input: str) -> str:
     """
-    Executes a single, lightning-fast LLM call with live Immortal stats in context.
-    Executes in ~3 to 5 seconds, eliminating timeouts on serverless functions.
+    Executes a single, lightning-fast LLM call grounded in:
+    1. Real-time Immortal bracket stats (STRATZ).
+    2. Real-time official Liquipedia / game wiki RAG knowledge.
+    Executes in ~3 to 5 seconds.
     """
-    llm = get_llm(temperature=settings.CHATBOT_TEMPERATURE)
     prompt = build_system_prompt()
     
+    # RAG: Retrieve matching Liquipedia / patch documentation
+    try:
+        from app.services.rag import search_liquipedia_knowledge
+        docs = search_liquipedia_knowledge(user_input, limit=2, threshold=0.55)
+        if docs:
+            snippets = [f"[{d['section_title']}]:\n{d['content']}" for d in docs]
+            rag_context = "\n\nOFFICIAL LIQUIPEDIA / GAME WIKI KNOWLEDGE (VERIFIED PATCH DATA):\n" + "\n\n".join(snippets)
+            prompt += rag_context
+    except Exception as rag_err:
+        print(f"RAG lookup notice: {rag_err}")
+
+    llm = get_llm(temperature=settings.CHATBOT_TEMPERATURE)
     messages = [
         SystemMessage(content=prompt),
         HumanMessage(content=user_input)
