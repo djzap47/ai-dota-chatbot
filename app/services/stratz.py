@@ -1,10 +1,13 @@
-import os
 import requests
+from sqlalchemy.orm import Session
+from app.config import settings
+from app.models import Hero, HeroStat
+from app.database import SessionLocal
 
 STRATZ_API_URL = "https://api.stratz.com/graphql"
 
-def get_headers():
-    token = os.getenv("STRATZ_API_KEY")
+def get_headers() -> dict:
+    token = settings.STRATZ_API_KEY
     if not token:
         raise ValueError("STRATZ_API_KEY is not set in the environment variables.")
     return {
@@ -13,7 +16,8 @@ def get_headers():
         "Content-Type": "application/json"
     }
 
-def fetch_hero_stats():
+def fetch_hero_stats() -> list[dict]:
+    """Fetch current daily Immortal stats for all heroes from STRATZ GraphQL API."""
     query = """
     query {
       constants {
@@ -31,8 +35,8 @@ def fetch_hero_stats():
       }
     }
     """
-    
-    response = requests.post(STRATZ_API_URL, json={'query': query}, headers=get_headers())
+
+    response = requests.post(STRATZ_API_URL, json={'query': query}, headers=get_headers(), timeout=30)
     
     if response.status_code != 200:
         raise Exception(f"STRATZ API returned {response.status_code}: {response.text}")
@@ -72,3 +76,42 @@ def fetch_hero_stats():
         })
         
     return results
+
+
+def sync_hero_stats(db: Session) -> int:
+    """Fetch data from STRATZ and upsert into Supabase."""
+    stats_list = fetch_hero_stats()
+    
+    for item in stats_list:
+        hero_id = item['hero_id']
+        hero_name = item['hero_name']
+        
+        # Upsert hero base record
+        hero = db.query(Hero).filter(Hero.id == hero_id).first()
+        if hero:
+            hero.name = hero_name
+        else:
+            hero = Hero(id=hero_id, name=hero_name)
+            db.add(hero)
+            
+        # Append today's stats record
+        stat_record = HeroStat(
+            hero_id=hero_id,
+            hero_name=hero_name,
+            match_count=item['match_count'],
+            win_count=item['win_count'],
+            win_rate=item['win_rate']
+        )
+        db.add(stat_record)
+        
+    db.commit()
+    return len(stats_list)
+
+
+def run_scraper_task() -> int:
+    """Entrypoint that manages its own database session (for cron jobs or CLI)."""
+    db = SessionLocal()
+    try:
+        return sync_hero_stats(db)
+    finally:
+        db.close()
