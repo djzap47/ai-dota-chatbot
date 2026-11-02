@@ -335,7 +335,7 @@
       <div class="message bot">
         <div class="avatar">🤖</div>
         <div class="bubble">
-          Greetings! I am your <strong>Dota 2 AI Assistant</strong> powered by Gemini 2.5 Flash and real-time Immortal bracket statistics from STRATZ. 
+          Greetings! I am your <strong>Dota 2 AI Assistant</strong> powered by Gemini and real-time Immortal bracket statistics from STRATZ. 
           <br><br>
           Ask me about current hero win rates, counters, items, lore, or esports meta!
         </div>
@@ -435,24 +435,44 @@
       sendBtn.disabled = true;
       appendTypingIndicator();
 
+      // Set a 35-second abort controller so it never hangs indefinitely
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 35000);
+
       try {
         const response = await fetch('/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text })
+          body: JSON.stringify({ message: text }),
+          signal: controller.signal
         });
 
-        const data = await response.json();
+        clearTimeout(timeoutId);
         removeTypingIndicator();
+
+        const contentType = response.headers.get("content-type") || "";
+        let data;
+
+        if (contentType.includes("application/json")) {
+          data = await response.json();
+        } else {
+          const rawText = await response.text();
+          data = { detail: `Server response (${response.status}): ${rawText.slice(0, 150)}` };
+        }
 
         if (response.ok && data.reply) {
           appendMessage(data.reply, false);
         } else {
-          appendMessage(`⚠️ Error: ${data.detail || 'Failed to get response.'}`, false);
+          appendMessage(`⚠️ ${data.detail || 'Failed to receive reply.'}`, false);
         }
       } catch (err) {
+        clearTimeout(timeoutId);
         removeTypingIndicator();
-        appendMessage(`⚠️ Connection error: ${err.message}`, false);
+        if (err.name === 'AbortError') {
+          appendMessage(`⚠️ Request timed out after 35 seconds. Please try again.`, false);
+        } else {
+          appendMessage(`⚠️ Connection error: ${err.message}`, false);
+        }
       } finally {
         sendBtn.disabled = false;
         userInput.focus();

@@ -31,14 +31,14 @@ If the question DOES NOT need database data (e.g., lore, mechanics, items, spell
 - Answer the user's question directly and informatively in English.
 
 If the question DOES need database statistics:
-- Output ONLY a valid PostgreSQL SELECT query starting with 'SQL:' on the very first line.
+- Output a valid PostgreSQL SELECT query starting with 'SQL: SELECT' on the very first line.
 - Rules for the SQL query:
   1. ONLY generate SELECT queries. Never generate INSERT, UPDATE, DELETE, ALTER, or DROP.
   2. The table hero_stats contains multiple snapshots. Always filter for the latest date:
      WHERE DATE(recorded_at) = (SELECT MAX(DATE(recorded_at)) FROM hero_stats)
   3. If asked for a specific role (e.g. 'top carry heroes' or 'best supports'), use your internal Dota 2 knowledge to filter heroes using 'WHERE ... AND hero_name IN (...)'.
   4. Order by win_rate DESC or match_count DESC as requested, and apply a reasonable LIMIT (e.g. LIMIT 3, 5, or 10).
-  5. Example output:
+  5. Example:
      SQL: SELECT hero_name, win_rate, match_count FROM hero_stats WHERE DATE(recorded_at) = (SELECT MAX(DATE(recorded_at)) FROM hero_stats) ORDER BY win_rate DESC LIMIT 3;
 """
 
@@ -57,13 +57,49 @@ def get_llm():
     return _llm
 
 
+def _extract_text(content: Any) -> str:
+    """Safely extract plain text string from model response content."""
+    if isinstance(content, str):
+        return content.strip()
+    if isinstance(content, list):
+        parts = []
+        for item in content:
+            if isinstance(item, dict):
+                parts.append(str(item.get("text", "")))
+            else:
+                parts.append(str(item))
+        return "".join(parts).strip()
+    return str(content).strip()
+
+
+def _extract_sql_query(text_content: str) -> Optional[str]:
+    """Extract and sanitize SQL query from model output."""
+    # Match SQL: ... or ```sql ... ```
+    match = re.search(r'SQL:\s*(.*?)(?:$|\n\n)', text_content, re.DOTALL | re.IGNORECASE)
+    if match:
+        query = match.group(1).strip()
+        query = re.sub(r'```(?:sql)?', '', query, flags=re.IGNORECASE).strip('` \n;')
+        if query.upper().startswith("SELECT"):
+            return query
+    
+    # Match standalone ```sql SELECT ... ```
+    block_match = re.search(r'```(?:sql)?\s*(SELECT.*?)```', text_content, re.DOTALL | re.IGNORECASE)
+    if block_match:
+        return block_match.group(1).strip().rstrip('; \n`')
+        
+    if text_content.strip().upper().startswith("SELECT"):
+        return text_content.strip().rstrip('; \n`')
+
+    return None
+
+
 def _execute_readonly_sql(query: str) -> List[Dict[str, Any]]:
     """Safely execute a read-only SELECT query against Supabase."""
     cleaned = query.strip().rstrip(";")
     if not cleaned.upper().startswith("SELECT"):
         raise ValueError("Security violation: Only SELECT queries are permitted.")
     
-    # Block destructive keywords
+    # Block destructive SQL operations
     blocked = ["DROP", "DELETE", "UPDATE", "INSERT", "ALTER", "TRUNCATE", "GRANT", "REVOKE"]
     for word in blocked:
         if re.search(r'\b' + word + r'\b', cleaned, re.IGNORECASE):
@@ -81,7 +117,7 @@ def _execute_readonly_sql(query: str) -> List[Dict[str, Any]]:
 def _run_chatbot_sync(user_input: str) -> str:
     llm = get_llm()
     
-    # Step 1: Ask model to either answer directly or generate a SQL query
+    # Step 1: Query Gemini to answer directly or write a SQL query
     messages = [
         SystemMessage(content=SYSTEM_PROMPT),
         HumanMessage(content=user_input)
@@ -89,7 +125,7 @@ def _run_chatbot_sync(user_input: str) -> str:
     
     try:
         response = llm.invoke(messages)
-        content = str(response.content).strip()
+        content = _extract_text(response.content)
     except Exception as e:
         err = str(e)
         if "429" in err or "RESOURCE_EXHAUSTED" in err:
@@ -97,8 +133,8 @@ def _run_chatbot_sync(user_input: str) -> str:
         return f"⚠️ Error communicating with Gemini: {err}"
 
     # Step 2: Check if response contains a SQL query
-    if content.startswith("SQL:"):
-        sql_query = content[4:].strip()
+    sql_query = _extract_sql_query(content)
+    if sql_query:
         try:
             db_data = _execute_readonly_sql(sql_query)
         except Exception as sql_err:
@@ -115,13 +151,13 @@ def _run_chatbot_sync(user_input: str) -> str:
         
         try:
             summary_response = llm.invoke(summary_prompt)
-            return str(summary_response.content).strip()
-        except Exception as e:
-            # Fallback to direct data presentation if formatting fails
-            formatted_heroes = ", ".join([f"{row.get('hero_name', 'Hero')} ({row.get('win_rate', 0)}% WR)" for row in db_data])
-            return f"Here are the latest stats: {formatted_heroes}"
+            return _extract_text(summary_response.content)
+        except Exception:
+            # Fallback formatting if secondary LLM call hits any rate limit
+            formatted = ", ".join([f"{row.get('hero_name', 'Hero')} ({row.get('win_rate', 0)}% WR)" for row in db_data])
+            return f"Here are the latest stats: {formatted}"
 
-    # If it wasn't a SQL query, it's a direct answer (lore, mechanics, items, etc.)
+    # Direct answer for mechanics, lore, items, etc.
     return content
 
 
