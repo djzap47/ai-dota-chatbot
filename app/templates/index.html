@@ -435,9 +435,9 @@
       sendBtn.disabled = true;
       appendTypingIndicator();
 
-      // Set a 35-second abort controller so it never hangs indefinitely
+      // Set a 50-second abort controller so it never hangs indefinitely
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 35000);
+      const timeoutId = setTimeout(() => controller.abort(), 50000);
 
       try {
         const response = await fetch('/chat', {
@@ -469,7 +469,7 @@
         clearTimeout(timeoutId);
         removeTypingIndicator();
         if (err.name === 'AbortError') {
-          appendMessage(`⚠️ Request timed out after 35 seconds. Please try again.`, false);
+          appendMessage(`⚠️ Request timed out after 50 seconds. Please try again.`, false);
         } else {
           appendMessage(`⚠️ Connection error: ${err.message}`, false);
         }
