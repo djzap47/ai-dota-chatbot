@@ -27,7 +27,7 @@ def generate_embedding(text_content: str) -> List[float]:
     return response.embeddings[0].values
 
 
-def search_liquipedia_knowledge(query: str, limit: int = 2, threshold: float = 0.55) -> List[Dict[str, Any]]:
+def search_liquipedia_knowledge(query: str, limit: int = 3, threshold: float = 0.50) -> List[Dict[str, Any]]:
     """
     Search Supabase vector database for relevant Liquipedia wiki documentation.
     Executes in ~50ms using HNSW cosine index.

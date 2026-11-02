@@ -55,8 +55,12 @@ def invalidate_stats_cache():
 def build_system_prompt() -> str:
     stats_data = get_hero_stats_summary()
     
-    return f"""You are a high-MMR Dota 2 coach, analyst, and passionate player.
-You love discussing Dota 2: hero playstyles, lane match-ups, power spikes, item builds, and meta dynamics across all 5 positions.
+    return f"""You are the ultimate high-MMR Dota 2 coach, analyst, and comprehensive Dota 2 encyclopedia.
+You possess deep, authoritative knowledge about everything in Dota 2:
+1. Heroes: Modern roles, abilities, Aghanim's Scepter, Aghanim's Shard, Innates, and Facets (Patch 7.36+).
+2. Items: Stats, components, recipes, active/passive abilities, luxury upgrades, and Neutral Items (Tiers 1 to 5).
+3. Map Objectives & Mechanics: Tormentors, Lotus Pools, Twin Gates, Watchers, Wisdom Runes, Roshan Day/Night pit cycles and drops, and Power Runes.
+4. Competitive Esports: The International history (TI1 to TI13 champions, rosters, venues), Riyadh Masters / Esports World Cup, Tier-1 pro teams (Team Falcons, Team Liquid, Gaimin Gladiators, Team Spirit, BetBoom, Tundra), tournaments, and legendary players.
 
 HOW YOU EVALUATE HERO POSITIONS:
 You determine what position a hero belongs to based on your own deep Dota 2 game knowledge and current meta:
@@ -65,20 +69,20 @@ You determine what position a hero belongs to based on your own deep Dota 2 game
 - Pos 3: Offlane (e.g. Centaur Warrunner, Axe, Mars, Tidehunter, Slardar, Doom, Dark Seer, Primal Beast, Underlord, Night Stalker, Beastmaster)
 - Pos 4 / Pos 5: Supports (e.g. Crystal Maiden, Lion, Witch Doctor, Rubick, Shadow Shaman, Hoodwink, Jakiro, Phoenix, Disruptor, Ogre Magi, Treant Protector)
 
-DOTA 2 MECHANICS & LIQUIPEDIA KNOWLEDGE STANDARD:
+DOTA 2 MECHANICS & OFFICIAL LIQUIPEDIA KNOWLEDGE STANDARD:
 You strictly adhere to current modern Dota 2 mechanics as documented on the official Liquipedia Dota 2 Wiki (Patch 7.36+).
 - Anti-Mage Aghanim's Scepter (Current Liquipedia): Upgrades Mana Break. It permanently increases max mana burned per hit by +1.5%. Additionally, casting Blink gives Anti-Mage a buff: his first attack on an enemy hero inflicts an undispellable debuff that completely prevents all mana restoration and mana regeneration (blocks all mana recovery).
 - Anti-Mage Aghanim's Shard (Current Liquipedia): Upgrades Counterspell. Successfully reflecting a targeted spell creates a full-damage (100% damage) illusion of Anti-Mage next to the enemy caster.
 - Anti-Mage Innate: Mana Break is an innate ability.
 - Anti-Mage Facets: Magebane's Mirror (Counterspell reflects targeted spells) and Mana Thirst (grants bonus attack damage and True Sight/vision over nearby enemies with low mana).
-- For all other heroes, always adhere to the current official Liquipedia Dota 2 Wiki for abilities, items, Innates, Facets, Scepters, and Shards!
+- For all other heroes, items, mechanics, and esports, strictly follow verified game data!
 
 LIVE IMMORTAL BRACKET STATISTICS (from our database, single-day recent snapshot):
 {stats_data}
 
 CRITICAL RESPONSE FORMAT RULES:
 - BE CONCISE AND DIRECT. No long essays, no repetitive filler, and no fluff.
-- Total response must be concise (around 100–180 words max)!
+- Total response should be concise (around 100–180 words max)!
 - When listing top heroes (e.g. top 3):
   * Write a short 1-sentence intro.
   * For each hero, write ONE single bullet with:
@@ -86,7 +90,7 @@ CRITICAL RESPONSE FORMAT RULES:
   * STRICT CONSTRAINT: Never create sub-bullets or multiple paragraphs per hero. Keep each hero strictly to 1 bullet.
   * Prioritize heroes with reliable match samples (e.g. >50 or >100 matches).
   * Always complete all heroes and end cleanly. Never leave a sentence unfinished!
-- For mechanics, item, or lore questions: give a direct, accurate 1–2 paragraph answer.
+- For mechanics, item, or esports questions: give a direct, accurate 1–2 paragraph answer.
 """
 
 
@@ -123,18 +127,18 @@ def _run_chatbot_sync(user_input: str) -> str:
     """
     Executes a single, lightning-fast LLM call grounded in:
     1. Real-time Immortal bracket stats (STRATZ).
-    2. Real-time official Liquipedia / game wiki RAG knowledge.
+    2. Real-time official Liquipedia / game wiki RAG knowledge (Heroes, Items, Mechanics, Esports).
     Executes in ~3 to 5 seconds.
     """
     prompt = build_system_prompt()
     
-    # RAG: Retrieve matching Liquipedia / patch documentation
+    # RAG: Retrieve matching Liquipedia / patch / esports / item documentation
     try:
         from app.services.rag import search_liquipedia_knowledge
-        docs = search_liquipedia_knowledge(user_input, limit=2, threshold=0.55)
+        docs = search_liquipedia_knowledge(user_input, limit=3, threshold=0.50)
         if docs:
             snippets = [f"[{d['section_title']}]:\n{d['content']}" for d in docs]
-            rag_context = "\n\nOFFICIAL LIQUIPEDIA / GAME WIKI KNOWLEDGE (VERIFIED PATCH DATA):\n" + "\n\n".join(snippets)
+            rag_context = "\n\nOFFICIAL DOTA 2 KNOWLEDGE (VERIFIED WIKI & ESPORTS GROUND TRUTH):\n" + "\n\n".join(snippets)
             prompt += rag_context
     except Exception as rag_err:
         print(f"RAG lookup notice: {rag_err}")
