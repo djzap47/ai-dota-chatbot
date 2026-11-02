@@ -293,6 +293,54 @@ Recent Pro Match Results:
 
 
 # =====================================================================
+# 4b. PARSE THE INTERNATIONAL CHAMPIONS (OPENDOTA EXPLORER)
+# =====================================================================
+def parse_the_international_champions() -> List[Tuple[str, str, str]]:
+    print("\n4b. Parsing The International Champions dynamically from OpenDota SQL Explorer...")
+    try:
+        sql = """
+        SELECT l.name as tournament, 
+               case when m.radiant_win then r.name else d.name end as winner,
+               case when m.radiant_win then d.name else r.name end as runner_up,
+               m.start_time
+        FROM matches m
+        JOIN leagues l ON m.leagueid = l.leagueid
+        LEFT JOIN teams r ON m.radiant_team_id = r.team_id
+        LEFT JOIN teams d ON m.dire_team_id = d.team_id
+        WHERE l.tier = 'premium' AND l.name LIKE 'The International 20%'
+        ORDER BY m.start_time DESC
+        """
+        res = requests.get(f"{BASE_URL}/explorer", params={"sql": sql}, headers=HEADERS, timeout=15)
+        rows = res.json().get("rows", [])
+        seen = {}
+        for r in rows:
+            t = r["tournament"]
+            if t not in seen and "qualifier" not in t.lower():
+                seen[t] = r
+
+        if not seen:
+            return []
+
+        sorted_tournaments = sorted(seen.items(), key=lambda x: x[1]["start_time"], reverse=True)
+        most_recent = sorted_tournaments[0]
+
+        lines = [f"• {tourn}: Champion {r['winner']} (Runner-up: {r['runner_up']})" for tourn, r in sorted_tournaments]
+
+        content = f"""The International (TI) Champions (Official Match Data from OpenDota):
+The most recent edition of The International was {most_recent[1]['tournament']}, won by {most_recent[1]['winner']} (defeated {most_recent[1]['runner_up']} in the Grand Finals).
+
+Historical The International Winners & Grand Finals:
+""" + "\n".join(lines)
+
+        cat = "Esports: The International All Champions"
+        title = f"The International (TI) Champions - Latest: {most_recent[1]['tournament']} ({most_recent[1]['winner']})"
+        return [(cat, title, content)]
+    except Exception as e:
+        print(f"Notice: Failed to query OpenDota Explorer for TI champions: {e}")
+        return []
+
+
+# =====================================================================
 # 5. PARSE LATEST PATCH NOTES (OPENDOTA)
 # =====================================================================
 def parse_latest_patchnotes() -> List[Tuple[str, str, str]]:
@@ -364,6 +412,7 @@ def sync_all():
     all_chunks.extend(parse_all_heroes())
     all_chunks.extend(parse_pro_teams())
     all_chunks.extend(parse_esports_tournaments())
+    all_chunks.extend(parse_the_international_champions())
     all_chunks.extend(parse_latest_patchnotes())
 
     print("\n" + "=" * 65)
