@@ -66,15 +66,15 @@ def _run_agent_sync(user_input: str) -> str:
             
         result = str(output).strip()
         if not result:
-            return "I processed your request, but received an empty response. If querying stats, please ensure the scraper has populated the database."
+            return "No hero statistics are found in the database yet. Please run the scraper to populate data!"
         return result
     except Exception as e:
         err_msg = str(e)
         if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
             return "⏳ Rate limit reached on Google Gemini free tier. Please wait 15–20 seconds and ask again!"
         if "No generation chunks" in err_msg:
-            return "The AI agent didn't return text. This usually happens if the database has no hero records yet. Please run the scraper first!"
-        raise e
+            return "No statistics are recorded in the database yet. Please run the scraper endpoint (/scraper/run) to fetch today's stats!"
+        return f"⚠️ Agent Notice: {err_msg}"
 
 
 async def get_chat_response(user_input: str) -> str:

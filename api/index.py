@@ -26,7 +26,7 @@ from app.schemas import (
     HealthResponse
 )
 from app.services.chatbot import get_chat_response
-from app.services.stratz import run_scraper_task, sync_hero_stats
+from app.services.stratz import run_scraper_task
 
 app = FastAPI(
     title="AI Dota 2 Tracker API",
@@ -162,12 +162,12 @@ async def cron_scraper(authorization: Optional[str] = Header(None)):
 
 
 @app.post("/scraper/run", response_model=ScraperResponse, tags=["Scraper"])
-async def manual_scraper(db: Session = Depends(get_db)):
+async def manual_scraper():
     """
     Manually trigger data scraper to update hero stats from STRATZ API.
     """
     try:
-        updated_count = await asyncio.to_thread(sync_hero_stats, db)
+        updated_count = await asyncio.to_thread(run_scraper_task)
         return ScraperResponse(
             status="success",
             message=f"Scraper completed successfully. Synced {updated_count} heroes.",
