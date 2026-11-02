@@ -1,4 +1,12 @@
 import os
+import sys
+
+# Ensure Vercel serverless function can find the 'app' module in the root directory
+current_dir = os.path.dirname(os.path.abspath(__file__))
+root_dir = os.path.abspath(os.path.join(current_dir, ".."))
+if root_dir not in sys.path:
+    sys.path.insert(0, root_dir)
+
 import asyncio
 from typing import Optional, List
 from fastapi import FastAPI, Depends, HTTPException, Header, Query
@@ -7,7 +15,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text, func
 
 from app.config import settings
-from app.database import get_db, engine
+from app.database import get_db
 from app.models import HeroStat
 from app.schemas import (
     ChatRequest,
@@ -25,7 +33,7 @@ app = FastAPI(
     version="2.0.0"
 )
 
-# CORS middleware for cross-origin access (e.g. from any frontend or localhost)
+# CORS middleware for cross-origin access
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -40,6 +48,7 @@ def root():
     return {
         "name": "AI Dota 2 Tracker API",
         "version": "2.0.0",
+        "status": "online",
         "docs_url": "/docs",
         "endpoints": {
             "chat": "POST /chat",
@@ -91,7 +100,6 @@ def get_top_heroes(
     Get top win rate heroes for the most recent recorded date.
     Fast direct SQL query without calling the AI agent.
     """
-    # Subquery for the most recent date in hero_stats
     latest_date_subquery = db.query(func.max(func.date(HeroStat.recorded_at))).scalar_subquery()
     
     top_stats = (
