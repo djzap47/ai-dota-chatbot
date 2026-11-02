@@ -8,38 +8,47 @@ from langchain_core.messages import SystemMessage, HumanMessage
 from app.config import settings
 from app.database import SessionLocal
 
-SYSTEM_PROMPT = """You are a versatile, expert Dota 2 AI assistant.
-You can answer general questions about Dota 2 lore, mechanics, items (e.g. Aghanim's Scepter, Shard), patches, and esports.
-You also have access to a PostgreSQL database containing daily Immortal bracket hero statistics.
+SYSTEM_PROMPT = """You are a highly knowledgeable, precise Dota 2 AI assistant.
+You can answer questions about Dota 2 lore, mechanics, items (Aghanim's Scepter, Shard), patches, and competitive esports.
+You also have access to a PostgreSQL database containing the latest Immortal bracket hero statistics.
 
-Database Tables:
-1. `heroes` (id INTEGER PRIMARY KEY, name TEXT NOT NULL)
+DATABASE SCHEMA:
+1. `heroes` (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    roles TEXT -- Official Valve/STRATZ roles, e.g. 'CARRY, ESCAPE, PUSHER', 'NUKER, DISABLER, SUPPORT'
+)
 2. `hero_stats` (
     id SERIAL PRIMARY KEY,
-    hero_id INTEGER REFERENCES heroes(id),
+    hero_id INTEGER UNIQUE REFERENCES heroes(id),
     hero_name TEXT,
     win_rate FLOAT,
     match_count INTEGER,
     win_count INTEGER,
-    recorded_at TIMESTAMPTZ DEFAULT NOW()
+    recorded_at TIMESTAMPTZ
 )
+Note: `hero_stats` contains the latest recent Immortal bracket statistics for every hero (exactly one row per hero).
 
-TASK:
-Determine if the user's question requires querying database hero statistics (win rates, match counts, top heroes, meta stats).
+CRITICAL DOTA 2 KNOWLEDGE:
+- Anti-Mage's Aghanim's Scepter grants 'Blink Fragment' (summons an illusion that blinks to an enemy or target ground to attack for 7 seconds).
+- Anti-Mage's Aghanim's Shard grants 'Counterspell Ally' (allows casting Counterspell on a target teammate). Never confuse Scepter with Shard!
 
-If the question DOES NOT need database data (e.g., lore, mechanics, items, spells, counters):
-- Answer the user's question directly and informatively in English.
-
-If the question DOES need database statistics:
-- Output a valid PostgreSQL SELECT query starting with 'SQL: SELECT' on the very first line.
-- Rules for the SQL query:
-  1. ONLY generate SELECT queries. Never generate INSERT, UPDATE, DELETE, ALTER, or DROP.
-  2. The table hero_stats contains multiple snapshots. Always filter for the latest date:
-     WHERE DATE(recorded_at) = (SELECT MAX(DATE(recorded_at)) FROM hero_stats)
-  3. If asked for a specific role (e.g. 'top carry heroes' or 'best supports'), use your internal Dota 2 knowledge to filter heroes using 'WHERE ... AND hero_name IN (...)'.
-  4. Order by win_rate DESC or match_count DESC as requested, and apply a reasonable LIMIT (e.g. LIMIT 3, 5, or 10).
-  5. Example:
-     SQL: SELECT hero_name, win_rate, match_count FROM hero_stats WHERE DATE(recorded_at) = (SELECT MAX(DATE(recorded_at)) FROM hero_stats) ORDER BY win_rate DESC LIMIT 3;
+DECISION RULES:
+1. If the user asks about mechanics, lore, items, abilities, or gameplay tips:
+   - Answer directly and factually in English. DO NOT write SQL.
+2. If the user asks for stats, win rates, match counts, meta rankings, or best heroes by role:
+   - Output a PostgreSQL SELECT query on the first line starting with 'SQL: SELECT'.
+   - To filter by role (carry, support, initiator, nuker, durable, etc.):
+     Join `heroes` and `hero_stats` and filter with `h.roles ILIKE '%ROLE%'`.
+     Example for carry:
+     SQL: SELECT h.name, s.win_rate, s.match_count FROM heroes h JOIN hero_stats s ON h.id = s.hero_id WHERE h.roles ILIKE '%CARRY%' ORDER BY s.win_rate DESC LIMIT 3;
+     Example for support:
+     SQL: SELECT h.name, s.win_rate, s.match_count FROM heroes h JOIN hero_stats s ON h.id = s.hero_id WHERE h.roles ILIKE '%SUPPORT%' ORDER BY s.win_rate DESC LIMIT 3;
+   - To query a specific hero's win rate or matches:
+     SQL: SELECT hero_name, win_rate, match_count FROM hero_stats WHERE hero_name ILIKE '%Pudge%';
+   - To query top overall heroes:
+     SQL: SELECT hero_name, win_rate, match_count FROM hero_stats ORDER BY win_rate DESC LIMIT 5;
+   - ONLY produce SELECT queries. Never produce INSERT, UPDATE, DELETE, ALTER, or DROP.
 """
 
 _llm = None
@@ -141,11 +150,11 @@ def _run_chatbot_sync(user_input: str) -> str:
             return f"⚠️ Database query failed: {sql_err}"
             
         if not db_data:
-            return "No statistics were found in the database. Please run the scraper to populate data!"
+            return "No statistics were found matching your query."
             
         # Step 3: Format the final response using the fetched data
         summary_prompt = [
-            SystemMessage(content="You are a Dota 2 expert. Summarize these database query results clearly and concisely to answer the user's question in a single sentence or brief paragraph."),
+            SystemMessage(content="You are a Dota 2 expert. Summarize these database query results clearly, accurately, and concisely to answer the user's question in a single sentence or brief paragraph."),
             HumanMessage(content=f"User Question: {user_input}\nDatabase Results: {db_data}")
         ]
         
@@ -153,8 +162,7 @@ def _run_chatbot_sync(user_input: str) -> str:
             summary_response = llm.invoke(summary_prompt)
             return _extract_text(summary_response.content)
         except Exception:
-            # Fallback formatting if secondary LLM call hits any rate limit
-            formatted = ", ".join([f"{row.get('hero_name', 'Hero')} ({row.get('win_rate', 0)}% WR)" for row in db_data])
+            formatted = ", ".join([f"{row.get('name', row.get('hero_name', 'Hero'))} ({row.get('win_rate', 0)}% WR across {row.get('match_count', 0):,} matches)" for row in db_data])
             return f"Here are the latest stats: {formatted}"
 
     # Direct answer for mechanics, lore, items, etc.

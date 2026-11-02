@@ -1,5 +1,6 @@
 import requests
 from sqlalchemy.orm import Session
+from sqlalchemy.sql import func
 from app.config import settings
 from app.models import Hero, HeroStat
 from app.database import SessionLocal
@@ -16,19 +17,26 @@ def get_headers() -> dict:
         "Content-Type": "application/json"
     }
 
-def fetch_hero_stats() -> list[dict]:
-    """Fetch current daily Immortal stats for all heroes from STRATZ GraphQL API."""
+def fetch_hero_stats() -> dict:
+    """
+    Fetch hero definitions (including official Valve roles) and 
+    the latest single-day Immortal statistics from STRATZ GraphQL API.
+    """
     query = """
     query {
       constants {
         heroes {
           id
           displayName
+          roles {
+            roleId
+          }
         }
       }
       heroStats {
         winDay(bracketIds: [IMMORTAL]) {
           heroId
+          day
           winCount
           matchCount
         }
@@ -49,63 +57,92 @@ def fetch_hero_stats() -> list[dict]:
     heroes_data = data['data']['constants']['heroes']
     stats_data = data['data']['heroStats']['winDay']
     
-    hero_map = {hero['id']: hero['displayName'] for hero in heroes_data}
+    # Map hero metadata: {hero_id: {'name': displayName, 'roles': 'CARRY, ESCAPE, ...'}}
+    hero_meta = {}
+    for hero in heroes_data:
+        h_id = hero['id']
+        name = hero['displayName']
+        roles_list = [r['roleId'] for r in (hero.get('roles') or []) if r and 'roleId' in r]
+        roles_str = ", ".join(roles_list)
+        hero_meta[h_id] = {
+            'name': name,
+            'roles': roles_str
+        }
     
-    results = []
-    aggregated = {}
+    # Identify ONLY the most recent recorded day to prevent accumulating multi-day counts
+    latest_day = max((stat['day'] for stat in stats_data if 'day' in stat), default=None)
     
+    stats_map = {}
     for stat in stats_data:
+        # Take ONLY records from the latest recorded day
+        if latest_day is not None and stat.get('day') != latest_day:
+            continue
+            
         hero_id = stat['heroId']
-        if hero_id not in aggregated:
-            aggregated[hero_id] = {'winCount': 0, 'matchCount': 0}
-        aggregated[hero_id]['winCount'] += stat['winCount']
-        aggregated[hero_id]['matchCount'] += stat['matchCount']
-
-    for hero_id, counts in aggregated.items():
-        name = hero_map.get(hero_id, f"Unknown Hero {hero_id}")
-        match_count = counts['matchCount']
-        win_count = counts['winCount']
-        win_rate = (win_count / match_count * 100) if match_count > 0 else 0.0
+        if hero_id in stats_map:
+            continue
+            
+        match_count = stat.get('matchCount', 0)
+        win_count = stat.get('winCount', 0)
+        win_rate = round((win_count / match_count * 100), 2) if match_count > 0 else 0.0
         
-        results.append({
-            'hero_id': hero_id,
-            'hero_name': name,
+        stats_map[hero_id] = {
             'match_count': match_count,
             'win_count': win_count,
-            'win_rate': round(win_rate, 2)
-        })
+            'win_rate': win_rate
+        }
         
-    return results
+    return {
+        'heroes': hero_meta,
+        'stats': stats_map,
+        'latest_day': latest_day
+    }
 
 
 def sync_hero_stats(db: Session) -> int:
-    """Fetch data from STRATZ and upsert into Supabase."""
-    stats_list = fetch_hero_stats()
+    """
+    Fetch latest data from STRATZ and upsert into Supabase.
+    Guarantees exactly ONE up-to-date stat record per hero.
+    """
+    data = fetch_hero_stats()
+    hero_meta = data['heroes']
+    stats_map = data['stats']
     
-    for item in stats_list:
-        hero_id = item['hero_id']
-        hero_name = item['hero_name']
-        
-        # Upsert hero base record
+    updated_count = 0
+    
+    for hero_id, meta in hero_meta.items():
+        # 1. Upsert Hero with official roles
         hero = db.query(Hero).filter(Hero.id == hero_id).first()
         if hero:
-            hero.name = hero_name
+            hero.name = meta['name']
+            hero.roles = meta['roles']
         else:
-            hero = Hero(id=hero_id, name=hero_name)
+            hero = Hero(id=hero_id, name=meta['name'], roles=meta['roles'])
             db.add(hero)
             
-        # Append today's stats record
-        stat_record = HeroStat(
-            hero_id=hero_id,
-            hero_name=hero_name,
-            match_count=item['match_count'],
-            win_count=item['win_count'],
-            win_rate=item['win_rate']
-        )
-        db.add(stat_record)
-        
+        # 2. Upsert HeroStat for the latest day
+        if hero_id in stats_map:
+            stat_data = stats_map[hero_id]
+            stat = db.query(HeroStat).filter(HeroStat.hero_id == hero_id).first()
+            if stat:
+                stat.hero_name = meta['name']
+                stat.match_count = stat_data['match_count']
+                stat.win_count = stat_data['win_count']
+                stat.win_rate = stat_data['win_rate']
+                stat.recorded_at = func.now()
+            else:
+                stat = HeroStat(
+                    hero_id=hero_id,
+                    hero_name=meta['name'],
+                    match_count=stat_data['match_count'],
+                    win_count=stat_data['win_count'],
+                    win_rate=stat_data['win_rate']
+                )
+                db.add(stat)
+            updated_count += 1
+            
     db.commit()
-    return len(stats_list)
+    return updated_count
 
 
 def run_scraper_task() -> int:

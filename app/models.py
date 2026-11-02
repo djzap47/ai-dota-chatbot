@@ -8,18 +8,19 @@ class Hero(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(Text, nullable=False)
+    roles = Column(Text, nullable=True)  # Comma-separated roles, e.g. "CARRY, ESCAPE, PUSHER"
 
     stats = relationship("HeroStat", back_populates="hero", cascade="all, delete-orphan")
 
     def __repr__(self):
-        return f"<Hero {self.id}: {self.name}>"
+        return f"<Hero {self.id}: {self.name} ({self.roles})>"
 
 
 class HeroStat(Base):
     __tablename__ = "hero_stats"
 
     id = Column(Integer, primary_key=True, index=True)
-    hero_id = Column(Integer, ForeignKey("heroes.id", ondelete="CASCADE"), nullable=False)
+    hero_id = Column(Integer, ForeignKey("heroes.id", ondelete="CASCADE"), nullable=False, unique=True)
     hero_name = Column(Text, nullable=True)
     win_rate = Column(Float, nullable=True)
     match_count = Column(Integer, nullable=True)
