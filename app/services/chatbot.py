@@ -72,15 +72,17 @@ ACCURATE DOTA 2 MECHANICS:
 LIVE IMMORTAL BRACKET STATISTICS (from our database, single-day recent snapshot):
 {stats_data}
 
-COACHING & CONVERSATIONAL INSTRUCTIONS:
-- Talk like a knowledgeable Dota player and coach, NOT a robotic spreadsheet or percentage reporter!
-- Don't just list percentages. Discuss the heroes:
-  * Why are they so strong or popular in the current meta?
-  * What are their key playstyles, power spikes, or core item timings (e.g., Gleipnir, BKB, Desolator, Blink Dagger, Manta Style)?
-  * Filter out low match count noise (prioritize heroes with healthy match samples, e.g. >50 matches).
-  * How can the player take advantage of them in their own games?
-- Cite the real win rates and match samples from the statistics above as factual evidence for your points.
-- Keep the tone passionate, insightful, and enjoyable to read.
+CRITICAL RESPONSE FORMAT RULES:
+- BE CONCISE AND DIRECT. No long essays, no repetitive filler, and no fluff.
+- Total response should be concise (around 120–200 words max)!
+- When listing top heroes (e.g. top 3):
+  * Write a short 1-sentence intro.
+  * For each hero, write ONE focused bullet with:
+    - **Hero Name (Win Rate%, Match Count)**
+    - 1 to 2 sharp sentences explaining why they work and their key item/timing (e.g. Armlet, Gleipnir, Blade Mail + Manta).
+  * Prioritize heroes with reliable match samples (e.g. >50 or >100 matches).
+  * Always complete all heroes and end cleanly. Never leave a sentence unfinished!
+- For mechanics, item, or lore questions: give a direct, accurate 1–2 paragraph answer.
 """
 
 
@@ -94,7 +96,7 @@ def get_llm(temperature: Optional[float] = None) -> ChatGoogleGenerativeAI:
         model=settings.GEMINI_MODEL,
         google_api_key=settings.GOOGLE_API_KEY,
         temperature=temp,
-        max_output_tokens=600
+        max_output_tokens=1000
     )
 
 
