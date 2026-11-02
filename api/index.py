@@ -25,7 +25,7 @@ from app.schemas import (
     ScraperResponse,
     HealthResponse
 )
-from app.services.chatbot import get_chat_response
+from app.services.chatbot import get_chat_response, invalidate_stats_cache
 from app.services.stratz import run_scraper_task
 
 app = FastAPI(
@@ -152,6 +152,7 @@ async def cron_scraper(authorization: Optional[str] = Header(None)):
 
     try:
         updated_count = await asyncio.to_thread(run_scraper_task)
+        invalidate_stats_cache()
         return ScraperResponse(
             status="success",
             message=f"Scraper completed successfully. Synced {updated_count} heroes.",
@@ -168,6 +169,7 @@ async def manual_scraper():
     """
     try:
         updated_count = await asyncio.to_thread(run_scraper_task)
+        invalidate_stats_cache()
         return ScraperResponse(
             status="success",
             message=f"Scraper completed successfully. Synced {updated_count} heroes.",
