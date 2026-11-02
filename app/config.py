@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     GOOGLE_API_KEY: str = ""
     STRATZ_API_KEY: str = ""
     GEMINI_MODEL: str = "gemini-3.5-flash-lite"
+    CHATBOT_TEMPERATURE: float = 0.7
     CRON_SECRET: Optional[str] = None
     PORT: int = 8000
 
