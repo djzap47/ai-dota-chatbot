@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Dota 2 Tracker & Chatbot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0b10;
+      --card-bg: rgba(18, 20, 29, 0.75);
+      --card-border: rgba(255, 75, 75, 0.18);
+      --dota-red: #e63946;
+      --dota-red-glow: rgba(230, 57, 70, 0.4);
+      --accent-gold: #f4a261;
+      --text-main: #f1faee;
+      --text-muted: #8d99ae;
+      --user-bubble: #1f1d2b;
+      --bot-bubble: rgba(25, 28, 41, 0.85);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at 50% 0%, #1a101f 0%, var(--bg-dark) 70%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      padding: 1rem 1.5rem;
+      background: rgba(10, 11, 16, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #e63946, #780000);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px var(--dota-red-glow);
+      font-size: 1.2rem;
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+      background: linear-gradient(90deg, #fff, #f4a261);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #2a9d8f;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #2a9d8f;
+    }
+
+    .docs-link {
+      color: var(--accent-gold);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      border: 1px solid rgba(244, 162, 97, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .docs-link:hover {
+      background: rgba(244, 162, 97, 0.15);
+      border-color: var(--accent-gold);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 1rem;
+      height: calc(100vh - 70px);
+    }
+
+    /* Chat Messages Box */
+    .chat-box {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      padding-right: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .chat-box::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-box::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+
+    .message {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 85%;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .message.bot {
+      align-self: flex-start;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+    }
+
+    .message.user .avatar {
+      background: #3a384f;
+    }
+
+    .message.bot .avatar {
+      background: linear-gradient(135deg, #e63946, #a81d28);
+      box-shadow: 0 0 10px var(--dota-red-glow);
+    }
+
+    .bubble {
+      padding: 0.85rem 1.15rem;
+      border-radius: 14px;
+      line-height: 1.55;
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
+    .message.user .bubble {
+      background: var(--user-bubble);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .message.bot .bubble {
+      background: var(--bot-bubble);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--card-border);
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Suggestion Chips */
+    .suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .chip {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.45rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: #e0e0e0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .chip:hover {
+      background: rgba(230, 57, 70, 0.15);
+      border-color: var(--dota-red);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* Input area */
+    .input-form {
+      display: flex;
+      gap: 0.75rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      padding: 0.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .input-field {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 0.95rem;
+      padding: 0.6rem 0.8rem;
+    }
+
+    .input-field::placeholder {
+      color: #6c757d;
+    }
+
+    .send-btn {
+      background: linear-gradient(135deg, var(--dota-red), #b71c1c);
+      color: #fff;
+      border: none;
+      outline: none;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .send-btn:hover {
+      box-shadow: 0 0 12px var(--dota-red-glow);
+      filter: brightness(1.1);
+    }
+
+    .send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Typing indicator */
+    .typing-dots {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      padding: 6px 0;
+    }
+
+    .typing-dots span {
+      width: 6px;
+      height: 6px;
+      background: var(--dota-red);
+      border-radius: 50%;
+      animation: bounce 1.2s infinite ease-in-out;
+    }
+
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-icon">⚔️</div>
+      <div class="brand-title">Dota 2 AI Assistant</div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        <span>Immortal Stats Online</span>
+      </div>
+      <a href="/docs" target="_blank" class="docs-link">API Docs</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="chat-box" id="chatBox">
+      <div class="message bot">
+        <div class="avatar">🤖</div>
+        <div class="bubble">
+          Greetings! I am your <strong>Dota 2 AI Assistant</strong> powered by Gemini 2.5 Flash and real-time Immortal bracket statistics from STRATZ. 
+          <br><br>
+          Ask me about current hero win rates, counters, items, lore, or esports meta!
+        </div>
+      </div>
+    </div>
+
+    <div class="suggestions">
+      <div class="chip" onclick="quickAsk('Top 3 carry heroes right now?')">
+        <span>🏆</span> Top 3 carry heroes right now?
+      </div>
+      <div class="chip" onclick="quickAsk('Highest win rate heroes in Immortal bracket?')">
+        <span>📊</span> Highest win rate heroes
+      </div>
+      <div class="chip" onclick="quickAsk('What is Pudge\'s current win rate and match count?')">
+        <span>🥩</span> Pudge current stats
+      </div>
+      <div class="chip" onclick="quickAsk('What does Aghanim\'s Scepter do on Anti-Mage?')">
+        <span>🪄</span> Anti-Mage Aghanim's Scepter
+      </div>
+    </div>
+
+    <form class="input-form" id="chatForm">
+      <input 
+        type="text" 
+        class="input-field" 
+        id="userInput" 
+        placeholder="Ask about Dota 2 heroes, stats, lore, or items..." 
+        autocomplete="off"
+        required
+      />
+      <button type="submit" class="send-btn" id="sendBtn">
+        <span>Send</span>
+        <span>➤</span>
+      </button>
+    </form>
+  </main>
+
+  <script>
+    const chatBox = document.getElementById('chatBox');
+    const chatForm = document.getElementById('chatForm');
+    const userInput = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    function appendMessage(text, isUser = false) {
+      const msg = document.createElement('div');
+      msg.className = `message ${isUser ? 'user' : 'bot'}`;
+
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar';
+      avatar.textContent = isUser ? '👤' : '🤖';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.innerHTML = text.replace(/\n/g, '<br>');
+
+      msg.appendChild(avatar);
+      msg.appendChild(bubble);
+      chatBox.appendChild(msg);
+
+      chatBox.scrollTop = chatBox.scrollHeight;
+      return msg;
+    }
+
+    function appendTypingIndicator() {
+      const msg = document.createElement('div');
+      msg.className = 'message bot';
+      msg.id = 'typingIndicator';
+
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar';
+      avatar.textContent = '🤖';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.innerHTML = `
+        <div class="typing-dots">
+          <span></span><span></span><span></span>
+        </div>
+      `;
+
+      msg.appendChild(avatar);
+      msg.appendChild(bubble);
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+      const el = document.getElementById('typingIndicator');
+      if (el) el.remove();
+    }
+
+    async function sendMessage(text) {
+      if (!text.trim()) return;
+
+      appendMessage(text, true);
+      userInput.value = '';
+      sendBtn.disabled = true;
+      appendTypingIndicator();
+
+      try {
+        const response = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+
+        const data = await response.json();
+        removeTypingIndicator();
+
+        if (response.ok && data.reply) {
+          appendMessage(data.reply, false);
+        } else {
+          appendMessage(`⚠️ Error: ${data.detail || 'Failed to get response.'}`, false);
+        }
+      } catch (err) {
+        removeTypingIndicator();
+        appendMessage(`⚠️ Connection error: ${err.message}`, false);
+      } finally {
+        sendBtn.disabled = false;
+        userInput.focus();
+      }
+    }
+
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      sendMessage(userInput.value);
+    });
+
+    function quickAsk(text) {
+      sendMessage(text);
+    }
+  </script>
+</body>
+</html>

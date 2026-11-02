@@ -10,6 +10,7 @@ if root_dir not in sys.path:
 import asyncio
 from typing import Optional, List
 from fastapi import FastAPI, Depends, HTTPException, Header, Query
+from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import text, func
@@ -29,7 +30,7 @@ from app.services.stratz import run_scraper_task, sync_hero_stats
 
 app = FastAPI(
     title="AI Dota 2 Tracker API",
-    description="FastAPI backend for Dota 2 analytics and AI chatbot powered by Gemini 2.5 Flash and STRATZ.",
+    description="FastAPI backend and Web UI for Dota 2 analytics and AI chatbot powered by Gemini 2.5 Flash and STRATZ.",
     version="2.0.0"
 )
 
@@ -43,14 +44,35 @@ app.add_middleware(
 )
 
 
-@app.get("/", tags=["General"])
-def root():
+@app.get("/", response_class=HTMLResponse, tags=["Frontend"])
+def home():
+    """Serves the interactive Dota 2 AI Assistant web interface."""
+    html_path = os.path.join(root_dir, "app", "templates", "index.html")
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    return HTMLResponse(
+        content="""
+        <html>
+            <body style='background:#111;color:#eee;font-family:sans-serif;padding:2rem;'>
+                <h1>AI Dota 2 Tracker API</h1>
+                <p>Backend is online. Visit <a style='color:#e63946;' href='/docs'>/docs</a> for the API Swagger UI.</p>
+            </body>
+        </html>
+        """
+    )
+
+
+@app.get("/api/info", tags=["General"])
+def api_info():
+    """JSON metadata about available API endpoints."""
     return {
         "name": "AI Dota 2 Tracker API",
         "version": "2.0.0",
         "status": "online",
         "docs_url": "/docs",
         "endpoints": {
+            "web_ui": "GET /",
             "chat": "POST /chat",
             "top_heroes": "GET /heroes/top",
             "health": "GET /health",
