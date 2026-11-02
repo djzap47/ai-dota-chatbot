@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     SUPABASE_DB_URL: str = ""
     GOOGLE_API_KEY: str = ""
     STRATZ_API_KEY: str = ""
+    GEMINI_MODEL: str = "gemini-1.5-flash"
     CRON_SECRET: Optional[str] = None
     PORT: int = 8000
 

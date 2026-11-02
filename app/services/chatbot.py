@@ -6,31 +6,48 @@ from langchain_community.agent_toolkits import create_sql_agent
 from app.config import settings
 
 PREFIX = """You are a versatile and expert Dota 2 AI assistant. You can engage in general conversations about Dota 2 lore, items, mechanics (e.g., what Aghanim's Scepter does), and esports. Additionally, you are equipped with database tools to analyze hero statistics, win rates, and match counts from the highest skill brackets (Immortal). You must strictly communicate in English.
+
 Strict Constraints:
-You are exclusively restricted to discussing topics related to Dota 2, heroes, mechanics, patches, and esports. If the user asks about ANY other topic, politely decline.
-SECURITY: You are strictly forbidden from executing INSERT, UPDATE, DELETE, ALTER, or DROP commands. You must ONLY generate and execute valid SELECT queries.
+- Exclusively discuss topics related to Dota 2, heroes, mechanics, items, patches, and esports. If the user asks about ANY unrelated topic, politely decline.
+- SECURITY: ONLY generate and execute valid SELECT queries. Never run INSERT, UPDATE, DELETE, ALTER, or DROP commands.
+
 Data Resolution Logic:
-The database stores hero statistics using 'hero_id'. Before querying statistics, resolve the hero's name to its 'hero_id' from the `heroes` table. 
-HISTORICAL DATA BUG PREVENTION (CRITICAL): The `hero_stats` table contains records from multiple days, which causes duplicate heroes in simple ORDER BY queries. When querying current stats, YOU MUST ONLY use the most recent data. Always filter your queries using `WHERE DATE(recorded_at) = (SELECT MAX(DATE(recorded_at)) FROM hero_stats)` or use `DISTINCT ON (hero_id)` to ensure each hero is only counted once. Do not use AVG() to group duplicates unless explicitly asked for historical average.
-ROLE FILTERING LOGIC: If the user asks for statistics about a specific role (e.g., 'top carry heroes'), use your internal Dota 2 knowledge to identify a list of traditional heroes for that role. Then, construct your SQL query to filter by those specific heroes using the IN clause.
-FORMATTING RULES: Always format your final response concisely in a single line if possible, like this example: "These are the 3 best heroes right now: Anti-Mage 55.41%, Pudge 54.20%, Slark 53.15%." Avoid long bulleted lists unless asked."""
+- The database stores hero statistics using 'hero_id'. Before querying statistics, resolve the hero's name to its 'hero_id' from the `heroes` table. 
+- HISTORICAL DATA BUG PREVENTION: The `hero_stats` table contains records from multiple days. When querying current stats, YOU MUST ONLY use the most recent data. Filter your queries using `WHERE DATE(recorded_at) = (SELECT MAX(DATE(recorded_at)) FROM hero_stats)` or use `DISTINCT ON (hero_id)`.
+- If the database query returns no rows or the table is empty, simply state: "No statistics are available in the database yet. Please run the scraper to fetch the latest Immortal stats."
+- ROLE FILTERING: If the user asks for a specific role (e.g., 'top carry heroes'), use your internal Dota 2 knowledge to identify traditional heroes for that role and filter using the IN clause.
+- FORMATTING: Format your final response concisely, for example: "Top 3 heroes right now: Anti-Mage (55.4%), Pudge (54.2%), Slark (53.1%)."
+"""
 
 _agent = None
 
 def get_agent():
     global _agent
     if _agent is None:
-        db = SQLDatabase.from_uri(settings.sqlalchemy_db_url)
+        if not settings.sqlalchemy_db_url:
+            raise ValueError("SUPABASE_DB_URL is not set.")
+        if not settings.GOOGLE_API_KEY:
+            raise ValueError("GOOGLE_API_KEY is not set.")
+            
+        # Limit inspection to only our relevant tables to save LLM calls and avoid scanning PostgreSQL system catalogs
+        db = SQLDatabase.from_uri(
+            settings.sqlalchemy_db_url,
+            include_tables=["heroes", "hero_stats"],
+            sample_rows_in_table_info=1
+        )
+        
         llm = ChatGoogleGenerativeAI(
-            model="gemini-2.5-flash",
+            model=settings.GEMINI_MODEL,
             google_api_key=settings.GOOGLE_API_KEY,
             temperature=0
         )
+        
         _agent = create_sql_agent(
             llm=llm,
             db=db,
             agent_type="tool-calling",
             verbose=False,
+            max_iterations=4,
             prefix=PREFIX
         )
     return _agent
@@ -38,15 +55,26 @@ def get_agent():
 
 def _run_agent_sync(user_input: str) -> str:
     agent = get_agent()
-    response = agent.invoke({"input": user_input})
-    output = response.get('output', '')
-    
-    if isinstance(output, list):
-        output = "".join([item.get('text', '') if isinstance(item, dict) else str(item) for item in output])
-    elif isinstance(output, dict) and 'text' in output:
-        output = output['text']
+    try:
+        response = agent.invoke({"input": user_input})
+        output = response.get('output', '')
         
-    return str(output).strip()
+        if isinstance(output, list):
+            output = "".join([item.get('text', '') if isinstance(item, dict) else str(item) for item in output])
+        elif isinstance(output, dict) and 'text' in output:
+            output = output['text']
+            
+        result = str(output).strip()
+        if not result:
+            return "I processed your request, but received an empty response. If querying stats, please ensure the scraper has populated the database."
+        return result
+    except Exception as e:
+        err_msg = str(e)
+        if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
+            return "⏳ Rate limit reached on Google Gemini free tier. Please wait 15–20 seconds and ask again!"
+        if "No generation chunks" in err_msg:
+            return "The AI agent didn't return text. This usually happens if the database has no hero records yet. Please run the scraper first!"
+        raise e
 
 
 async def get_chat_response(user_input: str) -> str:
