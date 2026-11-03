@@ -28,7 +28,7 @@ def generate_embedding(text_content: str) -> List[float]:
         return _embedding_cache[clean_text]
 
     client = get_genai_client()
-    for model_name in ["gemini-embedding-001", "gemini-embedding-2"]:
+    for model_name in ["gemini-embedding-2-preview", "gemini-embedding-2", "gemini-embedding-001"]:
         try:
             response = client.models.embed_content(
                 model=model_name,
