@@ -205,7 +205,7 @@ async def sync_opendota_meta(
     authorization: Optional[str] = Header(None, description="CRON_SECRET or Bearer token")
 ):
     """
-    Trigger full 2026 OpenDota Meta & Pro Player match sync (Patch 7.41+).
+    Trigger full OpenDota Meta & Pro Player match sync.
     Can be executed directly from Swagger UI (/docs). Runs on Vercel up to 300s.
     """
     verify_auth(authorization=authorization, secret=secret)
@@ -215,7 +215,7 @@ async def sync_opendota_meta(
         synced_count = await asyncio.to_thread(run_meta_and_pros_sync)
         return ScraperResponse(
             status="success",
-            message=f"Successfully ingested {synced_count} 2026 OpenDota meta & pro player match chunks into pgvector.",
+            message=f"Successfully ingested {synced_count} OpenDota meta & pro player match chunks into pgvector.",
             updated_count=synced_count
         )
     except Exception as e:

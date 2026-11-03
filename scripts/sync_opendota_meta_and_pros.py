@@ -23,39 +23,271 @@ HEADERS = {
 
 BASE_URL = "https://api.opendota.com/api"
 
-# Tier-1 Pro Players to track
-PRO_PLAYERS = {
-    321580797: {"name": "Yatoro (Raddan)", "team": "Team Spirit", "role": "Carry (Pos 1)"},
-    125581216: {"name": "Ame", "team": "Xtreme Gaming", "role": "Carry (Pos 1)"},
-    183719414: {"name": "Watson", "team": "Gaimin Gladiators", "role": "Carry (Pos 1)"},
-    100471531: {"name": "skiter", "team": "Team Falcons", "role": "Carry (Pos 1)"},
-    124801317: {"name": "Nightfall (Saika)", "team": "Tundra Esports", "role": "Carry (Pos 1)"},
-    117160980: {"name": "Pure", "team": "BetBoom Team", "role": "Carry (Pos 1)"},
-    105248644: {"name": "miCKe", "team": "Team Liquid", "role": "Carry (Pos 1)"},
-    111114687: {"name": "33", "team": "Tundra Esports", "role": "Offlane (Pos 3)"},
-    317880638: {"name": "Malr1ne", "team": "Team Falcons", "role": "Mid (Pos 2)"},
-    196723549: {"name": "bzm", "team": "OG", "role": "Mid (Pos 2)"},
-    302214028: {"name": "Collapse", "team": "Team Spirit", "role": "Offlane (Pos 3)"},
-}
+def get_pro_players_dict() -> Dict[int, Dict[str, Any]]:
+    """
+    Dynamically fetch all official pro players from OpenDota (/proPlayers).
+    Zero hardcoded nicknames or IDs — automatically includes every registered pro.
+    """
+    print("Fetching official pro players dynamically from OpenDota (/proPlayers)...")
+    try:
+        res = requests.get(f"{BASE_URL}/proPlayers", headers=HEADERS, timeout=15)
+        if res.status_code == 200:
+            players_data = res.json()
+            pro_map = {}
+            for p in players_data:
+                aid = p.get("account_id")
+                name = p.get("name")
+                if not aid or not name or len(name.strip()) < 2:
+                    continue
+                team = p.get("team_name") or p.get("team_tag") or "Pro Player"
+                role_num = p.get("fantasy_role", 1)
+                role_str = "Core (Pos 1/2/3)" if role_num == 1 else "Support (Pos 4/5)"
+                pro_map[aid] = {
+                    "account_id": aid,
+                    "name": name.strip(),
+                    "team": team.strip(),
+                    "role": role_str,
+                    "is_locked": p.get("is_locked", False),
+                    "is_pro": p.get("is_pro", False),
+                }
+            print(f"Loaded {len(pro_map)} pro players dynamically from OpenDota.")
+            return pro_map
+    except Exception as e:
+        print(f"Notice: Failed to fetch proPlayers: {e}")
+    return {}
 
 
-def get_item_dict() -> Dict[int, Dict[str, Any]]:
-    """Fetch OpenDota items constant and return mapping {item_id: {dname, cost, tier}}."""
-    print("Fetching OpenDota items constant...")
-    res = requests.get(f"{BASE_URL}/constants/items", headers=HEADERS, timeout=15)
-    data = res.json()
-    item_map = {}
-    for key, item in data.items():
-        iid = item.get("id")
-        if iid:
-            item_map[iid] = {
+class DotaItemGraph:
+    """
+    Intelligent Dota 2 item crafting graph.
+    Resolves recipe trees, component dependencies, and absorbs ingredients into completed items.
+    """
+    def __init__(self, raw_items: Dict[str, Any]):
+        self.raw = raw_items
+        self.id_to_key: Dict[int, str] = {}
+        self.key_to_item: Dict[str, Dict[str, Any]] = {}
+        self.subcomponents: Dict[str, set] = {}
+
+        for key, item in raw_items.items():
+            iid = item.get("id")
+            if iid:
+                self.id_to_key[iid] = key
+            self.key_to_item[key] = {
+                "id": iid,
                 "key": key,
                 "dname": item.get("dname", key.replace("_", " ").title()),
                 "cost": item.get("cost", 0),
-                "tier": item.get("tier")
+                "tier": item.get("tier"),
+                "components": item.get("components") or [],
+                "created": item.get("created", False),
             }
-    print(f"Loaded {len(item_map)} items into dictionary.")
-    return item_map
+
+        # Precompute all recursive subcomponents and index all crafting ingredients
+        self.ingredient_keys: set = set()
+        for item in self.key_to_item.values():
+            for comp_key in item["components"]:
+                if comp_key and not comp_key.startswith("recipe_") and not comp_key.endswith("recipe"):
+                    self.ingredient_keys.add(comp_key)
+
+        for key in self.key_to_item:
+            self._compute_subcomponents(key)
+
+    def _compute_subcomponents(self, key: str, visited: Optional[set] = None) -> set:
+        if key in self.subcomponents:
+            return self.subcomponents[key]
+        if visited is None:
+            visited = set()
+        if key in visited:
+            return set()
+        visited.add(key)
+
+        item = self.key_to_item.get(key)
+        if not item:
+            return set()
+
+        all_comps = set()
+        for comp_key in item["components"]:
+            if not comp_key or comp_key.startswith("recipe_") or comp_key.endswith("recipe"):
+                continue
+            all_comps.add(comp_key)
+            all_comps.update(self._compute_subcomponents(comp_key, visited.copy()))
+
+        self.subcomponents[key] = all_comps
+        return all_comps
+
+    def is_raw_component(self, key: str) -> bool:
+        """Dynamically identifies basic ingredients that have no recipe and exist to build higher items."""
+        item = self.key_to_item.get(key)
+        if not item:
+            return True
+        # If it is used to craft other items and is not a crafted item itself
+        if key in self.ingredient_keys and not item.get("created"):
+            return True
+        return False
+
+    def is_standalone_item(self, key: str) -> bool:
+        """Standalone major purchases that are not created via recipes (e.g. Blink Dagger, Ghost Scepter, Gem)."""
+        return key in {"blink", "ghost", "gem", "ward_dispenser"}
+
+    def is_trivial_consumable(self, key: str) -> bool:
+        """Dynamically identifies consumables and trivial starting items (cost <= 250, not neutral, not created)."""
+        item = self.key_to_item.get(key)
+        if not item:
+            return False
+        cost = item.get("cost", 0)
+        return cost <= 250 and not item.get("created") and item.get("tier") is None
+
+    def is_subcomponent_of(self, comp_key: str, parent_keys: Any) -> bool:
+        """Check if comp_key is a recursive ingredient of any item in parent_keys."""
+        for p in parent_keys:
+            if comp_key in self.subcomponents.get(p, set()):
+                return True
+        return False
+
+    def is_completed_boot(self, key: str) -> bool:
+        """Dynamically identifies upgraded boots (cost >= 800 and boot keyword in name/key)."""
+        item = self.key_to_item.get(key)
+        if not item:
+            return False
+        cost = item.get("cost", 0)
+        name = item.get("dname", "").lower()
+        k_lower = key.lower()
+        is_boot = "boots" in k_lower or "treads" in k_lower or "boots" in name or "treads" in name
+        return is_boot and cost >= 800
+
+    def is_valid_start_item(self, key: str) -> bool:
+        """Dynamically identifies valid starting items (cost <= 600, basic item, not neutral)."""
+        item = self.key_to_item.get(key)
+        if not item:
+            return False
+        cost = item.get("cost", 0)
+        return (
+            0 < cost <= 600
+            and not item.get("created")
+            and item.get("tier") is None
+            and not key.startswith("recipe_")
+            and not key.endswith("recipe")
+        )
+
+    def absorb_subcomponents(self, item_keys: List[str]) -> List[str]:
+        """
+        Deduplication rule: If item A is an ingredient of another item B in the list,
+        absorb and drop A (e.g., Phase Boots absorbs Boots of Speed; Radiance absorbs Sacred Relic).
+        """
+        all_subs = set()
+        for k in item_keys:
+            all_subs.update(self.subcomponents.get(k, set()))
+        return [k for k in item_keys if k not in all_subs]
+
+    def resolve_hero_build(self, pop_data: Dict[str, Any]) -> Dict[str, str]:
+        def get_ranked(sec_name: str) -> List[Tuple[str, int]]:
+            raw_dict = pop_data.get(sec_name, {})
+            ranked = []
+            for iid_str, count in sorted(raw_dict.items(), key=lambda x: int(x[1]), reverse=True):
+                try:
+                    iid = int(iid_str)
+                    k = self.id_to_key.get(iid)
+                    if k and not k.startswith("recipe_") and not k.endswith("recipe"):
+                        ranked.append((k, int(count)))
+                except ValueError:
+                    continue
+            return ranked
+
+        start_r = get_ranked("start_game_items")
+        early_r = get_ranked("early_game_items")
+        mid_r = get_ranked("mid_game_items")
+        late_r = get_ranked("late_game_items")
+
+        # 1. Boot choice (resolved early to protect early game from raw boots)
+        chosen_boot = None
+        for k, _ in early_r + start_r:
+            if self.is_completed_boot(k):
+                chosen_boot = k
+                break
+        boot_subs = self.subcomponents.get(chosen_boot, set()) if chosen_boot else set()
+
+        # 2. Late Game Luxury Spikes (30m+)
+        late_candidates = []
+        for k, _ in late_r:
+            it = self.key_to_item.get(k, {})
+            cost = it.get("cost", 0)
+            if self.is_valid_start_item(k) or cost <= 500:
+                continue
+            if self.is_raw_component(k) and not self.is_standalone_item(k):
+                continue
+            if cost >= 2200 or it.get("created"):
+                if k not in late_candidates:
+                    late_candidates.append(k)
+        late_keys = self.absorb_subcomponents(late_candidates)[:5]
+        late_subcomps = set()
+        for k in late_keys:
+            late_subcomps.update(self.subcomponents.get(k, set()))
+
+        # 3. Mid Game Core Spikes (15-30m)
+        mid_candidates = []
+        for k, _ in mid_r:
+            it = self.key_to_item.get(k, {})
+            cost = it.get("cost", 0)
+            if self.is_valid_start_item(k) or cost <= 500:
+                continue
+            if k in late_keys or k in late_subcomps:
+                continue
+            if self.is_raw_component(k) and not self.is_standalone_item(k):
+                continue
+            if cost >= 1400 or it.get("created"):
+                if k not in mid_candidates:
+                    mid_candidates.append(k)
+        mid_keys = self.absorb_subcomponents(mid_candidates)[:4]
+        mid_subcomps = set()
+        for k in mid_keys:
+            mid_subcomps.update(self.subcomponents.get(k, set()))
+
+        # 4. Early Game Core (0-15m)
+        all_higher_subcomps = late_subcomps.union(mid_subcomps).union(boot_subs)
+        early_candidates = [chosen_boot] if chosen_boot else []
+        for k, _ in early_r:
+            if k == chosen_boot or k in early_candidates:
+                continue
+            if self.is_valid_start_item(k) or k in all_higher_subcomps:
+                continue
+            if k in late_keys or k in mid_keys:
+                continue
+            if self.is_raw_component(k) and not self.is_standalone_item(k):
+                continue
+            it = self.key_to_item.get(k, {})
+            if it.get("created") or self.is_standalone_item(k) or it.get("cost", 0) >= 400:
+                early_candidates.append(k)
+
+        early_keys = self.absorb_subcomponents(early_candidates)[:4]
+
+        # 5. Starting Items
+        start_keys = []
+        for k, _ in start_r:
+            if self.is_valid_start_item(k) and k not in start_keys:
+                start_keys.append(k)
+                if len(start_keys) >= 5:
+                    break
+
+        def to_dnames(keys: List[str]) -> str:
+            names = [self.key_to_item[k]["dname"] for k in keys if k in self.key_to_item and self.key_to_item[k]["dname"]]
+            return ", ".join(names) if names else "Standard meta items"
+
+        return {
+            "starting": to_dnames(start_keys),
+            "early": to_dnames(early_keys),
+            "mid": to_dnames(mid_keys),
+            "late": to_dnames(late_keys),
+        }
+
+
+def get_item_graph() -> DotaItemGraph:
+    """Fetch OpenDota items constant and return initialized DotaItemGraph."""
+    print("Fetching OpenDota items constant...")
+    res = requests.get(f"{BASE_URL}/constants/items", headers=HEADERS, timeout=15)
+    data = res.json()
+    graph = DotaItemGraph(data)
+    print(f"Loaded {len(graph.key_to_item)} items into item crafting graph.")
+    return graph
 
 
 def get_heroes_dict() -> Dict[int, Dict[str, Any]]:
@@ -72,17 +304,36 @@ def get_heroes_dict() -> Dict[int, Dict[str, Any]]:
     return hero_map
 
 
+def get_current_patch_name() -> str:
+    """Dynamically get the latest active patch from OpenDota constants."""
+    print("Fetching active patch dynamically from OpenDota (/constants/patch)...")
+    try:
+        res = requests.get(f"{BASE_URL}/constants/patch", headers=HEADERS, timeout=10)
+        if res.status_code == 200:
+            patches = res.json()
+            if isinstance(patches, list) and patches:
+                latest = patches[-1].get("name")
+                if latest:
+                    patch_str = f"Patch {latest}"
+                    print(f"Current Dota 2 patch identified: {patch_str}")
+                    return patch_str
+    except Exception as e:
+        print(f"Notice: Failed to fetch patch constants: {e}")
+    return "Current Competitive Meta"
+
+
 def parse_hero_meta_and_matchups(
-    items_dict: Dict[int, Dict[str, Any]], 
+    item_graph: DotaItemGraph, 
     heroes_dict: Dict[int, Dict[str, Any]],
+    patch_name: str = "Current Competitive Meta",
     hero_limit: Optional[int] = None
 ) -> List[Tuple[str, str, str]]:
     """
     For heroes, fetch:
-    1. /heroes/{hero_id}/itemPopularity (Starting, Early, Mid, Late item distributions)
+    1. /heroes/{hero_id}/itemPopularity (Resolved into completed items via DotaItemGraph)
     2. /heroes/{hero_id}/matchups (Hardest counters & favorable matchups)
     """
-    print("\n--- 1. Parsing Hero Meta, Item Popularity & Matchup Counters ---")
+    print(f"\n--- 1. Parsing Hero Meta, Item Popularity & Matchup Counters ({patch_name}) ---")
     chunks = []
 
     target_heroes = list(heroes_dict.items())
@@ -96,38 +347,18 @@ def parse_hero_meta_and_matchups(
         attack = hero.get("attack_type", "")
         roles = ", ".join(hero.get("roles", []))
 
-        # 1. Item popularity
+        # 1. Item popularity resolved via Item Graph
         try:
             pop_res = requests.get(f"{BASE_URL}/heroes/{hid}/itemPopularity", headers=HEADERS, timeout=10)
             pop_data = pop_res.json() if pop_res.status_code == 200 else {}
         except Exception:
             pop_data = {}
 
-        def format_items(section_key: str, top_n: int = 5) -> str:
-            raw_dict = pop_data.get(section_key, {})
-            if not raw_dict:
-                return "Standard meta items"
-            # Sort by frequency
-            sorted_items = sorted(raw_dict.items(), key=lambda x: int(x[1]), reverse=True)
-            names = []
-            for iid_str, count in sorted_items:
-                try:
-                    iid = int(iid_str)
-                    item_info = items_dict.get(iid)
-                    if item_info and item_info["dname"]:
-                        item_name = item_info["dname"]
-                        if item_name not in names and not item_name.endswith("Recipe"):
-                            names.append(item_name)
-                except ValueError:
-                    continue
-                if len(names) >= top_n:
-                    break
-            return ", ".join(names) if names else "Standard meta items"
-
-        start_items = format_items("start_game_items", 6)
-        early_items = format_items("early_game_items", 4)
-        mid_items = format_items("mid_game_items", 6)
-        late_items = format_items("late_game_items", 6)
+        build = item_graph.resolve_hero_build(pop_data)
+        start_items = build["starting"]
+        early_items = build["early"]
+        mid_items = build["mid"]
+        late_items = build["late"]
 
         # 2. Matchups
         try:
@@ -155,9 +386,9 @@ def parse_hero_meta_and_matchups(
         weak_str = ", ".join(f"{name} ({wr}%)" for name, wr, g in weak_against) if weak_against else "None recorded"
 
         cat = f"Hero Meta: {name}"
-        title = f"Hero Meta & 7.41 Item Build Guide: {name}"
+        title = f"Hero Meta & Item Build Guide: {name} ({patch_name})"
 
-        content = f"""Hero Meta & Item Build Guide: {name} — Patch 7.41
+        content = f"""Hero Meta & Item Build Guide: {name} — {patch_name}
 Attribute: {attr} | Attack Type: {attack} | Roles: {roles}
 
 Verified High-MMR Item Build Progression (OpenDota Match Data):
@@ -166,7 +397,7 @@ Verified High-MMR Item Build Progression (OpenDota Match Data):
 • Mid Game Core Spikes (15-30m): {mid_items}
 • Late Game / Extensions (30m+): {late_items}
 
-Patch 7.41 Matchups & Counters:
+{patch_name} Matchups & Counters:
 • Strong Against (High Win Rate): {strong_str}
 • Countered By (Low Win Rate / Struggles Against): {weak_str}"""
 
@@ -178,21 +409,27 @@ Patch 7.41 Matchups & Counters:
 
 
 def parse_pro_player_matches(
-    items_dict: Dict[int, Dict[str, Any]], 
-    heroes_dict: Dict[int, Dict[str, Any]]
+    item_graph: DotaItemGraph, 
+    heroes_dict: Dict[int, Dict[str, Any]],
+    patch_name: str = "Current Competitive Meta"
 ) -> List[Tuple[str, str, str]]:
     """
-    Fetch actual recent matches of Tier-1 pro players (Yatoro, Ame, Watson, etc.)
-    using OpenDota SQL Explorer, extracting item purchase timelines and match stats.
+    Fetch actual recent matches of pro players dynamically from OpenDota.
+    Zero hardcoded nicknames or IDs — uses OpenDota's /proPlayers registry and pro league matches.
     """
-    print("\n--- 2. Parsing Real-Time Pro Player Matches via OpenDota Explorer ---")
+    print(f"\n--- 2. Parsing Real-Time Pro Player Matches via OpenDota Explorer ({patch_name}) ---")
     chunks = []
 
-    account_ids_str = ", ".join(str(aid) for aid in PRO_PLAYERS.keys())
-    sql = f"""
+    pro_players = get_pro_players_dict()
+
+    # Query official pro tournament matches directly from OpenDota SQL Explorer
+    sql = """
     SELECT 
         pm.account_id,
+        coalesce(p.name, 'Pro Player') AS pro_name,
+        coalesce(t.name, 'Pro Team') AS team_name,
         pm.hero_id,
+        h.localized_name AS hero_name,
         m.match_id,
         m.start_time,
         m.duration,
@@ -203,9 +440,12 @@ def parse_pro_player_matches(
         (m.radiant_win = (pm.player_slot < 128)) AS won
     FROM player_matches pm
     JOIN matches m ON pm.match_id = m.match_id
-    WHERE pm.account_id IN ({account_ids_str})
+    JOIN players p ON pm.account_id = p.account_id
+    LEFT JOIN teams t ON p.team_id = t.team_id
+    JOIN heroes h ON pm.hero_id = h.id
+    WHERE m.leagueid > 0 AND p.name IS NOT NULL AND length(p.name) > 1
     ORDER BY m.start_time DESC
-    LIMIT 100;
+    LIMIT 120;
     """
 
     rows = []
@@ -215,28 +455,42 @@ def parse_pro_player_matches(
             rows = res.json().get("rows", [])
             print(f"Retrieved {len(rows)} pro match records from OpenDota SQL Explorer.")
     except Exception as e:
-        print(f"Notice: OpenDota Explorer error: {e}")
+        print(f"Notice: OpenDota Explorer query notice: {e}")
 
-    # Fallback to direct player matches if explorer is empty
-    if not rows:
-        print("Falling back to direct /players/{id}/matches...")
-        for aid, pinfo in list(PRO_PLAYERS.items())[:5]:
+    # Fallback to direct player matches if explorer is empty: take active pro players from dynamic pro_players dict
+    if not rows and pro_players:
+        print("Falling back to active /players/{id}/matches from dynamic pro players...")
+        active_pros = [p for p in pro_players.values() if p.get("is_locked") or p.get("team") != "Pro Player"][:15]
+        for p in active_pros:
+            aid = p["account_id"]
             try:
                 res = requests.get(f"{BASE_URL}/players/{aid}/matches?limit=10", headers=HEADERS, timeout=10)
                 if res.status_code == 200:
                     for m in res.json():
                         m["account_id"] = aid
+                        m["pro_name"] = p["name"]
+                        m["team_name"] = p["team"]
                         rows.append(m)
-                time.sleep(0.3)
+                time.sleep(0.2)
             except Exception:
                 pass
 
     for r in rows:
         aid = r.get("account_id")
         hid = r.get("hero_id")
-        pinfo = PRO_PLAYERS.get(aid, {"name": "Pro Player", "team": "Tier 1", "role": "Core"})
-        pname = pinfo["name"]
-        team = pinfo["team"]
+        
+        # Dynamic player and team names from OpenDota data
+        pname = r.get("pro_name")
+        if not pname or pname == "Pro Player":
+            pname = pro_players.get(aid, {}).get("name") if aid in pro_players else "Pro Player"
+        if not pname or pname == "Pro Player":
+            continue
+
+        team = r.get("team_name")
+        if not team or team == "Pro Team":
+            team = pro_players.get(aid, {}).get("team", "Tier 1")
+
+        role = pro_players.get(aid, {}).get("role", "Core")
 
         hero_name = heroes_dict.get(hid, {}).get("localized_name") if hid in heroes_dict else f"Hero {hid}"
         if not hero_name:
@@ -250,7 +504,19 @@ def parse_pro_player_matches(
         won = r.get("won")
         result_str = "WIN" if won else "LOSS"
 
-        # Parse purchase timeline
+        # Final 6 slotted items
+        completed_keys = set()
+        final_items = []
+        for slot in ["item_0", "item_1", "item_2", "item_3", "item_4", "item_5", "item_neutral"]:
+            item_id = r.get(slot)
+            if item_id and item_id in item_graph.id_to_key:
+                k_item = item_graph.id_to_key[item_id]
+                completed_keys.add(k_item)
+                dname = item_graph.key_to_item.get(k_item, {}).get("dname")
+                if dname and not dname.endswith("Recipe"):
+                    final_items.append(dname)
+
+        # Parse purchase timeline - highlight completed items, suppress basic ingredients
         purchase_log = r.get("purchase_log") or []
         timeline_items = []
         if isinstance(purchase_log, list):
@@ -260,35 +526,28 @@ def parse_pro_player_matches(
                 pkey = p.get("key")
                 ptime = p.get("time", 0)
                 if ptime is not None and ptime >= 0 and pkey:
-                    # Match against items dict
-                    display = pkey.replace("_", " ").title()
-                    for item in items_dict.values():
-                        if item["key"] == pkey:
-                            display = item["dname"]
-                            break
-                    if not display.endswith("Recipe") and display not in ["Tango", "Clarity", "Ward", "Observer Ward", "Sentry Ward", "Town Portal Scroll"]:
+                    # Suppress raw ingredients of completed items (e.g. chainmail/boots for phase)
+                    if item_graph.is_raw_component(pkey) and item_graph.is_subcomponent_of(pkey, completed_keys):
+                        continue
+                    # Suppress trivial consumables dynamically (cost <= 250, not created)
+                    if item_graph.is_trivial_consumable(pkey):
+                        continue
+                    item_data = item_graph.key_to_item.get(pkey)
+                    display = item_data["dname"] if item_data else pkey.replace("_", " ").title()
+                    if not display.endswith("Recipe"):
                         minutes = ptime // 60
                         seconds = ptime % 60
                         timeline_items.append(f"{minutes:02d}:{seconds:02d} - {display}")
-
-        # Final 6 slotted items
-        final_items = []
-        for slot in ["item_0", "item_1", "item_2", "item_3", "item_4", "item_5", "item_neutral"]:
-            item_id = r.get(slot)
-            if item_id and item_id in items_dict:
-                dname = items_dict[item_id]["dname"]
-                if dname and not dname.endswith("Recipe"):
-                    final_items.append(dname)
 
         final_items_str = ", ".join(final_items) if final_items else "Endgame inventory not available"
         timeline_summary = " • " + "\n • ".join(timeline_items[:10]) if timeline_items else "Timeline not recorded"
 
         cat = f"Pro Match: {pname} on {hero_name}"
-        title = f"Pro Build: {hero_name} by {pname} ({team}) — Patch 7.41"
+        title = f"Pro Build: {hero_name} by {pname} ({team}) — {patch_name}"
 
-        content = f"""Verified Pro Match Record: {hero_name} played by {pname} ({team}) — Patch 7.41
+        content = f"""Verified Pro Match Record: {hero_name} played by {pname} ({team}) — {patch_name}
 Result: {result_str} (KDA: {k}/{d}/{a} | GPM: {gpm}) | Match ID: {match_id}
-Role: {pinfo['role']}
+Role: {role}
 
 Item Purchase Timeline:
 {timeline_summary}
@@ -358,21 +617,22 @@ def embed_batch_with_retry(batch: List[str], max_retries: int = 5) -> List[List[
 
 
 def run_meta_and_pros_sync(hero_limit: Optional[int] = None) -> int:
+    patch_name = get_current_patch_name()
     print("=" * 65)
-    print("STARTING 2026 OPENDOTA META & PRO PLAYER INGESTION (PATCH 7.41+)")
+    print(f"STARTING OPENDOTA META & PRO PLAYER INGESTION ({patch_name})")
     print("=" * 65)
 
-    items_dict = get_item_dict()
+    item_graph = get_item_graph()
     heroes_dict = get_heroes_dict()
 
     all_chunks = []
-    # 1. Hero Meta & Matchups
-    all_chunks.extend(parse_hero_meta_and_matchups(items_dict, heroes_dict, hero_limit=hero_limit))
+    # 1. Hero Meta & Matchups (resolved with Item Crafting Graph)
+    all_chunks.extend(parse_hero_meta_and_matchups(item_graph, heroes_dict, patch_name=patch_name, hero_limit=hero_limit))
     # 2. Pro Player Matches
-    all_chunks.extend(parse_pro_player_matches(items_dict, heroes_dict))
+    all_chunks.extend(parse_pro_player_matches(item_graph, heroes_dict, patch_name=patch_name))
 
     print("\n" + "=" * 65)
-    print(f"TOTAL PARSED 2026 META CHUNKS: {len(all_chunks)}")
+    print(f"TOTAL PARSED META CHUNKS ({patch_name}): {len(all_chunks)}")
     print("=" * 65)
 
     db = SessionLocal()

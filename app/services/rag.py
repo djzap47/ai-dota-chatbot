@@ -44,27 +44,10 @@ def generate_embedding(text_content: str) -> List[float]:
     raise RuntimeError("Failed to generate embedding with available models.")
 
 
-# Known pro aliases to assist hybrid search
-PRO_ALIASES = {
-    "yatoro": "Yatoro",
-    "raddan": "Yatoro",
-    "ame": "Ame",
-    "watson": "Watson",
-    "skiter": "skiter",
-    "nightfall": "Nightfall",
-    "saika": "Nightfall",
-    "pure": "Pure",
-    "micke": "miCKe",
-    "33": "33",
-    "malr1ne": "Malr1ne",
-    "bzm": "bzm",
-    "collapse": "Collapse"
-}
-
 def search_dota_knowledge(query: str, limit: int = 4, threshold: float = 0.45) -> List[Dict[str, Any]]:
     """
-    Hybrid search: Combines pgvector cosine similarity with direct entity matching
-    for pro player names and hero meta guides.
+    Hybrid search: Combines pgvector cosine similarity with dynamic keyword matching
+    for pro player names and hero meta guides. Zero hardcoded player names.
     """
     results: List[Dict[str, Any]] = []
     seen_titles = set()
@@ -72,27 +55,33 @@ def search_dota_knowledge(query: str, limit: int = 4, threshold: float = 0.45) -
     try:
         db = SessionLocal()
         try:
-            # 1. Hybrid Entity Match: Check if query contains a known pro player
-            lower_q = query.lower()
-            detected_pro = None
-            for alias, canon in PRO_ALIASES.items():
-                if re.search(r'\b' + re.escape(alias) + r'\b', lower_q):
-                    detected_pro = canon
-                    break
+            # 1. Dynamic Entity Match: Extract meaningful keywords (player names, heroes) from user query
+            stop_words = {
+                "what", "should", "build", "builds", "item", "items", "best", "play", "guide",
+                "hero", "heroes", "dota", "patch", "current", "when", "with", "does", "from",
+                "game", "like", "order", "meta", "timing", "timings", "tell", "about"
+            }
+            words = [
+                w.strip().lower() for w in re.findall(r'[a-zA-Z0-9_\-]+', query)
+                if len(w.strip()) >= 3 and w.strip().lower() not in stop_words
+            ]
 
-            if detected_pro:
-                pro_sql = text("""
+            for word in words:
+                pattern = f"%{word}%"
+                match_sql = text("""
                     SELECT hero_name, section_title, content, 1.0 AS similarity
                     FROM hero_documents
-                    WHERE hero_name ILIKE :pro_pattern OR section_title ILIKE :pro_pattern
+                    WHERE hero_name ILIKE :pattern OR section_title ILIKE :pattern
                     ORDER BY updated_at DESC
                     LIMIT 2;
                 """)
-                pro_rows = db.execute(pro_sql, {"pro_pattern": f"%{detected_pro}%"}).mappings().all()
-                for row in pro_rows:
+                rows = db.execute(match_sql, {"pattern": pattern}).mappings().all()
+                for row in rows:
                     if row["section_title"] not in seen_titles:
                         results.append(dict(row))
                         seen_titles.add(row["section_title"])
+                if len(results) >= 2:
+                    break
 
             # 2. Vector Cosine Similarity Search
             query_vector = generate_embedding(query)

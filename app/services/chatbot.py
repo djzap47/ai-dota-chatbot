@@ -55,12 +55,12 @@ def invalidate_stats_cache():
 def build_system_prompt() -> str:
     stats_data = get_hero_stats_summary()
     
-    return f"""You are an elite high-MMR Dota 2 coach and competitive esports analyst operating on the latest Patch 7.41 meta.
-Your answers are grounded strictly in the live database statistics and verified 2026 OpenDota knowledge:
+    return f"""You are an elite high-MMR Dota 2 coach and competitive esports analyst operating on the latest active competitive tournament meta.
+Your answers are grounded strictly in the live database statistics and verified OpenDota knowledge:
 
 1. META PICKS & WIN RATES: Use the LIVE IMMORTAL BRACKET STATISTICS below for pick rates and win percentages.
-2. ITEM BUILDS & PROGRESSION: When asked about hero builds, structure your answer by game phase (Starting, Early Game with timing windows, Mid Game core spikes, Late Game/Situational extensions) using the RETRIEVED GROUND TRUTH KNOWLEDGE.
-3. PRO PLAYER TRACKING: If a pro player's recent match record is retrieved (e.g. Yatoro, Ame, Watson), cite their verified purchase timeline, match ID, and build choices. If no recent pro match is in context, clearly present the high-MMR Immortal build progression from the verified meta guide.
+2. ITEM BUILDS & PROGRESSION: When asked about hero builds, structure your answer by game phase (Starting Items, Early Game core, Mid Game core spikes, Late Game/Situational extensions) using the RETRIEVED GROUND TRUTH KNOWLEDGE.
+3. PRO PLAYER TRACKING: If a pro player's recent match record is retrieved, cite their verified purchase timeline, match ID, and build choices. If no recent pro match is in context, clearly present the high-MMR Immortal build progression from the verified meta guide.
 4. HERO COUNTERS & MATCHUPS: Cite the specific favorable and unfavorable matchup percentages provided in context.
 5. KEEP RESPONSES SHARP, STRUCTURED, AND FACTUAL (~150-200 words). Never invent facts or hallucinate abilities.
 
@@ -107,13 +107,13 @@ def _run_chatbot_sync(user_input: str) -> str:
     """
     prompt = build_system_prompt()
     
-    # RAG: Retrieve matching Patch 7.41 meta, pro matches, items, and wiki knowledge
+    # RAG: Retrieve matching meta, pro matches, items, and wiki knowledge
     try:
         from app.services.rag import search_dota_knowledge
         docs = search_dota_knowledge(user_input, limit=4, threshold=0.45)
         if docs:
             snippets = [f"[{d['section_title']}]:\n{d['content']}" for d in docs]
-            rag_context = "\n\nVERIFIED 2026 DOTA 2 KNOWLEDGE (PATCH 7.41 META & PRO MATCH GROUND TRUTH):\n" + "\n\n".join(snippets)
+            rag_context = "\n\nVERIFIED COMPETITIVE DOTA 2 META & PRO MATCH GROUND TRUTH:\n" + "\n\n".join(snippets)
             prompt += rag_context
     except Exception as rag_err:
         print(f"RAG lookup notice: {rag_err}")
