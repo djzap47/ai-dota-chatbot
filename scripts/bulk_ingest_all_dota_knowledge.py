@@ -177,12 +177,22 @@ Description / Effects: {desc if desc else 'Core tactical item.'}"""
 
         chunks.append((cat_item, title_item, content_item))
 
+    # 3. DOTA 2 GENERAL GAME MECHANICS, LANING, AND ROLE TAXONOMY
+    game_mechanics = load_json("game_mechanics.json")
+    if isinstance(game_mechanics, list):
+        print(f"Building chunks for {len(game_mechanics)} Dota 2 game mechanics & fundamentals...")
+        for gm in game_mechanics:
+            cat = gm.get("category", "Game Mechanics")
+            title = gm.get("title", "Dota 2 Mechanics")
+            content = gm.get("content", "")
+            chunks.append((cat, title, content))
+
     print(f"Total compiled rich Dota 2 knowledge chunks: {len(chunks)}")
     return chunks
 
 def bulk_ingest_into_supabase(batch_size: int = 15):
     chunks = build_all_knowledge_chunks()
-    print(f"Starting bulk ingestion of {len(chunks)} knowledge chunks into Supabase pgvector...")
+    print(f"Starting bulk ingestion of {len(chunks)} knowledge chunks into Supabase...")
 
     db = SessionLocal()
     try:
@@ -190,23 +200,41 @@ def bulk_ingest_into_supabase(batch_size: int = 15):
         print("Purging old knowledge documents from Supabase...")
         db.execute(text("TRUNCATE TABLE hero_documents;"))
         db.commit()
-        print("Cleaned hero_documents table. Embedding and inserting fresh chunks...")
+        print("Cleaned hero_documents table. Inserting all fresh chunks...")
 
         total = len(chunks)
-        for i in range(0, total, batch_size):
-            batch = chunks[i:i + batch_size]
-            texts_to_embed = [f"{c[1]}\n{c[2]}" for c in batch]
-            embeddings = embed_batch_with_retry(texts_to_embed)
+        insert_sql = text("""
+            INSERT INTO hero_documents (hero_name, section_title, content)
+            VALUES (:h, :t, :c)
+        """)
+        for cat, title, content in chunks:
+            db.execute(insert_sql, {"h": cat, "t": title, "c": content})
+        db.commit()
+        print(f"Successfully loaded all {total} knowledge chunks into Supabase hero_documents!")
 
-            for (cat, title, content), emb in zip(batch, embeddings):
-                vector_str = "[" + ",".join(map(str, emb)) + "]"
-                db.execute(text("""
-                    INSERT INTO hero_documents (hero_name, section_title, content, embedding)
-                    VALUES (:h, :t, :c, CAST(:e AS vector))
-                """), {"h": cat, "t": title, "c": content, "e": vector_str})
-            db.commit()
-            print(f"Indexed [{i + 1} to {min(i + batch_size, total)}] / {total} chunks into Supabase.")
-            time.sleep(1.0)
+        # Attempt to compute vector embeddings where quota permits
+        print("Attempting to compute vector embeddings where quota permits...")
+        try:
+            for i in range(0, total, batch_size):
+                batch = chunks[i:i + batch_size]
+                texts_to_embed = [f"{c[1]}\n{c[2]}" for c in batch]
+                try:
+                    embeddings = embed_batch_with_retry(texts_to_embed, max_retries=1)
+                except Exception as emb_e:
+                    print(f"Notice: Gemini embedding API quota limit reached ({emb_e}). All documents are already safely stored and accessible via hybrid keyword/FTS search.")
+                    break
+
+                for (cat, title, content), emb in zip(batch, embeddings):
+                    vector_str = "[" + ",".join(map(str, emb)) + "]"
+                    db.execute(text("""
+                        UPDATE hero_documents 
+                        SET embedding = CAST(:e AS vector)
+                        WHERE hero_name = :h AND section_title = :t
+                    """), {"h": cat, "t": title, "e": vector_str})
+                db.commit()
+                print(f"Vectorized [{i + 1} to {min(i + batch_size, total)}] / {total} chunks.")
+        except Exception as vec_err:
+            print(f"Vectorization note: {vec_err}")
 
         total_db = db.execute(text("SELECT count(*) FROM hero_documents")).scalar()
         print(f"\nBULK INGESTION COMPLETE! Total documents in Supabase: {total_db}")

@@ -91,27 +91,48 @@ def search_dota_knowledge(query: str, limit: int = 4, threshold: float = 0.45) -
                 if len(results) >= 3:
                     break
 
-            # 2. Vector Cosine Similarity Search
-            query_vector = generate_embedding(query)
-            vector_str = "[" + ",".join(map(str, query_vector)) + "]"
-            
-            vec_sql = text("""
-                SELECT hero_name, section_title, content,
-                       1 - (embedding <=> CAST(:query_vec AS vector)) AS similarity
-                FROM hero_documents
-                WHERE embedding IS NOT NULL
-                ORDER BY embedding <=> CAST(:query_vec AS vector) ASC
-                LIMIT :limit;
-            """)
-            vec_rows = db.execute(vec_sql, {
-                "query_vec": vector_str,
-                "limit": limit
-            }).mappings().all()
+            # 2. Vector Cosine Similarity Search (with graceful fallback if embedding quota reached)
+            try:
+                query_vector = generate_embedding(query)
+                vector_str = "[" + ",".join(map(str, query_vector)) + "]"
+                
+                vec_sql = text("""
+                    SELECT hero_name, section_title, content,
+                           1 - (embedding <=> CAST(:query_vec AS vector)) AS similarity
+                    FROM hero_documents
+                    WHERE embedding IS NOT NULL
+                    ORDER BY embedding <=> CAST(:query_vec AS vector) ASC
+                    LIMIT :limit;
+                """)
+                vec_rows = db.execute(vec_sql, {
+                    "query_vec": vector_str,
+                    "limit": limit
+                }).mappings().all()
 
-            for row in vec_rows:
-                if row["section_title"] not in seen_titles and len(results) < limit:
-                    results.append(dict(row))
-                    seen_titles.add(row["section_title"])
+                for row in vec_rows:
+                    if row["section_title"] not in seen_titles and len(results) < limit:
+                        results.append(dict(row))
+                        seen_titles.add(row["section_title"])
+            except Exception as vec_err:
+                # Quota exceeded or embedding error fallback: search by content & section title
+                fallback_sql = text("""
+                    SELECT hero_name, section_title, content, 0.85 AS similarity
+                    FROM hero_documents
+                    WHERE section_title ILIKE :pat OR content ILIKE :pat
+                    ORDER BY updated_at DESC
+                    LIMIT :limit;
+                """)
+                for word in words:
+                    if len(results) >= limit:
+                        break
+                    fb_rows = db.execute(fallback_sql, {
+                        "pat": f"%{word}%",
+                        "limit": limit
+                    }).mappings().all()
+                    for row in fb_rows:
+                        if row["section_title"] not in seen_titles and len(results) < limit:
+                            results.append(dict(row))
+                            seen_titles.add(row["section_title"])
 
             return results
         finally:

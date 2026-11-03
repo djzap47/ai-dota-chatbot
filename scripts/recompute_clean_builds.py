@@ -401,18 +401,18 @@ CURATED_BUILDS = {
         "hero_name": "Doom",
         "builds": [
             {
-                "name": "Blink & Shiva Teamfight Build",
+                "name": "Pos 3 Offlane",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
                 "early": "Phase Boots, Hand of Midas, Blink Dagger",
                 "mid": "Black King Bar, Shiva's Guard, Aghanim's Scepter",
                 "late": "Refresher Orb, Octarine Core, Overwhelming Blink, Heart of Tarrasque"
             },
             {
-                "name": "Radiance & Aura Tank Build",
-                "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-                "early": "Phase Boots, Hand of Midas, Radiance",
-                "mid": "Black King Bar, Blink Dagger, Assault Cuirass",
-                "late": "Shiva's Guard, Refresher Orb, Heart of Tarrasque, Overwhelming Blink"
+                "name": "Pos 2 Mid",
+                "starting": "Tango, Iron Branch, Faerie Fire, Quelling Blade, Circlet",
+                "early": "Bottle, Phase Boots, Blink Dagger",
+                "mid": "Black King Bar, Shiva's Guard, Octarine Core",
+                "late": "Refresher Orb, Overwhelming Blink, Scythe of Vyse, Aghanim's Scepter"
             }
         ]
     },
@@ -441,18 +441,239 @@ CURATED_BUILDS = {
         "hero_name": "Pudge",
         "builds": [
             {
-                "name": "Core / Tank & Initiator Build",
+                "name": "Pos 1/3 Core",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-                "early": "Phase Boots, Bottle or Vanguard, Blade Mail",
+                "early": "Phase Boots, Vanguard, Blade Mail",
                 "mid": "Blink Dagger, Black King Bar, Aghanim's Scepter",
                 "late": "Heart of Tarrasque, Shiva's Guard, Overwhelming Blink, Bloodstone"
             },
             {
-                "name": "Support / Roaming & Utility Build",
+                "name": "Pos 4 Support",
                 "starting": "Tango, Blood Grenade, Observer Ward, Sentry Ward, Iron Branch, Magic Stick",
                 "early": "Tranquil Boots, Magic Wand, Glimmer Cape",
                 "mid": "Blink Dagger, Force Staff, Aghanim's Shard",
                 "late": "Lotus Orb, Wind Waker, Aghanim's Scepter, Scythe of Vyse"
+            }
+        ]
+    },
+    # Magnus
+    "97": {
+        "hero_name": "Magnus",
+        "builds": [
+            {
+                "name": "Pos 1 Carry",
+                "starting": "Quelling Blade, Tango, Iron Branch, Gauntlets of Strength, Circlet",
+                "early": "Power Treads, Echo Sabre or Harpoon, Mask of Madness",
+                "mid": "Black King Bar, Blink Dagger, Aghanim's Scepter or Daedalus",
+                "late": "Satanic, Refresher Orb, Swift Blink, Nullifier"
+            },
+            {
+                "name": "Pos 3 Offlane",
+                "starting": "Tango, Quelling Blade, Iron Branch, Gauntlets of Strength, Circlet",
+                "early": "Power Treads, Bracer, Blink Dagger",
+                "mid": "Harpoon or Force Staff, Black King Bar, Aghanim's Shard",
+                "late": "Shiva's Guard, Refresher Orb, Overwhelming Blink, Octarine Core"
+            },
+            {
+                "name": "Pos 2 Mid",
+                "starting": "Tango, Iron Branch, Faerie Fire, Circlet, Quelling Blade",
+                "early": "Bottle, Power Treads, Blink Dagger",
+                "mid": "Harpoon, Black King Bar, Aghanim's Scepter",
+                "late": "Refresher Orb, Shiva's Guard, Swift Blink, Scythe of Vyse"
+            }
+        ]
+    },
+    # Lina
+    "25": {
+        "hero_name": "Lina",
+        "builds": [
+            {
+                "name": "Pos 1 Carry",
+                "starting": "Tango, Iron Branch, Circlet, Slippers of Agility, Faerie Fire",
+                "early": "Falcon Blade, Phase Boots, Maelstrom",
+                "mid": "Black King Bar, Gleipnir, Daedalus, Hurricane Pike",
+                "late": "Satanic, Butterfly, Swift Blink, Silver Edge"
+            },
+            {
+                "name": "Pos 2 Mid",
+                "starting": "Tango, Iron Branch, Faerie Fire, Circlet, Mantle of Intelligence",
+                "early": "Bottle, Boots of Travel, Eul's Scepter of Divinity",
+                "mid": "Black King Bar, Aghanim's Scepter, Scythe of Vyse",
+                "late": "Octarine Core, Ethereal Blade, Refresher Orb, Swift Blink"
+            },
+            {
+                "name": "Pos 4 Support",
+                "starting": "Tango, Blood Grenade, Iron Branch, Sentry Ward, Faerie Fire",
+                "early": "Arcane Boots, Magic Wand, Wind Lace",
+                "mid": "Aether Lens, Eul's Scepter of Divinity, Force Staff",
+                "late": "Glimmer Cape, Aghanim's Shard, Scythe of Vyse, Lotus Orb"
+            }
+        ]
+    },
+    # Windranger
+    "21": {
+        "hero_name": "Windranger",
+        "builds": [
+            {
+                "name": "Pos 1/2 Core",
+                "starting": "Tango, Iron Branch, Circlet, Slippers of Agility, Faerie Fire",
+                "early": "Power Treads, Bottle or Falcon Blade, Maelstrom",
+                "mid": "Black King Bar, Gleipnir, Linken's Sphere or Manta Style",
+                "late": "Daedalus, Scythe of Vyse, Butterfly, Nullifier"
+            },
+            {
+                "name": "Pos 4/5 Support",
+                "starting": "Tango, Blood Grenade, Iron Branch, Sentry Ward, Faerie Fire",
+                "early": "Tranquil Boots, Magic Wand, Solar Crest",
+                "mid": "Force Staff, Glimmer Cape, Aghanim's Shard",
+                "late": "Scythe of Vyse, Lotus Orb, Wind Waker, Aeon Disk"
+            }
+        ]
+    },
+    # Tiny
+    "19": {
+        "hero_name": "Tiny",
+        "builds": [
+            {
+                "name": "Pos 1 Carry",
+                "starting": "Quelling Blade, Tango, Iron Branch, Gauntlets of Strength, Circlet",
+                "early": "Power Treads, Echo Sabre, Shadow Blade",
+                "mid": "Black King Bar, Daedalus, Silver Edge, Assault Cuirass",
+                "late": "Satanic, Swift Blink, Moon Shard, Nullifier"
+            },
+            {
+                "name": "Pos 2 Mid",
+                "starting": "Tango, Iron Branch, Faerie Fire, Circlet, Quelling Blade",
+                "early": "Bottle, Power Treads, Blink Dagger",
+                "mid": "Echo Sabre or Harpoon, Black King Bar, Daedalus",
+                "late": "Assault Cuirass, Satanic, Overwhelming Blink, Refresher Orb"
+            },
+            {
+                "name": "Pos 4 Support",
+                "starting": "Tango, Blood Grenade, Iron Branch, Boots of Speed",
+                "early": "Tranquil Boots, Magic Wand, Wind Lace",
+                "mid": "Blink Dagger, Force Staff, Aghanim's Shard, Eul's Scepter",
+                "late": "Lotus Orb, Solar Crest, Octarine Core, Wind Waker"
+            }
+        ]
+    },
+    # Gyrocopter
+    "72": {
+        "hero_name": "Gyrocopter",
+        "builds": [
+            {
+                "name": "Pos 1 Carry",
+                "starting": "Quelling Blade, Tango, Iron Branch, Circlet, Slippers of Agility",
+                "early": "Power Treads, Falcon Blade, Sange and Yasha",
+                "mid": "Black King Bar, Satanic, Butterfly, Aghanim's Scepter",
+                "late": "Daedalus, Swift Blink, Eye of Skadi, Nullifier"
+            },
+            {
+                "name": "Pos 4/5 Support",
+                "starting": "Tango, Blood Grenade, Iron Branch, Faerie Fire, Sentry Ward",
+                "early": "Tranquil Boots, Magic Wand, Drum of Endurance",
+                "mid": "Force Staff, Glimmer Cape, Aghanim's Shard, Eul's Scepter",
+                "late": "Boots of Bearing, Lotus Orb, Solar Crest, Scythe of Vyse"
+            }
+        ]
+    },
+    # Vengeful Spirit
+    "20": {
+        "hero_name": "Vengeful Spirit",
+        "builds": [
+            {
+                "name": "Pos 1 Carry",
+                "starting": "Quelling Blade, Tango, Iron Branch, Circlet, Slippers of Agility",
+                "early": "Power Treads, Falcon Blade, Dragon Lance",
+                "mid": "Manta Style, Aghanim's Scepter, Black King Bar",
+                "late": "Butterfly, Daedalus, Hurricane Pike, Satanic"
+            },
+            {
+                "name": "Pos 5 Support",
+                "starting": "Tango, Blood Grenade, Iron Branch, Faerie Fire, Sentry Ward",
+                "early": "Tranquil Boots, Magic Wand, Pavise or Solar Crest",
+                "mid": "Force Staff, Glimmer Cape, Aghanim's Scepter",
+                "late": "Lotus Orb, Wind Waker, Aeon Disk, Boots of Bearing"
+            }
+        ]
+    },
+    # Dragon Knight
+    "49": {
+        "hero_name": "Dragon Knight",
+        "builds": [
+            {
+                "name": "Pos 2 Mid",
+                "starting": "Quelling Blade, Tango, Iron Branch, Gauntlets of Strength, Circlet",
+                "early": "Bottle, Power Treads, Soul Ring or Armlet",
+                "mid": "Black King Bar, Blink Dagger, Manta Style or Maelstrom",
+                "late": "Assault Cuirass, Eye of Skadi, Overwhelming Blink, Satanic"
+            },
+            {
+                "name": "Pos 3 Offlane",
+                "starting": "Quelling Blade, Tango, Iron Branch, Gauntlets of Strength, Circlet",
+                "early": "Power Treads, Bracer, Blink Dagger",
+                "mid": "Black King Bar, Harpoon, Aghanim's Scepter",
+                "late": "Assault Cuirass, Overwhelming Blink, Shiva's Guard, Refresher Orb"
+            }
+        ]
+    },
+    # Snapfire
+    "128": {
+        "hero_name": "Snapfire",
+        "builds": [
+            {
+                "name": "Pos 2 Mid",
+                "starting": "Tango, Iron Branch, Faerie Fire, Circlet, Quelling Blade",
+                "early": "Bottle, Power Treads, Dragon Lance",
+                "mid": "Black King Bar, Daedalus, Hurricane Pike, Maelstrom or Gleipnir",
+                "late": "Eye of Skadi, Satanic, Swift Blink, Scythe of Vyse"
+            },
+            {
+                "name": "Pos 4/5 Support",
+                "starting": "Tango, Blood Grenade, Iron Branch, Faerie Fire, Sentry Ward",
+                "early": "Arcane or Tranquil Boots, Magic Wand, Pavise",
+                "mid": "Solar Crest, Force Staff, Glimmer Cape, Aghanim's Shard",
+                "late": "Lotus Orb, Guardian Greaves, Scythe of Vyse, Wind Waker"
+            }
+        ]
+    },
+    # Mirana
+    "9": {
+        "hero_name": "Mirana",
+        "builds": [
+            {
+                "name": "Pos 2 Mid",
+                "starting": "Tango, Iron Branch, Faerie Fire, Circlet, Slippers of Agility",
+                "early": "Bottle, Power Treads, Maelstrom",
+                "mid": "Manta Style, Black King Bar, Gleipnir",
+                "late": "Eye of Skadi, Butterfly, Daedalus, Scythe of Vyse"
+            },
+            {
+                "name": "Pos 4 Support",
+                "starting": "Tango, Blood Grenade, Iron Branch, Faerie Fire, Sentry Ward",
+                "early": "Tranquil or Arcane Boots, Magic Wand, Urn of Shadows",
+                "mid": "Spirit Vessel, Eul's Scepter, Force Staff, Solar Crest",
+                "late": "Lotus Orb, Glimmer Cape, Scythe of Vyse, Wind Waker"
+            }
+        ]
+    },
+    # Naga Siren
+    "89": {
+        "hero_name": "Naga Siren",
+        "builds": [
+            {
+                "name": "Pos 1 Carry",
+                "starting": "Quelling Blade, Tango, Iron Branch, Slippers of Agility, Circlet",
+                "early": "Power Treads, Wraith Band, Diffusal Blade",
+                "mid": "Manta Style, Heart of Tarrasque, Butterfly",
+                "late": "Eye of Skadi, Disperser, Bloodthorn, Swift Blink"
+            },
+            {
+                "name": "Pos 4 Support",
+                "starting": "Tango, Blood Grenade, Iron Branch, Sentry Ward, Faerie Fire",
+                "early": "Arcane Boots, Magic Wand, Solar Crest",
+                "mid": "Aether Lens, Lotus Orb, Aghanim's Scepter",
+                "late": "Guardian Greaves, Wind Waker, Octarine Core, Scythe of Vyse"
             }
         ]
     }
