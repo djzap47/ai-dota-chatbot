@@ -3,7 +3,7 @@
     "hero_name": "Anti-Mage",
     "builds": [
       {
-        "name": "Battle Fury Standard Build",
+        "name": "Battle Fury",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Battle Fury",
         "mid": "Manta Style, Black King Bar, Skull Basher",
@@ -15,7 +15,7 @@
     "hero_name": "Axe",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -27,7 +27,7 @@
     "hero_name": "Bane",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -39,7 +39,7 @@
     "hero_name": "Bloodseeker",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -51,7 +51,7 @@
     "hero_name": "Crystal Maiden",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -63,7 +63,7 @@
     "hero_name": "Drow Ranger",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -75,7 +75,7 @@
     "hero_name": "Earthshaker",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -87,14 +87,14 @@
     "hero_name": "Juggernaut",
     "builds": [
       {
-        "name": "Battle Fury Scaling Build",
+        "name": "Battle Fury",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Faerie Fire",
         "early": "Phase Boots, Magic Wand, Battle Fury",
         "mid": "Manta Style, Aghanim's Scepter, Butterfly",
         "late": "Swift Blink, Eye of Skadi, Abyssal Blade, Refresher Orb"
       },
       {
-        "name": "Maelstrom / Tempo Fighting Build",
+        "name": "Maelstrom",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Faerie Fire",
         "early": "Phase Boots, Wraith Band, Maelstrom",
         "mid": "Manta Style, Diffusal Blade or Gleipnir, Aghanim's Scepter",
@@ -106,7 +106,7 @@
     "hero_name": "Mirana",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -156,7 +156,7 @@
     "hero_name": "Phantom Lancer",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -168,7 +168,7 @@
     "hero_name": "Puck",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -199,7 +199,7 @@
     "hero_name": "Razor",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -211,7 +211,7 @@
     "hero_name": "Sand King",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -280,7 +280,7 @@
     "hero_name": "Vengeful Spirit",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -292,7 +292,7 @@
     "hero_name": "Windranger",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Phase Boots, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -304,7 +304,7 @@
     "hero_name": "Zeus",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -316,7 +316,7 @@
     "hero_name": "Kunkka",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -347,7 +347,7 @@
     "hero_name": "Lion",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -359,7 +359,7 @@
     "hero_name": "Shadow Shaman",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -371,7 +371,7 @@
     "hero_name": "Slardar",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -383,7 +383,7 @@
     "hero_name": "Tidehunter",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -395,7 +395,7 @@
     "hero_name": "Witch Doctor",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -407,7 +407,7 @@
     "hero_name": "Lich",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -419,7 +419,7 @@
     "hero_name": "Riki",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -431,7 +431,7 @@
     "hero_name": "Enigma",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -443,7 +443,7 @@
     "hero_name": "Tinker",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -474,7 +474,7 @@
     "hero_name": "Necrophos",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -486,7 +486,7 @@
     "hero_name": "Warlock",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -498,7 +498,7 @@
     "hero_name": "Beastmaster",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -529,7 +529,7 @@
     "hero_name": "Venomancer",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -541,14 +541,14 @@
     "hero_name": "Faceless Void",
     "builds": [
       {
-        "name": "Maelstrom / Attack Speed & Teamfight Build",
+        "name": "Maelstrom",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom",
         "mid": "Manta Style or Black King Bar, Mjollnir",
         "late": "Eye of Skadi, Butterfly, Refresher Orb, Satanic"
       },
       {
-        "name": "Battle Fury & Scepter Scaling Build",
+        "name": "Battle Fury",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Wraith Band, Battle Fury",
         "mid": "Manta Style, Aghanim's Scepter, Black King Bar",
@@ -560,14 +560,14 @@
     "hero_name": "Wraith King",
     "builds": [
       {
-        "name": "Radiance & Sustain Build",
+        "name": "Radiance",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Armlet of Mordiggian, Radiance",
         "mid": "Blink Dagger, Black King Bar, Assault Cuirass",
         "late": "Refresher Orb, Abyssal Blade, Overwhelming Blink, Heart of Tarrasque"
       },
       {
-        "name": "Desolator Crit Burst Build",
+        "name": "Desolator",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Armlet of Mordiggian, Desolator",
         "mid": "Blink Dagger, Black King Bar, Assault Cuirass",
@@ -579,7 +579,7 @@
     "hero_name": "Death Prophet",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Phase Boots, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -591,14 +591,14 @@
     "hero_name": "Phantom Assassin",
     "builds": [
       {
-        "name": "Battle Fury Scaling Build",
+        "name": "Battle Fury",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Wraith Band, Battle Fury",
         "mid": "Desolator, Black King Bar, Aghanim's Scepter",
         "late": "Skull Basher into Abyssal Blade, Satanic, Nullifier"
       },
       {
-        "name": "Desolator Fast Tempo Build",
+        "name": "Desolator",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Orb of Corrosion, Desolator",
         "mid": "Black King Bar, Skull Basher, Aghanim's Scepter",
@@ -610,7 +610,7 @@
     "hero_name": "Pugna",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -622,7 +622,7 @@
     "hero_name": "Templar Assassin",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -634,7 +634,7 @@
     "hero_name": "Viper",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -646,7 +646,7 @@
     "hero_name": "Luna",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -658,7 +658,7 @@
     "hero_name": "Dragon Knight",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -670,7 +670,7 @@
     "hero_name": "Dazzle",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -682,7 +682,7 @@
     "hero_name": "Clockwerk",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -694,7 +694,7 @@
     "hero_name": "Leshrac",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -706,7 +706,7 @@
     "hero_name": "Nature's Prophet",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Phase Boots, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -718,14 +718,14 @@
     "hero_name": "Lifestealer",
     "builds": [
       {
-        "name": "Armlet & Radiance Durability Build",
+        "name": "Radiance",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Armlet of Mordiggian",
         "mid": "Radiance, Sange and Yasha, Skull Basher",
         "late": "Abyssal Blade, Assault Cuirass, Nullifier, Satanic"
       },
       {
-        "name": "Desolator Fast Tempo Build",
+        "name": "Desolator",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Orb of Corrosion, Armlet of Mordiggian",
         "mid": "Desolator, Sange and Yasha or Black King Bar, Skull Basher",
@@ -737,7 +737,7 @@
     "hero_name": "Dark Seer",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -749,7 +749,7 @@
     "hero_name": "Clinkz",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -761,7 +761,7 @@
     "hero_name": "Omniknight",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -773,7 +773,7 @@
     "hero_name": "Enchantress",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -785,7 +785,7 @@
     "hero_name": "Huskar",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -797,7 +797,7 @@
     "hero_name": "Night Stalker",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -809,7 +809,7 @@
     "hero_name": "Broodmother",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -821,7 +821,7 @@
     "hero_name": "Bounty Hunter",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -833,7 +833,7 @@
     "hero_name": "Weaver",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -845,7 +845,7 @@
     "hero_name": "Jakiro",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -857,7 +857,7 @@
     "hero_name": "Batrider",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -869,7 +869,7 @@
     "hero_name": "Chen",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -881,14 +881,14 @@
     "hero_name": "Spectre",
     "builds": [
       {
-        "name": "Radiance Scaling Build",
+        "name": "Radiance",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Blade Mail, Radiance",
         "mid": "Manta Style, Aghanim's Scepter, Heart of Tarrasque",
         "late": "Eye of Skadi, Abyssal Blade, Butterfly, Bloodthorn"
       },
       {
-        "name": "Blade Mail & Orchid Aggressive Build",
+        "name": "Blade Mail",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Blade Mail, Orchid Malevolence",
         "mid": "Manta Style, Aghanim's Scepter, Skull Basher",
@@ -900,7 +900,7 @@
     "hero_name": "Ancient Apparition",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -950,7 +950,7 @@
     "hero_name": "Spirit Breaker",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -962,7 +962,7 @@
     "hero_name": "Gyrocopter",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -1012,7 +1012,7 @@
     "hero_name": "Silencer",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1024,7 +1024,7 @@
     "hero_name": "Outworld Devourer",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -1036,7 +1036,7 @@
     "hero_name": "Lycan",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1048,7 +1048,7 @@
     "hero_name": "Brewmaster",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1060,7 +1060,7 @@
     "hero_name": "Shadow Demon",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1072,7 +1072,7 @@
     "hero_name": "Lone Druid",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1084,7 +1084,7 @@
     "hero_name": "Chaos Knight",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1096,7 +1096,7 @@
     "hero_name": "Meepo",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1108,7 +1108,7 @@
     "hero_name": "Treant Protector",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1120,7 +1120,7 @@
     "hero_name": "Ogre Magi",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1132,7 +1132,7 @@
     "hero_name": "Undying",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1144,7 +1144,7 @@
     "hero_name": "Rubick",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1156,7 +1156,7 @@
     "hero_name": "Disruptor",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1168,7 +1168,7 @@
     "hero_name": "Nyx Assassin",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1180,7 +1180,7 @@
     "hero_name": "Naga Siren",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1192,7 +1192,7 @@
     "hero_name": "Keeper of the Light",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1204,7 +1204,7 @@
     "hero_name": "Io",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1216,7 +1216,7 @@
     "hero_name": "Visage",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1247,7 +1247,7 @@
     "hero_name": "Medusa",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1259,7 +1259,7 @@
     "hero_name": "Troll Warlord",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1271,7 +1271,7 @@
     "hero_name": "Centaur Warrunner",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1283,7 +1283,7 @@
     "hero_name": "Magnus",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1295,7 +1295,7 @@
     "hero_name": "Timbersaw",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1307,7 +1307,7 @@
     "hero_name": "Bristleback",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1319,7 +1319,7 @@
     "hero_name": "Tusk",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1331,7 +1331,7 @@
     "hero_name": "Skywrath Mage",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1343,7 +1343,7 @@
     "hero_name": "Abaddon",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1355,7 +1355,7 @@
     "hero_name": "Elder Titan",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1367,7 +1367,7 @@
     "hero_name": "Legion Commander",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1379,7 +1379,7 @@
     "hero_name": "Techies",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Phase Boots, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -1410,7 +1410,7 @@
     "hero_name": "Earth Spirit",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1422,7 +1422,7 @@
     "hero_name": "Underlord",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1434,7 +1434,7 @@
     "hero_name": "Terrorblade",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -1446,7 +1446,7 @@
     "hero_name": "Phoenix",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1458,7 +1458,7 @@
     "hero_name": "Oracle",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1470,7 +1470,7 @@
     "hero_name": "Winter Wyvern",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1482,7 +1482,7 @@
     "hero_name": "Arc Warden",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Phase Boots, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -1494,7 +1494,7 @@
     "hero_name": "Monkey King",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1506,7 +1506,7 @@
     "hero_name": "Dark Willow",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1518,7 +1518,7 @@
     "hero_name": "Pangolier",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1530,7 +1530,7 @@
     "hero_name": "Grimstroke",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1542,7 +1542,7 @@
     "hero_name": "Hoodwink",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1554,7 +1554,7 @@
     "hero_name": "Void Spirit",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Phase Boots, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -1566,7 +1566,7 @@
     "hero_name": "Snapfire",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1578,7 +1578,7 @@
     "hero_name": "Mars",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1590,7 +1590,7 @@
     "hero_name": "Ring Master",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -1602,7 +1602,7 @@
     "hero_name": "Dawnbreaker",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1614,7 +1614,7 @@
     "hero_name": "Marci",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Power Treads, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1626,7 +1626,7 @@
     "hero_name": "Primal Beast",
     "builds": [
       {
-        "name": "Initiation & Teamfight Build",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
         "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
         "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -1638,7 +1638,7 @@
     "hero_name": "Muerta",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -1650,7 +1650,7 @@
     "hero_name": "Kez",
     "builds": [
       {
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
@@ -1662,7 +1662,7 @@
     "hero_name": "Largo",
     "builds": [
       {
-        "name": "Support Utility & Save Build",
+        "name": "Standard",
         "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
         "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
         "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",

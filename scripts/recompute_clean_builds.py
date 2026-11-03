@@ -28,14 +28,14 @@ CURATED_BUILDS = {
         "hero_name": "Faceless Void",
         "builds": [
             {
-                "name": "Maelstrom / Attack Speed & Teamfight Build",
+                "name": "Maelstrom",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
                 "early": "Power Treads, Magic Wand, Maelstrom",
                 "mid": "Manta Style or Black King Bar, Mjollnir",
                 "late": "Eye of Skadi, Butterfly, Refresher Orb, Satanic"
             },
             {
-                "name": "Battle Fury & Scepter Scaling Build",
+                "name": "Battle Fury",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
                 "early": "Power Treads, Wraith Band, Battle Fury",
                 "mid": "Manta Style, Aghanim's Scepter, Black King Bar",
@@ -48,14 +48,14 @@ CURATED_BUILDS = {
         "hero_name": "Juggernaut",
         "builds": [
             {
-                "name": "Battle Fury Scaling Build",
+                "name": "Battle Fury",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Faerie Fire",
                 "early": "Phase Boots, Magic Wand, Battle Fury",
                 "mid": "Manta Style, Aghanim's Scepter, Butterfly",
                 "late": "Swift Blink, Eye of Skadi, Abyssal Blade, Refresher Orb"
             },
             {
-                "name": "Maelstrom / Tempo Fighting Build",
+                "name": "Maelstrom",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Faerie Fire",
                 "early": "Phase Boots, Wraith Band, Maelstrom",
                 "mid": "Manta Style, Diffusal Blade or Gleipnir, Aghanim's Scepter",
@@ -68,14 +68,14 @@ CURATED_BUILDS = {
         "hero_name": "Lifestealer",
         "builds": [
             {
-                "name": "Armlet & Radiance Durability Build",
+                "name": "Radiance",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
                 "early": "Phase Boots, Bracer, Armlet of Mordiggian",
                 "mid": "Radiance, Sange and Yasha, Skull Basher",
                 "late": "Abyssal Blade, Assault Cuirass, Nullifier, Satanic"
             },
             {
-                "name": "Desolator Fast Tempo Build",
+                "name": "Desolator",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
                 "early": "Phase Boots, Orb of Corrosion, Armlet of Mordiggian",
                 "mid": "Desolator, Sange and Yasha or Black King Bar, Skull Basher",
@@ -88,14 +88,14 @@ CURATED_BUILDS = {
         "hero_name": "Phantom Assassin",
         "builds": [
             {
-                "name": "Battle Fury Scaling Build",
+                "name": "Battle Fury",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
                 "early": "Power Treads, Wraith Band, Battle Fury",
                 "mid": "Desolator, Black King Bar, Aghanim's Scepter",
                 "late": "Skull Basher into Abyssal Blade, Satanic, Nullifier"
             },
             {
-                "name": "Desolator Fast Tempo Build",
+                "name": "Desolator",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
                 "early": "Power Treads, Orb of Corrosion, Desolator",
                 "mid": "Black King Bar, Skull Basher, Aghanim's Scepter",
@@ -108,7 +108,7 @@ CURATED_BUILDS = {
         "hero_name": "Anti-Mage",
         "builds": [
             {
-                "name": "Battle Fury Standard Build",
+                "name": "Battle Fury",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
                 "early": "Power Treads, Magic Wand, Battle Fury",
                 "mid": "Manta Style, Black King Bar, Skull Basher",
@@ -121,14 +121,14 @@ CURATED_BUILDS = {
         "hero_name": "Spectre",
         "builds": [
             {
-                "name": "Radiance Scaling Build",
+                "name": "Radiance",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
                 "early": "Power Treads, Blade Mail, Radiance",
                 "mid": "Manta Style, Aghanim's Scepter, Heart of Tarrasque",
                 "late": "Eye of Skadi, Abyssal Blade, Butterfly, Bloodthorn"
             },
             {
-                "name": "Blade Mail & Orchid Aggressive Build",
+                "name": "Blade Mail",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
                 "early": "Power Treads, Blade Mail, Orchid Malevolence",
                 "mid": "Manta Style, Aghanim's Scepter, Skull Basher",
@@ -141,14 +141,14 @@ CURATED_BUILDS = {
         "hero_name": "Wraith King",
         "builds": [
             {
-                "name": "Radiance & Sustain Build",
+                "name": "Radiance",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
                 "early": "Phase Boots, Armlet of Mordiggian, Radiance",
                 "mid": "Blink Dagger, Black King Bar, Assault Cuirass",
                 "late": "Refresher Orb, Abyssal Blade, Overwhelming Blink, Heart of Tarrasque"
             },
             {
-                "name": "Desolator Crit Burst Build",
+                "name": "Desolator",
                 "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
                 "early": "Phase Boots, Armlet of Mordiggian, Desolator",
                 "mid": "Blink Dagger, Black King Bar, Assault Cuirass",
@@ -468,7 +468,7 @@ def generate_default_build_for_hero(hero: Dict[str, Any]) -> List[Dict[str, str]
     if is_support:
         # Standard Support Progression
         return [{
-            "name": "Support Utility & Save Build",
+            "name": "Standard",
             "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
             "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
             "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
@@ -479,7 +479,7 @@ def generate_default_build_for_hero(hero: Dict[str, Any]) -> List[Dict[str, str]
     if "Initiator" in roles or "Durable" in roles:
         boot = "Phase Boots" if attr == "STR" else "Power Treads"
         return [{
-            "name": "Initiation & Teamfight Build",
+            "name": "Standard",
             "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
             "early": f"{boot}, Bracer, Blade Mail or Vanguard",
             "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
@@ -489,7 +489,7 @@ def generate_default_build_for_hero(hero: Dict[str, Any]) -> List[Dict[str, str]
     # Standard Carry / Mid Core
     boot = "Power Treads" if attr == "AGI" else ("Power Treads" if attr == "INT" else "Phase Boots")
     return [{
-        "name": "Standard Core Progression",
+        "name": "Standard",
         "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
         "early": f"{boot}, Magic Wand, Maelstrom or Falcon Blade",
         "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",

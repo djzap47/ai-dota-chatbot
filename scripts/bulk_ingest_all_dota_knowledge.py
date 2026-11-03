@@ -114,18 +114,20 @@ TALENT TREE:
         m = hero_matchups.get(hid_str, {})
 
         build_blocks = []
-        for idx, build in enumerate(build_list, 1):
-            b_name = build.get("name", f"Build {idx}")
-            s_items = build.get("starting", "Quelling Blade, Tango, Iron Branch, Magic Stick")
-            e_items = build.get("early", "Phase Boots, Magic Wand")
-            m_items = build.get("mid", "Black King Bar, Manta Style")
-            l_items = build.get("late", "Eye of Skadi, Butterfly, Refresher Orb")
-            
-            build_blocks.append(f"""Build {idx} ({b_name}):
-• Starting Items: {s_items}
-• Early Game: {e_items}
-• Mid Game Core: {m_items}
-• Late Game: {l_items}""")
+        if len(build_list) == 1:
+            b = build_list[0]
+            build_blocks.append(f"""• Starting Items: {b.get('starting')}
+• Early Game: {b.get('early')}
+• Mid Game: {b.get('mid')}
+• Late Game: {b.get('late')}""")
+        else:
+            for idx, build in enumerate(build_list, 1):
+                b_name = build.get("name", f"Option {idx}")
+                build_blocks.append(f"""Build {idx} ({b_name}):
+• Starting Items: {build.get('starting')}
+• Early Game: {build.get('early')}
+• Mid Game: {build.get('mid')}
+• Late Game: {build.get('late')}""")
 
         build_text = "\n\n".join(build_blocks)
         strong_str = ", ".join(m.get("strong_against", [])) if m.get("strong_against") else "High win-rate against favorable heroes"
