@@ -139,27 +139,30 @@ def get_top_heroes(
     return top_stats
 
 
-def verify_auth(authorization: Optional[str]):
-    """Verify authorization header against CRON_SECRET (accepts raw secret or Bearer token)."""
+def verify_auth(authorization: Optional[str] = None, secret: Optional[str] = None):
+    """Verify authorization header or secret query parameter against CRON_SECRET."""
     if not settings.CRON_SECRET:
         return
-    token = (authorization or "").strip()
+    token = (secret or authorization or "").strip()
     if token.startswith("Bearer "):
         token = token[7:].strip()
     if token != settings.CRON_SECRET:
         raise HTTPException(
             status_code=401,
-            detail="Unauthorized. Enter your CRON_SECRET or 'Bearer <CRON_SECRET>' in the Authorization header."
+            detail="Unauthorized. Enter your CRON_SECRET in the 'secret' parameter or Authorization header."
         )
 
 
 @app.get("/api/cron", response_model=ScraperResponse, tags=["Scraper"])
-async def cron_scraper(authorization: Optional[str] = Header(None, description="CRON_SECRET or Bearer token")):
+async def cron_scraper(
+    secret: Optional[str] = Query(None, description="CRON_SECRET query parameter"),
+    authorization: Optional[str] = Header(None, description="CRON_SECRET or Bearer token")
+):
     """
     Daily cron endpoint intended for Vercel Cron.
-    Secured by comparing Authorization header against CRON_SECRET if configured.
+    Secured by comparing Authorization header or secret query against CRON_SECRET if configured.
     """
-    verify_auth(authorization)
+    verify_auth(authorization=authorization, secret=secret)
 
     try:
         updated_count = await asyncio.to_thread(run_scraper_task)
@@ -174,12 +177,15 @@ async def cron_scraper(authorization: Optional[str] = Header(None, description="
 
 
 @app.post("/scraper/run", response_model=ScraperResponse, tags=["Scraper"])
-async def manual_scraper(authorization: Optional[str] = Header(None, description="CRON_SECRET or Bearer token")):
+async def manual_scraper(
+    secret: Optional[str] = Query(None, description="Enter CRON_SECRET here (works reliably in Swagger)"),
+    authorization: Optional[str] = Header(None, description="CRON_SECRET or Bearer token")
+):
     """
     Manually trigger data scraper to update hero stats from STRATZ API.
     Can be executed directly from Swagger UI (/docs).
     """
-    verify_auth(authorization)
+    verify_auth(authorization=authorization, secret=secret)
 
     try:
         updated_count = await asyncio.to_thread(run_scraper_task)
@@ -194,12 +200,15 @@ async def manual_scraper(authorization: Optional[str] = Header(None, description
 
 
 @app.post("/scraper/sync-meta", response_model=ScraperResponse, tags=["Scraper"])
-async def sync_opendota_meta(authorization: Optional[str] = Header(None, description="CRON_SECRET or Bearer token")):
+async def sync_opendota_meta(
+    secret: Optional[str] = Query(None, description="Enter CRON_SECRET here (works reliably in Swagger)"),
+    authorization: Optional[str] = Header(None, description="CRON_SECRET or Bearer token")
+):
     """
     Trigger full 2026 OpenDota Meta & Pro Player match sync (Patch 7.41+).
     Can be executed directly from Swagger UI (/docs). Runs on Vercel up to 300s.
     """
-    verify_auth(authorization)
+    verify_auth(authorization=authorization, secret=secret)
 
     try:
         from scripts.sync_opendota_meta_and_pros import run_meta_and_pros_sync
