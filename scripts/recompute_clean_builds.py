@@ -458,62 +458,79 @@ CURATED_BUILDS = {
     }
 }
 
-def generate_default_build_for_hero(hero: Dict[str, Any]) -> List[Dict[str, str]]:
-    """Generate high-MMR role-appropriate single-boot 4-phase build for uncurated heroes."""
-    name = hero.get("localized_name", "")
-    roles = hero.get("roles", [])
-    attr = str(hero.get("primary_attr", "")).upper()
-    is_support = "Support" in roles and "Carry" not in roles
+import requests
+import time
+from scripts.sync_opendota_meta_and_pros import DotaItemGraph
 
-    if is_support:
-        # Standard Support Progression
-        return [{
-            "name": "Standard",
-            "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-            "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-            "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-            "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
-        }]
+items_data_path = os.path.join(DATA_DIR, "items.json")
+with open(items_data_path, "r", encoding="utf-8") as f:
+    items_data = json.load(f)
 
-    # Initiator / Offlane Tank
-    if "Initiator" in roles or "Durable" in roles:
-        boot = "Phase Boots" if attr == "STR" else "Power Treads"
-        return [{
-            "name": "Standard",
-            "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-            "early": f"{boot}, Bracer, Blade Mail or Vanguard",
-            "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-            "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
-        }]
+graph = DotaItemGraph(items_data)
 
-    # Standard Carry / Mid Core
-    boot = "Power Treads" if attr == "AGI" else ("Power Treads" if attr == "INT" else "Phase Boots")
-    return [{
-        "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": f"{boot}, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
-    }]
+raw_pop_path = os.path.join(DATA_DIR, "raw_popularity.json")
+raw_pop_cache = {}
+if os.path.exists(raw_pop_path):
+    with open(raw_pop_path, "r", encoding="utf-8") as f:
+        try:
+            raw_pop_cache = json.load(f)
+        except Exception:
+            raw_pop_cache = {}
+
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) DotaBot/2.0"
+}
+
+def fetch_hero_popularity(hid_str: str) -> Dict[str, Any]:
+    if hid_str in raw_pop_cache and raw_pop_cache[hid_str]:
+        return raw_pop_cache[hid_str]
+    for attempt in range(5):
+        try:
+            res = requests.get(f"https://api.opendota.com/api/heroes/{hid_str}/itemPopularity", headers=headers, timeout=12)
+            if res.status_code == 200:
+                data = res.json()
+                raw_pop_cache[hid_str] = data
+                return data
+            elif res.status_code == 429:
+                time.sleep(2.5 * (attempt + 1))
+        except Exception:
+            time.sleep(1.0)
+    return {}
 
 def build_all_clean_hero_builds():
     output_builds = {}
     print(f"Generating clean multi-variant builds for all {len(heroes_data)} heroes...")
 
-    for hid_str, hero in heroes_data.items():
+    for i, (hid_str, hero) in enumerate(heroes_data.items(), 1):
         hname = hero.get("localized_name")
         if hid_str in CURATED_BUILDS:
             output_builds[hid_str] = CURATED_BUILDS[hid_str]
-        else:
+            print(f"[{i}/{len(heroes_data)}] {hname} -> Using Curated Multi-Build")
+            continue
+
+        pop = fetch_hero_popularity(hid_str)
+        if pop:
+            b = graph.resolve_hero_build(pop)
             output_builds[hid_str] = {
                 "hero_name": hname,
-                "builds": generate_default_build_for_hero(hero)
+                "builds": [{
+                    "name": "Standard",
+                    "starting": b.get("starting", "Tango, Iron Branch, Magic Stick"),
+                    "early": b.get("early", "Power Treads, Magic Wand"),
+                    "mid": b.get("mid", "Black King Bar, Blink Dagger"),
+                    "late": b.get("late", "Scythe of Vyse, Refresher Orb")
+                }]
             }
+            print(f"[{i}/{len(heroes_data)}] {hname} -> Real Build: {b.get('early')} | Mid: {b.get('mid')}")
+        time.sleep(0.15)
+
+    with open(raw_pop_path, "w", encoding="utf-8") as f:
+        json.dump(raw_pop_cache, f, indent=2)
 
     with open(os.path.join(DATA_DIR, "hero_builds.json"), "w", encoding="utf-8") as f:
         json.dump(output_builds, f, indent=2)
 
-    print(f"SUCCESS! Built comprehensive clean builds for {len(output_builds)} heroes in hero_builds.json.")
+    print(f"\nSUCCESS! Built comprehensive clean builds for {len(output_builds)} heroes in hero_builds.json.")
 
 if __name__ == "__main__":
     build_all_clean_hero_builds()

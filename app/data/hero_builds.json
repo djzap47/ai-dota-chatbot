@@ -16,10 +16,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Gauntlets of Strength, Iron Branch, Ring of Protection, Tango, Faerie Fire",
+        "early": "Phase Boots, Bracer, Soul Ring, Vanguard",
+        "mid": "Blink Dagger, Blade Mail, Aghanim's Shard, Spirit Vessel",
+        "late": "Black King Bar, Shiva's Guard, Heart of Tarrasque, Lotus Orb, Manta Style"
       }
     ]
   },
@@ -28,10 +28,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Smoke of Deceit",
+        "early": "Arcane Boots",
+        "mid": "Ghost Scepter, Solar Crest, Aghanim's Scepter, Aghanim's Shard",
+        "late": "Blink Dagger, Aether Lens, Force Staff, Glimmer Cape, Shadow Blade"
       }
     ]
   },
@@ -40,10 +40,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Quelling Blade, Circlet, Tango, Magic Stick",
+        "early": "Phase Boots, Wraith Band, Null Talisman, Bracer",
+        "mid": "Aghanim's Shard, Manta Style, Sange and Yasha, Radiance",
+        "late": "Black King Bar, Butterfly, Abyssal Blade, Swift Blink, Mjollnir"
       }
     ]
   },
@@ -52,10 +52,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Enchanted Mango, Faerie Fire",
+        "early": "Tranquil Boots, Null Talisman, Soul Ring",
+        "mid": "Aghanim's Shard, Drum of Endurance, Ghost Scepter, Aether Lens",
+        "late": "Blink Dagger, Glimmer Cape, Black King Bar, Force Staff, Solar Crest"
       }
     ]
   },
@@ -64,10 +64,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Faerie Fire, Circlet, Tango, Magic Stick",
+        "early": "Power Treads, Wraith Band, Null Talisman, Bracer",
+        "mid": "Manta Style, Aghanim's Scepter, Aghanim's Shard, Falcon Blade",
+        "late": "Black King Bar, Butterfly, Silver Edge, Hurricane Pike, Daedalus"
       }
     ]
   },
@@ -76,10 +76,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Faerie Fire, Enchanted Mango, Clarity",
+        "early": "Power Treads, Bottle, Soul Ring, Bracer",
+        "mid": "Aghanim's Shard, Blink Dagger, Aghanim's Scepter",
+        "late": "Black King Bar, Yasha and Kaya, Refresher Orb, Octarine Core, Aeon Disk"
       }
     ]
   },
@@ -107,10 +107,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Sentry Ward",
+        "early": "Tranquil Boots, Null Talisman",
+        "mid": "Essence Distiller, Eul's Scepter of Divinity, Guardian Greaves, Spirit Vessel",
+        "late": "Aghanim's Scepter, Force Staff, Consecrated Wraps, Blink Dagger, Solar Crest"
       }
     ]
   },
@@ -157,10 +157,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Quelling Blade, Tango, Faerie Fire, Circlet",
+        "early": "Power Treads, Wraith Band, Bracer, Urn of Shadows",
+        "mid": "Manta Style, Aghanim's Shard, Diffusal Blade",
+        "late": "Eye of Skadi, Bloodthorn, Heart of Tarrasque, Aghanim's Blessing, Butterfly"
       }
     ]
   },
@@ -169,10 +169,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Tango, Faerie Fire, Circlet, Magic Stick",
+        "early": "Power Treads, Bottle, Null Talisman, Wraith Band",
+        "mid": "Aghanim's Shard, Eul's Scepter of Divinity, Maelstrom, Hurricane Pike",
+        "late": "Parasma, Octarine Core, Linken's Sphere, Overwhelming Blink, Aeon Disk"
       }
     ]
   },
@@ -200,10 +200,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Tango, Circlet, Magic Stick, Faerie Fire",
+        "early": "Power Treads, Wraith Band, Falcon Blade, Bottle",
+        "mid": "Manta Style, Sange and Yasha, Mage Slayer, Mjollnir",
+        "late": "Satanic, Black King Bar, Butterfly, Linken's Sphere, Nullifier"
       }
     ]
   },
@@ -212,10 +212,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Sentry Ward, Faerie Fire, Quelling Blade",
+        "early": "Phase Boots, Bottle, Bracer, Soul Ring",
+        "mid": "Blink Dagger, Spirit Vessel, Aghanim's Shard, Eul's Scepter of Divinity",
+        "late": "Black King Bar, Shiva's Guard, Abyssal Blade, Refresher Orb, Aghanim's Blessing"
       }
     ]
   },
@@ -281,10 +281,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Faerie Fire, Circlet, Magic Stick",
+        "early": "Power Treads, Wraith Band, Bracer, Bottle",
+        "mid": "Aghanim's Scepter, Drum of Endurance, Solar Crest, Force Staff",
+        "late": "Manta Style, Hydra's Breath, Butterfly, Black King Bar, Daedalus"
       }
     ]
   },
@@ -293,10 +293,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Phase Boots, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Tango, Circlet, Blood Grenade, Faerie Fire",
+        "early": "Power Treads, Null Talisman, Bracer, Bottle",
+        "mid": "Essence Distiller, Mjollnir, Blink Dagger, Aghanim's Shard",
+        "late": "Daedalus, Black King Bar, Consecrated Wraps, Satanic, Linken's Sphere"
       }
     ]
   },
@@ -305,10 +305,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Tango, Faerie Fire, Enchanted Mango, Blood Grenade",
+        "early": "Arcane Boots, Bottle, Null Talisman, Soul Ring",
+        "mid": "Aghanim's Shard, Phylactery, Kaya and Sange, Aether Lens",
+        "late": "Refresher Orb, Divine Rapier, Octarine Core, Yasha and Kaya, Aghanim's Blessing"
       }
     ]
   },
@@ -317,10 +317,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Gauntlets of Strength, Circlet, Tango, Quelling Blade",
+        "early": "Phase Boots, Bracer, Bottle, Urn of Shadows",
+        "mid": "Aghanim's Scepter, Aghanim's Shard, Blade Mail, Radiance",
+        "late": "Shiva's Guard, Black King Bar, Daedalus, Scythe of Vyse, Silver Edge"
       }
     ]
   },
@@ -348,10 +348,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Sentry Ward",
+        "early": "Tranquil Boots, Bracer, Null Talisman",
+        "mid": "Blink Dagger, Ghost Scepter, Drum of Endurance, Eul's Scepter of Divinity",
+        "late": "Force Staff, Glimmer Cape, Aether Lens, Aeon Disk, Shadow Blade"
       }
     ]
   },
@@ -360,10 +360,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Sentry Ward, Faerie Fire",
+        "early": "Tranquil Boots",
+        "mid": "Aghanim's Shard, Ghost Scepter",
+        "late": "Aether Lens, Blink Dagger, Force Staff, Black King Bar, Glimmer Cape"
       }
     ]
   },
@@ -372,10 +372,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Gauntlets of Strength, Tango, Circlet, Faerie Fire",
+        "early": "Power Treads, Bracer, Soul Ring, Bottle",
+        "mid": "Blink Dagger, Aghanim's Shard, Orchid Malevolence, Mask of Madness",
+        "late": "Black King Bar, Nullifier, Assault Cuirass, Harpoon, Heart of Tarrasque"
       }
     ]
   },
@@ -384,10 +384,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Gauntlets of Strength, Iron Branch, Tango, Quelling Blade, Magic Stick",
+        "early": "Phase Boots, Bracer, Soul Ring, Perseverance",
+        "mid": "Blink Dagger, Aghanim's Shard, Aghanim's Scepter, Consecrated Wraps",
+        "late": "Shiva's Guard, Scythe of Vyse, Black King Bar, Refresher Orb, Crella's Crozier"
       }
     ]
   },
@@ -396,10 +396,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Smoke of Deceit, Faerie Fire",
+        "early": "Arcane Boots, Null Talisman",
+        "mid": "Aghanim's Shard, Ghost Scepter, Holy Locket, Essence Distiller",
+        "late": "Blink Dagger, Force Staff, Solar Crest, Consecrated Wraps, Glimmer Cape"
       }
     ]
   },
@@ -408,10 +408,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Enchanted Mango",
+        "early": "Tranquil Boots",
+        "mid": "Aghanim's Shard, Force Staff, Ghost Scepter, Aether Lens",
+        "late": "Aghanim's Scepter, Blink Dagger, Glimmer Cape, Aeon Disk, Solar Crest"
       }
     ]
   },
@@ -420,10 +420,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Tango, Quelling Blade, Circlet, Magic Stick",
+        "early": "Power Treads, Wraith Band, Bottle, Phylactery",
+        "mid": "Aghanim's Shard, Battle Fury, Crystalys, Orb of Corrosion",
+        "late": "Manta Style, Disperser, Black King Bar, Butterfly, Aghanim's Scepter"
       }
     ]
   },
@@ -432,10 +432,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Tango, Ring of Regen, Faerie Fire, Magic Stick",
+        "early": "Tranquil Boots, Null Talisman, Soul Ring, Helm of the Dominator",
+        "mid": "Blink Dagger, Aghanim's Shard, Spirit Vessel, Drum of Endurance",
+        "late": "Black King Bar, Shiva's Guard, Octarine Core, Refresher Orb, Aghanim's Blessing"
       }
     ]
   },
@@ -444,10 +444,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Tango, Faerie Fire, Circlet, Mantle of Intelligence",
+        "early": "Power Treads, Bottle, Blink Dagger, Null Talisman",
+        "mid": "Aghanim's Scepter, Kaya and Sange, Aghanim's Shard, Dagon",
+        "late": "Shiva's Guard, Aether Lens, Black King Bar, Scythe of Vyse, Dagon"
       }
     ]
   },
@@ -475,10 +475,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Circlet, Faerie Fire, Tango, Magic Stick",
+        "early": "Boots of Travel, Bracer, Null Talisman, Urn of Shadows",
+        "mid": "Radiance, Aghanim's Shard, Consecrated Wraps, Lotus Orb",
+        "late": "Heart of Tarrasque, Black King Bar, Shiva's Guard, Aghanim's Blessing, Manta Style"
       }
     ]
   },
@@ -487,10 +487,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Blood Grenade, Tango, Smoke of Deceit, Sentry Ward",
+        "early": "Arcane Boots, Null Talisman",
+        "mid": "Aghanim's Shard, Solar Crest, Ghost Scepter, Vladmir's Offering",
+        "late": "Aghanim's Scepter, Blink Dagger, Glimmer Cape, Force Staff, Refresher Orb"
       }
     ]
   },
@@ -499,10 +499,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Sage's Mask, Tango, Magic Stick, Circlet",
+        "early": "Arcane Boots, Null Talisman, Bottle, Bracer",
+        "mid": "Helm of the Overlord, Blink Dagger, Aghanim's Scepter, Drum of Endurance",
+        "late": "Black King Bar, Assault Cuirass, Nullifier, Scythe of Vyse, Refresher Orb"
       }
     ]
   },
@@ -530,10 +530,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Sentry Ward",
+        "early": "Arcane Boots, Bracer, Null Talisman, Bottle",
+        "mid": "Spirit Vessel, Force Staff, Essence Distiller, Eul's Scepter of Divinity",
+        "late": "Glimmer Cape, Blink Dagger, Pipe of Insight, Solar Crest, Guardian Greaves"
       }
     ]
   },
@@ -580,10 +580,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Phase Boots, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Tango, Faerie Fire, Circlet, Mantle of Intelligence",
+        "early": "Power Treads, Bottle, Null Talisman, Soul Ring",
+        "mid": "Consecrated Wraps, Blink Dagger, Rod of Atos, Aghanim's Scepter",
+        "late": "Shiva's Guard, Black King Bar, Scythe of Vyse, Kaya and Sange, Wind Waker"
       }
     ]
   },
@@ -611,10 +611,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Magic Stick",
+        "early": "Arcane Boots, Null Talisman, Bottle, Soul Ring",
+        "mid": "Aghanim's Shard, Kaya and Sange, Dagon, Drum of Endurance",
+        "late": "Aether Lens, Glimmer Cape, Blink Dagger, Force Staff, Aeon Disk"
       }
     ]
   },
@@ -623,10 +623,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Faerie Fire, Tango, Circlet, Magic Stick",
+        "early": "Power Treads, Falcon Blade, Wraith Band, Null Talisman",
+        "mid": "Desolator, Hydra's Breath, Butterfly, Aghanim's Scepter",
+        "late": "Daedalus, Black King Bar, Swift Blink, Monkey King Bar, Hurricane Pike"
       }
     ]
   },
@@ -635,10 +635,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Circlet, Tango, Faerie Fire, Enchanted Mango",
+        "early": "Power Treads, Wraith Band, Null Talisman, Bracer",
+        "mid": "Mage Slayer, Blink Dagger, Aghanim's Shard, Orchid Malevolence",
+        "late": "Black King Bar, Eye of Skadi, Hurricane Pike, Manta Style, Linken's Sphere"
       }
     ]
   },
@@ -647,10 +647,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Faerie Fire, Circlet, Tango, Magic Stick",
+        "early": "Power Treads, Wraith Band, Bracer",
+        "mid": "Manta Style, Mask of Madness, Hurricane Pike, Aghanim's Scepter",
+        "late": "Black King Bar, Butterfly, Satanic, Swift Blink, Daedalus"
       }
     ]
   },
@@ -659,10 +659,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Gauntlets of Strength, Circlet, Tango, Quelling Blade",
+        "early": "Power Treads, Soul Ring, Bracer, Bottle",
+        "mid": "Aghanim's Shard, Radiance, Manta Style, Ghost Scepter",
+        "late": "Octarine Core, Shiva's Guard, Black King Bar, Overwhelming Blink, Bloodthorn"
       }
     ]
   },
@@ -671,10 +671,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Smoke of Deceit, Faerie Fire",
+        "early": "Situational meta items",
+        "mid": "Holy Locket, Ghost Scepter, Vladmir's Offering, Drum of Endurance",
+        "late": "Blink Dagger, Glimmer Cape, Solar Crest, Aeon Disk, Guardian Greaves"
       }
     ]
   },
@@ -683,10 +683,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Tango, Iron Branch, Blood Grenade, Boots of Speed, Smoke of Deceit",
+        "early": "Tranquil Boots, Bracer",
+        "mid": "Essence Distiller, Eul's Scepter of Divinity, Ghost Scepter, Consecrated Wraps",
+        "late": "Blink Dagger, Force Staff, Solar Crest, Glimmer Cape, Aeon Disk"
       }
     ]
   },
@@ -695,10 +695,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Tango, Faerie Fire, Circlet, Sentry Ward",
+        "early": "Arcane Boots, Bottle, Null Talisman, Bracer",
+        "mid": "Blink Dagger, Yasha and Kaya, Eul's Scepter of Divinity, Consecrated Wraps",
+        "late": "Shiva's Guard, Black King Bar, Bloodstone, Kaya and Sange, Scythe of Vyse"
       }
     ]
   },
@@ -707,10 +707,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Phase Boots, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Circlet, Faerie Fire, Tango, Magic Stick",
+        "early": "Power Treads, Wraith Band, Null Talisman, Drum of Endurance",
+        "mid": "Mjollnir, Black King Bar, Hurricane Pike, Aghanim's Shard",
+        "late": "Daedalus, Satanic, Butterfly, Hydra's Breath, Moon Shard"
       }
     ]
   },
@@ -738,10 +738,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Tango, Circlet, Sage's Mask, Mantle of Intelligence",
+        "early": "Arcane Boots, Null Talisman, Soul Ring, Vanguard",
+        "mid": "Shiva's Guard, Aghanim's Shard, Blink Dagger, Helm of the Dominator",
+        "late": "Black King Bar, Crella's Crozier, Scythe of Vyse, Octarine Core, Linken's Sphere"
       }
     ]
   },
@@ -750,10 +750,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Faerie Fire, Iron Branch, Tango, Circlet, Magic Stick",
+        "early": "Power Treads, Falcon Blade, Soul Ring, Wraith Band",
+        "mid": "Desolator, Aghanim's Shard, Orchid Malevolence, Nullifier",
+        "late": "Daedalus, Black King Bar, Hurricane Pike, Aghanim's Blessing, Linken's Sphere"
       }
     ]
   },
@@ -762,10 +762,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Gauntlets of Strength, Tango, Faerie Fire, Magic Stick",
+        "early": "Phase Boots, Bracer, Soul Ring, Bottle",
+        "mid": "Harpoon, Radiance, Drum of Endurance, Aghanim's Shard",
+        "late": "Black King Bar, Octarine Core, Pipe of Insight, Force Staff, Glimmer Cape"
       }
     ]
   },
@@ -774,10 +774,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Faerie Fire, Blood Grenade, Smoke of Deceit",
+        "early": "Power Treads, Bracer, Null Talisman",
+        "mid": "Drum of Endurance, Aghanim's Scepter, Essence Distiller, Solar Crest",
+        "late": "Hurricane Pike, Blink Dagger, Black King Bar, Pipe of Insight, Assault Cuirass"
       }
     ]
   },
@@ -786,10 +786,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Gauntlets of Strength, Iron Branch, Faerie Fire, Magic Stick, Tango",
+        "early": "Power Treads, Bracer",
+        "mid": "Blink Dagger, Armlet of Mordiggian, Aghanim's Shard, Aghanim's Scepter",
+        "late": "Satanic, Black King Bar, Heart of Tarrasque, Sange and Yasha, Hurricane Pike"
       }
     ]
   },
@@ -798,10 +798,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Gauntlets of Strength, Iron Branch, Tango, Magic Stick, Circlet",
+        "early": "Phase Boots, Bracer, Soul Ring, Bottle",
+        "mid": "Blink Dagger, Aghanim's Shard, Drum of Endurance, Eul's Scepter of Divinity",
+        "late": "Black King Bar, Nullifier, Assault Cuirass, Abyssal Blade, Radiance"
       }
     ]
   },
@@ -810,10 +810,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Circlet, Tango, Quelling Blade, Faerie Fire",
+        "early": "Power Treads, Soul Ring, Wraith Band, Bracer",
+        "mid": "Manta Style, Aghanim's Shard, Crystalys, Shadow Blade",
+        "late": "Butterfly, Black King Bar, Eye of Skadi, Bloodthorn, Nullifier"
       }
     ]
   },
@@ -822,10 +822,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Blood Grenade, Tango, Boots of Speed, Faerie Fire",
+        "early": "Tranquil Boots, Bottle",
+        "mid": "Essence Distiller, Drum of Endurance, Spirit Vessel, Aghanim's Shard",
+        "late": "Force Staff, Blink Dagger, Vladmir's Offering, Wind Waker, Lotus Orb"
       }
     ]
   },
@@ -834,10 +834,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Faerie Fire, Tango, Circlet, Magic Stick",
+        "early": "Power Treads, Falcon Blade, Wraith Band, Bottle",
+        "mid": "Aghanim's Shard, Desolator, Spirit Vessel, Mjollnir",
+        "late": "Daedalus, Black King Bar, Satanic, Hurricane Pike, Linken's Sphere"
       }
     ]
   },
@@ -846,10 +846,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Sentry Ward",
+        "early": "Arcane Boots, Null Talisman, Urn of Shadows",
+        "mid": "Eul's Scepter of Divinity, Solar Crest, Drum of Endurance, Ghost Scepter",
+        "late": "Aghanim's Scepter, Force Staff, Aether Lens, Blink Dagger, Glimmer Cape"
       }
     ]
   },
@@ -858,10 +858,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Faerie Fire, Tango, Circlet, Blood Grenade",
+        "early": "Tranquil Boots, Bracer, Null Talisman, Bottle",
+        "mid": "Blink Dagger, Drum of Endurance, Force Staff, Lotus Orb",
+        "late": "Black King Bar, Shiva's Guard, Aether Lens, Refresher Orb, Octarine Core"
       }
     ]
   },
@@ -870,10 +870,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Sentry Ward, Smoke of Deceit",
+        "early": "Arcane Boots",
+        "mid": "Drum of Endurance, Glimmer Cape, Force Staff, Aghanim's Shard",
+        "late": "Pipe of Insight, Guardian Greaves, Aghanim's Scepter, Vladmir's Offering, Solar Crest"
       }
     ]
   },
@@ -901,10 +901,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Sentry Ward",
+        "early": "Arcane Boots, Null Talisman, Bracer",
+        "mid": "Aghanim's Shard, Force Staff, Ghost Scepter, Essence Distiller",
+        "late": "Blink Dagger, Glimmer Cape, Aeon Disk, Scythe of Vyse, Gleipnir"
       }
     ]
   },
@@ -951,10 +951,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Boots of Speed, Tango, Blood Grenade, Sentry Ward, Iron Branch",
+        "early": "Phase Boots, Bracer, Bottle",
+        "mid": "Drum of Endurance, Shadow Blade, Aghanim's Shard, Spirit Vessel",
+        "late": "Black King Bar, Octarine Core, Yasha and Kaya, Consecrated Wraps, Wind Waker"
       }
     ]
   },
@@ -963,10 +963,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Faerie Fire, Tango, Circlet, Blood Grenade",
+        "early": "Power Treads, Falcon Blade, Wraith Band, Dragon Lance",
+        "mid": "Aghanim's Shard, Manta Style, Essence Distiller, Aghanim's Scepter",
+        "late": "Daedalus, Satanic, Black King Bar, Divine Rapier, Butterfly"
       }
     ]
   },
@@ -1013,10 +1013,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Sentry Ward",
+        "early": "Arcane Boots, Null Talisman, Urn of Shadows, Bottle",
+        "mid": "Drum of Endurance, Ghost Scepter, Aghanim's Shard, Hurricane Pike",
+        "late": "Refresher Orb, Glimmer Cape, Aghanim's Scepter, Solar Crest, Octarine Core"
       }
     ]
   },
@@ -1025,10 +1025,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Circlet, Tango, Faerie Fire, Mantle of Intelligence",
+        "early": "Power Treads, Null Talisman, Bracer, Wraith Band",
+        "mid": "Blink Dagger, Yasha and Kaya, Meteor Hammer, Orchid Malevolence",
+        "late": "Scythe of Vyse, Hurricane Pike, Black King Bar, Parasma, Aghanim's Blessing"
       }
     ]
   },
@@ -1037,10 +1037,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Sage's Mask, Tango, Quelling Blade, Faerie Fire",
+        "early": "Situational meta items",
+        "mid": "Helm of the Overlord, Aghanim's Shard, Orchid Malevolence, Yasha",
+        "late": "Black King Bar, Nullifier, Assault Cuirass, Scythe of Vyse, Overwhelming Blink"
       }
     ]
   },
@@ -1049,10 +1049,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Circlet, Tango, Gauntlets of Strength, Faerie Fire",
+        "early": "Phase Boots, Bracer, Soul Ring, Wraith Band",
+        "mid": "Blink Dagger, Orchid Malevolence, Spirit Vessel, Vladmir's Offering",
+        "late": "Assault Cuirass, Black King Bar, Refresher Orb, Aghanim's Scepter, Aeon Disk"
       }
     ]
   },
@@ -1061,10 +1061,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Sentry Ward",
+        "early": "Tranquil Boots",
+        "mid": "Blink Dagger, Aghanim's Shard, Essence Distiller, Ghost Scepter",
+        "late": "Aghanim's Scepter, Aether Lens, Aeon Disk, Glimmer Cape, Force Staff"
       }
     ]
   },
@@ -1073,10 +1073,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Faerie Fire, Orb of Blight, Tango, Quelling Blade",
+        "early": "Power Treads, Orb of Corrosion",
+        "mid": "Mjollnir, Aghanim's Shard, Diffusal Blade",
+        "late": "Black King Bar, Silver Edge, Butterfly, Aghanim's Blessing, Swift Blink"
       }
     ]
   },
@@ -1085,34 +1085,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
-      }
-    ]
-  },
-  "82": {
-    "hero_name": "Meepo",
-    "builds": [
-      {
-        "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
-      }
-    ]
-  },
-  "83": {
-    "hero_name": "Treant Protector",
-    "builds": [
-      {
-        "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Gauntlets of Strength, Tango, Quelling Blade, Magic Stick",
+        "early": "Power Treads, Bracer, Soul Ring, Urn of Shadows",
+        "mid": "Armlet of Mordiggian, Blink Dagger, Aghanim's Shard, Sange and Yasha",
+        "late": "Heart of Tarrasque, Bloodthorn, Black King Bar, Manta Style, Harpoon"
       }
     ]
   },
@@ -1121,10 +1097,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Gauntlets of Strength, Tango, Iron Branch, Blood Grenade, Sentry Ward",
+        "early": "Arcane Boots, Soul Ring, Hand of Midas, Bracer",
+        "mid": "Blink Dagger, Aghanim's Scepter, Aether Lens, Drum of Endurance",
+        "late": "Glimmer Cape, Scythe of Vyse, Black King Bar, Force Staff, Solar Crest"
       }
     ]
   },
@@ -1133,10 +1109,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Enchanted Mango, Tango, Blood Grenade, Gauntlets of Strength",
+        "early": "Phase Boots, Soul Ring, Bracer, Bottle",
+        "mid": "Aghanim's Shard, Blink Dagger, Octarine Core, Drum of Endurance",
+        "late": "Black King Bar, Force Staff, Glimmer Cape, Lotus Orb, Crella's Crozier"
       }
     ]
   },
@@ -1145,10 +1121,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Circlet",
+        "early": "Arcane Boots, Bottle, Null Talisman, Perseverance",
+        "mid": "Essence Distiller, Aghanim's Shard, Consecrated Wraps, Ghost Scepter",
+        "late": "Blink Dagger, Aghanim's Scepter, Aether Lens, Aeon Disk, Force Staff"
       }
     ]
   },
@@ -1157,10 +1133,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Smoke of Deceit",
+        "early": "Arcane Boots, Null Talisman",
+        "mid": "Ghost Scepter, Solar Crest, Essence Distiller, Drum of Endurance",
+        "late": "Aghanim's Scepter, Blink Dagger, Glimmer Cape, Aeon Disk, Vladmir's Offering"
       }
     ]
   },
@@ -1169,10 +1145,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Sentry Ward, Boots of Speed",
+        "early": "Tranquil Boots, Bottle, Null Talisman, Bracer",
+        "mid": "Essence Distiller, Eul's Scepter of Divinity, Aghanim's Shard, Dagon",
+        "late": "Blink Dagger, Aeon Disk, Aghanim's Scepter, Force Staff, Consecrated Wraps"
       }
     ]
   },
@@ -1181,10 +1157,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Circlet, Slippers of Agility, Tango, Quelling Blade",
+        "early": "Power Treads, Wraith Band, Null Talisman",
+        "mid": "Manta Style, Diffusal Blade, Aghanim's Shard, Mekansm",
+        "late": "Bloodthorn, Butterfly, Heart of Tarrasque, Eye of Skadi, Scythe of Vyse"
       }
     ]
   },
@@ -1193,10 +1169,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Circlet, Faerie Fire, Blood Grenade",
+        "early": "Tranquil Boots, Bracer",
+        "mid": "Holy Locket, Spirit Vessel, Orchid Malevolence, Ghost Scepter",
+        "late": "Scythe of Vyse, Octarine Core, Force Staff, Black King Bar, Glimmer Cape"
       }
     ]
   },
@@ -1205,10 +1181,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Gauntlets of Strength, Tango, Sage's Mask, Magic Stick",
+        "early": "Helm of the Dominator, Soul Ring, Bottle, Null Talisman",
+        "mid": "Aghanim's Scepter, Aghanim's Shard, Mekansm, Eul's Scepter of Divinity",
+        "late": "Shiva's Guard, Mjollnir, Satanic, Black King Bar, Scythe of Vyse"
       }
     ]
   },
@@ -1217,10 +1193,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Circlet, Enchanted Mango, Tango, Faerie Fire",
+        "early": "Tranquil Boots, Null Talisman, Bracer, Phylactery",
+        "mid": "Drum of Endurance, Vladmir's Offering, Aghanim's Shard, Aghanim's Scepter",
+        "late": "Assault Cuirass, Scythe of Vyse, Pipe of Insight, Bloodthorn, Crimson Guard"
       }
     ]
   },
@@ -1248,10 +1224,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Magic Stick, Circlet, Enchanted Mango, Quelling Blade",
+        "early": "Power Treads, Null Talisman, Falcon Blade, Wraith Band",
+        "mid": "Manta Style, Aghanim's Scepter, Shadow Blade, Dragon Lance",
+        "late": "Eye of Skadi, Daedalus, Black King Bar, Disperser, Butterfly"
       }
     ]
   },
@@ -1260,10 +1236,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Tango, Quelling Blade, Magic Stick, Faerie Fire",
+        "early": "Power Treads, Wraith Band, Null Talisman, Bottle",
+        "mid": "Battle Fury, Aghanim's Scepter, Manta Style, Harpoon",
+        "late": "Black King Bar, Monkey King Bar, Sange and Yasha, Satanic, Abyssal Blade"
       }
     ]
   },
@@ -1272,10 +1248,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Gauntlets of Strength, Iron Branch, Ring of Protection, Tango, Faerie Fire",
+        "early": "Bracer, Soul Ring, Vanguard",
+        "mid": "Aghanim's Shard, Helm of the Dominator, Pipe of Insight, Blade Mail",
+        "late": "Black King Bar, Shiva's Guard, Heart of Tarrasque, Lotus Orb, Overwhelming Blink"
       }
     ]
   },
@@ -1284,10 +1260,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Circlet, Tango, Gauntlets of Strength, Quelling Blade",
+        "early": "Power Treads, Bracer, Wraith Band, Bottle",
+        "mid": "Blink Dagger, Aghanim's Scepter, Mask of Madness, Aghanim's Shard",
+        "late": "Black King Bar, Harpoon, Refresher Orb, Shiva's Guard, Linken's Sphere"
       }
     ]
   },
@@ -1296,10 +1272,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Gauntlets of Strength, Tango, Circlet, Quelling Blade",
+        "early": "Phase Boots, Soul Ring, Bracer, Bottle",
+        "mid": "Kaya and Sange, Lotus Orb, Aghanim's Shard, Consecrated Wraps",
+        "late": "Shiva's Guard, Heart of Tarrasque, Black King Bar, Overwhelming Blink, Octarine Core"
       }
     ]
   },
@@ -1308,10 +1284,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Gauntlets of Strength, Tango, Circlet, Magic Stick",
+        "early": "Power Treads, Bracer, Soul Ring, Null Talisman",
+        "mid": "Aghanim's Shard, Lotus Orb, Consecrated Wraps, Blade Mail",
+        "late": "Heart of Tarrasque, Sange and Yasha, Black King Bar, Assault Cuirass, Linken's Sphere"
       }
     ]
   },
@@ -1320,10 +1296,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Sentry Ward, Faerie Fire",
+        "early": "Tranquil Boots, Urn of Shadows, Bracer",
+        "mid": "Aghanim's Shard, Ghost Scepter, Drum of Endurance, Meteor Hammer",
+        "late": "Eul's Scepter of Divinity, Black King Bar, Force Staff, Aghanim's Scepter, Blink Dagger"
       }
     ]
   },
@@ -1332,10 +1308,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Circlet, Blood Grenade, Mantle of Intelligence",
+        "early": "Arcane Boots, Null Talisman, Bottle",
+        "mid": "Rod of Atos, Aghanim's Shard, Ghost Scepter, Essence Distiller",
+        "late": "Blink Dagger, Force Staff, Scythe of Vyse, Glimmer Cape, Shadow Blade"
       }
     ]
   },
@@ -1344,10 +1320,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Tango, Magic Stick, Quelling Blade, Circlet",
+        "early": "Phase Boots, Null Talisman, Bracer, Bottle",
+        "mid": "Radiance, Blink Dagger, Harpoon, Holy Locket",
+        "late": "Bloodthorn, Aghanim's Scepter, Manta Style, Abyssal Blade, Guardian Greaves"
       }
     ]
   },
@@ -1356,10 +1332,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Sentry Ward, Smoke of Deceit",
+        "early": "Tranquil Boots, Bracer, Bottle, Wraith Band",
+        "mid": "Drum of Endurance, Aghanim's Shard, Mask of Madness, Crystalys",
+        "late": "Force Staff, Solar Crest, Aghanim's Scepter, Eul's Scepter of Divinity, Glimmer Cape"
       }
     ]
   },
@@ -1368,10 +1344,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Gauntlets of Strength, Tango, Quelling Blade, Circlet",
+        "early": "Phase Boots, Bracer, Soul Ring, Wraith Band",
+        "mid": "Blink Dagger, Blade Mail, Aghanim's Shard, Aghanim's Scepter",
+        "late": "Black King Bar, Assault Cuirass, Nullifier, Silver Edge, Daedalus"
       }
     ]
   },
@@ -1380,10 +1356,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Phase Boots, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Smoke of Deceit",
+        "early": "Tranquil Boots, Bracer, Null Talisman",
+        "mid": "Glimmer Cape, Essence Distiller, Aether Lens, Guardian Greaves",
+        "late": "Force Staff, Consecrated Wraps, Octarine Core, Solar Crest, Scythe of Vyse"
       }
     ]
   },
@@ -1411,10 +1387,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Tango, Faerie Fire, Gauntlets of Strength, Circlet",
+        "early": "Power Treads, Bottle, Bracer, Soul Ring",
+        "mid": "Spirit Vessel, Eul's Scepter of Divinity, Blink Dagger, Radiance",
+        "late": "Shiva's Guard, Kaya and Sange, Octarine Core, Black King Bar, Bloodstone"
       }
     ]
   },
@@ -1423,10 +1399,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Gauntlets of Strength, Iron Branch, Tango, Magic Stick, Enchanted Mango",
+        "early": "Phase Boots, Soul Ring, Bracer",
+        "mid": "Aghanim's Shard, Aghanim's Scepter, Pipe of Insight, Crimson Guard",
+        "late": "Shiva's Guard, Black King Bar, Crella's Crozier, Octarine Core, Lotus Orb"
       }
     ]
   },
@@ -1435,10 +1411,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Circlet, Tango, Faerie Fire, Quelling Blade",
+        "early": "Power Treads, Wraith Band, Null Talisman",
+        "mid": "Manta Style, Aghanim's Shard, Falcon Blade, Orchid Malevolence",
+        "late": "Black King Bar, Eye of Skadi, Butterfly, Daedalus, Hurricane Pike"
       }
     ]
   },
@@ -1447,10 +1423,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Faerie Fire, Blood Grenade, Sentry Ward",
+        "early": "Tranquil Boots, Bracer, Bottle",
+        "mid": "Aghanim's Shard, Spirit Vessel, Solar Crest, Eul's Scepter of Divinity",
+        "late": "Refresher Orb, Shiva's Guard, Aeon Disk, Scythe of Vyse, Force Staff"
       }
     ]
   },
@@ -1459,10 +1435,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Magic Stick, Smoke of Deceit",
+        "early": "Arcane Boots, Bottle, Soul Ring",
+        "mid": "Ghost Scepter, Essence Distiller, Force Staff, Holy Locket",
+        "late": "Blink Dagger, Aether Lens, Glimmer Cape, Guardian Greaves, Aeon Disk"
       }
     ]
   },
@@ -1471,10 +1447,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Faerie Fire, Blood Grenade, Smoke of Deceit",
+        "early": "Power Treads, Null Talisman",
+        "mid": "Force Staff",
+        "late": "Glimmer Cape, Blink Dagger, Aeon Disk, Shadow Blade, Consecrated Wraps"
       }
     ]
   },
@@ -1483,10 +1459,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Phase Boots, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Circlet, Faerie Fire, Tango, Gloves of Haste",
+        "early": "Power Treads, Hand of Midas, Bottle, Wraith Band",
+        "mid": "Mjollnir, Aghanim's Shard, Blink Dagger, Monkey King Bar",
+        "late": "Bloodthorn, Hurricane Pike, Scythe of Vyse, Black King Bar, Manta Style"
       }
     ]
   },
@@ -1495,10 +1471,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Circlet, Tango, Faerie Fire, Quelling Blade",
+        "early": "Power Treads, Wraith Band, Orb of Corrosion, Diffusal Blade",
+        "mid": "Desolator, Aghanim's Shard, Battle Fury, Manta Style",
+        "late": "Black King Bar, Eye of Skadi, Harpoon, Monkey King Bar, Nullifier"
       }
     ]
   },
@@ -1507,10 +1483,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Sentry Ward",
+        "early": "Tranquil Boots, Bracer, Null Talisman",
+        "mid": "Essence Distiller, Eul's Scepter of Divinity, Aghanim's Shard, Spirit Vessel",
+        "late": "Blink Dagger, Consecrated Wraps, Force Staff, Aeon Disk, Scythe of Vyse"
       }
     ]
   },
@@ -1519,10 +1495,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Tango, Faerie Fire, Circlet, Magic Stick",
+        "early": "Power Treads, Bottle, Falcon Blade, Bracer",
+        "mid": "Blink Dagger, Aghanim's Shard, Aghanim's Scepter, Mage Slayer",
+        "late": "Octarine Core, Disperser, Refresher Orb, Linken's Sphere, Shiva's Guard"
       }
     ]
   },
@@ -1531,10 +1507,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Sentry Ward",
+        "early": "Arcane Boots, Null Talisman, Urn of Shadows, Bottle",
+        "mid": "Blink Dagger, Aghanim's Shard, Ghost Scepter, Aghanim's Scepter",
+        "late": "Scythe of Vyse, Aeon Disk, Glimmer Cape, Aether Lens, Force Staff"
       }
     ]
   },
@@ -1543,10 +1519,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Faerie Fire, Circlet",
+        "early": "Arcane Boots, Wraith Band",
+        "mid": "Essence Distiller, Aghanim's Shard, Force Staff, Solar Crest",
+        "late": "Blink Dagger, Scythe of Vyse, Glimmer Cape, Aeon Disk, Consecrated Wraps"
       }
     ]
   },
@@ -1555,10 +1531,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Phase Boots, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Tango, Faerie Fire, Circlet, Quelling Blade",
+        "early": "Power Treads, Bottle, Bracer, Null Talisman",
+        "mid": "Spirit Vessel, Aghanim's Shard, Eul's Scepter of Divinity, Aghanim's Scepter",
+        "late": "Black King Bar, Yasha and Kaya, Octarine Core, Shiva's Guard, Parasma"
       }
     ]
   },
@@ -1567,10 +1543,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Tango, Faerie Fire, Blood Grenade, Gauntlets of Strength",
+        "early": "Boots of Travel, Bottle, Soul Ring, Bracer",
+        "mid": "Aghanim's Shard, Blink Dagger, Glimmer Cape, Ghost Scepter",
+        "late": "Black King Bar, Yasha and Kaya, Shiva's Guard, Refresher Orb, Scythe of Vyse"
       }
     ]
   },
@@ -1579,10 +1555,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Gauntlets of Strength, Tango, Quelling Blade, Circlet",
+        "early": "Phase Boots, Bracer, Soul Ring, Bottle",
+        "mid": "Aghanim's Shard, Eul's Scepter of Divinity, Desolator, Vladmir's Offering",
+        "late": "Black King Bar, Scythe of Vyse, Refresher Orb, Shiva's Guard, Overwhelming Blink"
       }
     ]
   },
@@ -1591,10 +1567,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Faerie Fire, Tango, Blood Grenade, Sentry Ward",
+        "early": "Arcane Boots",
+        "mid": "Essence Distiller, Eul's Scepter of Divinity, Rod of Atos, Solar Crest",
+        "late": "Blink Dagger, Aether Lens, Force Staff, Aeon Disk, Glimmer Cape"
       }
     ]
   },
@@ -1603,10 +1579,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Gauntlets of Strength, Tango, Circlet, Quelling Blade",
+        "early": "Phase Boots, Soul Ring, Bracer, Bottle",
+        "mid": "Aghanim's Shard, Orchid Malevolence, Blade Mail, Blink Dagger",
+        "late": "Assault Cuirass, Black King Bar, Abyssal Blade, Nullifier, Harpoon"
       }
     ]
   },
@@ -1615,10 +1591,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Power Treads, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Tango, Blood Grenade, Sentry Ward, Circlet",
+        "early": "Phase Boots, Bracer, Bottle, Wraith Band",
+        "mid": "Blink Dagger, Aghanim's Scepter, Aghanim's Shard, Helm of the Dominator",
+        "late": "Black King Bar, Abyssal Blade, Nullifier, Solar Crest, Glimmer Cape"
       }
     ]
   },
@@ -1627,10 +1603,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-        "early": "Phase Boots, Bracer, Blade Mail or Vanguard",
-        "mid": "Blink Dagger, Black King Bar, Pipe of Insight or Crimson Guard",
-        "late": "Overwhelming Blink, Shiva's Guard, Heart of Tarrasque, Assault Cuirass, Refresher Orb"
+        "starting": "Iron Branch, Gauntlets of Strength, Tango, Magic Stick, Quelling Blade",
+        "early": "Phase Boots, Soul Ring, Bottle, Bracer",
+        "mid": "Blink Dagger, Aghanim's Shard, Consecrated Wraps, Drum of Endurance",
+        "late": "Shiva's Guard, Black King Bar, Heart of Tarrasque, Linken's Sphere, Aghanim's Blessing"
       }
     ]
   },
@@ -1639,10 +1615,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Faerie Fire, Tango, Circlet, Magic Stick",
+        "early": "Power Treads, Falcon Blade, Null Talisman, Bottle",
+        "mid": "Mask of Madness, Rod of Atos, Silver Edge, Essence Distiller",
+        "late": "Black King Bar, Daedalus, Hurricane Pike, Mjollnir, Swift Blink"
       }
     ]
   },
@@ -1651,10 +1627,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Circlet",
-        "early": "Power Treads, Magic Wand, Maelstrom or Falcon Blade",
-        "mid": "Manta Style or Sange and Yasha, Black King Bar, Skull Basher",
-        "late": "Butterfly, Eye of Skadi, Abyssal Blade, Satanic, Swift Blink"
+        "starting": "Iron Branch, Circlet, Faerie Fire, Tango, Quelling Blade",
+        "early": "Power Treads, Wraith Band, Bracer",
+        "mid": "Mage Slayer, Desolator, Manta Style, Linken's Sphere",
+        "late": "Daedalus, Black King Bar, Aghanim's Blessing, Swift Blink, Monkey King Bar"
       }
     ]
   },
@@ -1663,10 +1639,10 @@
     "builds": [
       {
         "name": "Standard",
-        "starting": "Tango, Blood Grenade, Sentry Ward, Observer Ward, Iron Branch, Magic Stick",
-        "early": "Tranquil Boots or Arcane Boots, Magic Wand, Glimmer Cape or Force Staff",
-        "mid": "Blink Dagger, Ghost Scepter, Aghanim's Shard, Eul's Scepter or Aeon Disk",
-        "late": "Aghanim's Scepter, Scythe of Vyse, Wind Waker, Lotus Orb, Refresher Orb"
+        "starting": "Iron Branch, Gauntlets of Strength, Tango, Magic Stick, Faerie Fire",
+        "early": "Phase Boots, Soul Ring, Bracer, Bottle",
+        "mid": "Aghanim's Shard, Lotus Orb, Meteor Hammer, Octarine Core",
+        "late": "Black King Bar, Linken's Sphere, Shiva's Guard, Kaya and Sange, Crella's Crozier"
       }
     ]
   }

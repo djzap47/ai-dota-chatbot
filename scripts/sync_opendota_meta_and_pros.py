@@ -211,6 +211,8 @@ class DotaItemGraph:
         for k, _ in late_r:
             it = self.key_to_item.get(k, {})
             cost = it.get("cost", 0)
+            if it.get("tier") is not None:
+                continue
             if self.is_valid_start_item(k) or cost <= 500:
                 continue
             if self.is_raw_component(k) and not self.is_standalone_item(k):
@@ -231,6 +233,8 @@ class DotaItemGraph:
         for k, _ in mid_r:
             it = self.key_to_item.get(k, {})
             cost = it.get("cost", 0)
+            if it.get("tier") is not None:
+                continue
             if self.is_valid_start_item(k) or cost <= 500:
                 continue
             if k in late_keys or k in late_subcomps:
@@ -257,6 +261,9 @@ class DotaItemGraph:
         all_higher_subcomps = late_subcomps.union(mid_subcomps).union(boot_subs)
         early_candidates = [chosen_boot] if chosen_boot else []
         for k, _ in early_r:
+            it = self.key_to_item.get(k, {})
+            if it.get("tier") is not None:
+                continue
             # Skip if already chosen boot or another boot (strict 1 boot rule!)
             if self.is_completed_boot(k):
                 continue
@@ -269,7 +276,6 @@ class DotaItemGraph:
             # Only allow Midas in early game if hero does not build Radiance/Battle Fury
             if k == "hand_of_midas" and has_major_farming_item:
                 continue
-            it = self.key_to_item.get(k, {})
             if it.get("created") or self.is_standalone_item(k) or it.get("cost", 0) >= 400:
                 early_candidates.append(k)
 
@@ -278,6 +284,9 @@ class DotaItemGraph:
         # 5. Starting Items
         start_keys = []
         for k, _ in start_r:
+            it = self.key_to_item.get(k, {})
+            if it.get("tier") is not None:
+                continue
             if self.is_valid_start_item(k) and k not in start_keys:
                 start_keys.append(k)
                 if len(start_keys) >= 5:
