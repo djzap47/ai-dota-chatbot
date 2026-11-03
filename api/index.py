@@ -163,10 +163,16 @@ async def cron_scraper(authorization: Optional[str] = Header(None)):
 
 
 @app.post("/scraper/run", response_model=ScraperResponse, tags=["Scraper"])
-async def manual_scraper():
+async def manual_scraper(authorization: Optional[str] = Header(None)):
     """
     Manually trigger data scraper to update hero stats from STRATZ API.
+    Secured with Bearer token against CRON_SECRET if configured.
     """
+    if settings.CRON_SECRET:
+        expected = f"Bearer {settings.CRON_SECRET}"
+        if authorization != expected:
+            raise HTTPException(status_code=401, detail="Unauthorized scraper request. Provide Bearer token.")
+
     try:
         updated_count = await asyncio.to_thread(run_scraper_task)
         invalidate_stats_cache()
@@ -177,3 +183,26 @@ async def manual_scraper():
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Scraper failed: {str(e)}")
+
+
+@app.post("/scraper/sync-meta", response_model=ScraperResponse, tags=["Scraper"])
+async def sync_opendota_meta(authorization: Optional[str] = Header(None)):
+    """
+    Trigger 2026 OpenDota Meta & Pro Player match sync (Patch 7.41+).
+    Secured with Bearer token against CRON_SECRET if configured.
+    """
+    if settings.CRON_SECRET:
+        expected = f"Bearer {settings.CRON_SECRET}"
+        if authorization != expected:
+            raise HTTPException(status_code=401, detail="Unauthorized request. Provide Bearer token.")
+
+    try:
+        from scripts.sync_opendota_meta_and_pros import run_meta_and_pros_sync
+        await asyncio.to_thread(run_meta_and_pros_sync)
+        return ScraperResponse(
+            status="success",
+            message="Successfully ingested 2026 OpenDota meta & pro player match data into pgvector.",
+            updated_count=1
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Meta sync failed: {str(e)}")

@@ -1,12 +1,12 @@
 fastapi
 uvicorn[standard]
 sqlalchemy
-psycopg[binary]
 psycopg2-binary
 pydantic
 pydantic-settings
 python-dotenv
 requests
+httpx
+google-genai
 langchain
 langchain-google-genai
-langchain-community

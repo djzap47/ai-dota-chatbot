@@ -379,6 +379,23 @@
     const userInput = document.getElementById('userInput');
     const sendBtn = document.getElementById('sendBtn');
 
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function formatMarkdown(text) {
+      let safe = escapeHtml(text);
+      // Format bold **text**
+      safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      // Format inline code `code`
+      safe = safe.replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,0.1);padding:2px 4px;border-radius:3px;">$1</code>');
+      // Format line breaks
+      safe = safe.replace(/\n/g, '<br>');
+      return safe;
+    }
+
     function appendMessage(text, isUser = false) {
       const msg = document.createElement('div');
       msg.className = `message ${isUser ? 'user' : 'bot'}`;
@@ -389,7 +406,7 @@
 
       const bubble = document.createElement('div');
       bubble.className = 'bubble';
-      bubble.innerHTML = text.replace(/\n/g, '<br>');
+      bubble.innerHTML = formatMarkdown(text);
 
       msg.appendChild(avatar);
       msg.appendChild(bubble);
