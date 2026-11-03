@@ -17,10 +17,19 @@ def get_engine():
             raise ValueError("SUPABASE_DB_URL is not set in environment variables.")
         
         # NullPool is the official Supabase recommendation for serverless + port 6543
-        # sslmode=require is already in db_url query parameters
+        # Disable prepared statements for psycopg 3 to prevent DuplicatePreparedStatement
+        # errors ("prepared statement _pg3_0 already exists") in Supabase transaction pooler mode
+        connect_args = {}
+        try:
+            import psycopg  # psycopg v3
+            connect_args["prepare_threshold"] = None
+        except ImportError:
+            pass
+
         _engine = create_engine(
             db_url,
-            poolclass=NullPool
+            poolclass=NullPool,
+            connect_args=connect_args
         )
         _SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=_engine)
     return _engine
