@@ -304,25 +304,57 @@ Final Items Slotted:
 
 def embed_batch_with_retry(batch: List[str], max_retries: int = 5) -> List[List[float]]:
     client = get_genai_client()
-    delay = 3.0
-    for attempt in range(max_retries):
-        try:
-            response = client.models.embed_content(
-                model="models/gemini-embedding-001",
-                contents=batch,
-                config={"output_dimensionality": 768}
-            )
-            return [emb.values for emb in response.embeddings]
-        except Exception as e:
-            err_str = str(e)
-            if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str or "quota" in err_str.lower():
-                print(f"Rate limit hit. Waiting {delay:.1f}s (attempt {attempt + 1}/{max_retries})...")
-                time.sleep(delay)
-                delay *= 1.5
-            else:
-                print(f"Embedding error: {e}")
-                time.sleep(2.0)
-    raise RuntimeError("Failed to embed batch after retries.")
+    last_error = None
+    models_to_try = ["gemini-embedding-001", "gemini-embedding-2"]
+
+    for model_name in models_to_try:
+        delay = 3.0
+        for attempt in range(max_retries):
+            try:
+                response = client.models.embed_content(
+                    model=model_name,
+                    contents=batch,
+                    config={"output_dimensionality": 768}
+                )
+                return [emb.values for emb in response.embeddings]
+            except Exception as e:
+                last_error = e
+                err_str = str(e)
+                if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str or "quota" in err_str.lower():
+                    print(f"Rate limit hit on {model_name}. Waiting {delay:.1f}s (attempt {attempt + 1}/{max_retries})...")
+                    time.sleep(delay)
+                    delay *= 1.8
+                elif "404" in err_str or "NOT_FOUND" in err_str or "not found" in err_str.lower():
+                    print(f"Model {model_name} not found, trying alternate model...")
+                    break
+                else:
+                    print(f"Embedding notice ({model_name}): {e}. Waiting {delay:.1f}s...")
+                    time.sleep(delay)
+                    delay *= 1.2
+
+    # Fallback: embed item-by-item if batch call fails
+    print("Batch call exhausted. Falling back to item-by-item embedding...")
+    individual_embeddings = []
+    for text_item in batch:
+        item_emb = None
+        for model_name in models_to_try:
+            try:
+                res = client.models.embed_content(
+                    model=model_name,
+                    contents=text_item,
+                    config={"output_dimensionality": 768}
+                )
+                item_emb = res.embeddings[0].values
+                break
+            except Exception as e:
+                last_error = e
+                time.sleep(1.5)
+        if item_emb is not None:
+            individual_embeddings.append(item_emb)
+        else:
+            raise RuntimeError(f"Failed to embed batch item: {last_error}")
+
+    return individual_embeddings
 
 
 def run_meta_and_pros_sync(hero_limit: Optional[int] = None) -> int:
@@ -345,7 +377,7 @@ def run_meta_and_pros_sync(hero_limit: Optional[int] = None) -> int:
 
     db = SessionLocal()
     try:
-        batch_size = 15
+        batch_size = 10
         for i in range(0, len(all_chunks), batch_size):
             batch = all_chunks[i:i + batch_size]
             texts_to_embed = [f"{c[1]}\n{c[2]}" for c in batch]
@@ -361,7 +393,7 @@ def run_meta_and_pros_sync(hero_limit: Optional[int] = None) -> int:
                 """), {"h": cat, "t": title, "c": content, "e": vector_str})
             db.commit()
             print(f"Indexed batch [{i + 1} to {min(i + batch_size, len(all_chunks))}] / {len(all_chunks)}")
-            time.sleep(1.2)
+            time.sleep(2.0)
 
         total_in_db = db.execute(text("SELECT count(*) FROM hero_documents")).scalar()
         print("\n" + "=" * 65)

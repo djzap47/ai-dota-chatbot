@@ -1,22 +1,4 @@
 import time
-from typing import List, Dict, Any, Optional
-from google import genai
-from sqlalchemy import text
-from app.config import settings
-from app.database import SessionLocal
-
-_client = None
-
-def get_genai_client():
-    global _client
-    if _client is None:
-        if not settings.GOOGLE_API_KEY:
-            raise ValueError("GOOGLE_API_KEY is not set.")
-        _client = genai.Client(api_key=settings.GOOGLE_API_KEY)
-    return _client
-
-
-import time
 import re
 from functools import lru_cache
 from typing import List, Dict, Any, Optional
@@ -46,15 +28,20 @@ def generate_embedding(text_content: str) -> List[float]:
         return _embedding_cache[clean_text]
 
     client = get_genai_client()
-    response = client.models.embed_content(
-        model="models/gemini-embedding-001",
-        contents=text_content,
-        config={"output_dimensionality": 768}
-    )
-    vec = response.embeddings[0].values
-    if len(_embedding_cache) < 256:
-        _embedding_cache[clean_text] = vec
-    return vec
+    for model_name in ["gemini-embedding-001", "gemini-embedding-2"]:
+        try:
+            response = client.models.embed_content(
+                model=model_name,
+                contents=text_content,
+                config={"output_dimensionality": 768}
+            )
+            vec = response.embeddings[0].values
+            if len(_embedding_cache) < 256:
+                _embedding_cache[clean_text] = vec
+            return vec
+        except Exception:
+            continue
+    raise RuntimeError("Failed to generate embedding with available models.")
 
 
 # Known pro aliases to assist hybrid search
