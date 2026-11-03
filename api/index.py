@@ -205,18 +205,18 @@ async def sync_opendota_meta(
     authorization: Optional[str] = Header(None, description="CRON_SECRET or Bearer token")
 ):
     """
-    Trigger full OpenDota Meta & Pro Player match sync.
-    Can be executed directly from Swagger UI (/docs). Runs on Vercel up to 300s.
+    Trigger full Bulk Dota 2 Knowledge Ingestion (All Heroes, Abilities, Facets, Talents, Items, Builds).
+    Can be executed directly from Swagger UI (/docs).
     """
     verify_auth(authorization=authorization, secret=secret)
 
     try:
-        from scripts.sync_opendota_meta_and_pros import run_meta_and_pros_sync
-        synced_count = await asyncio.to_thread(run_meta_and_pros_sync)
+        from scripts.bulk_ingest_all_dota_knowledge import bulk_ingest_into_supabase
+        synced_count = await asyncio.to_thread(bulk_ingest_into_supabase)
         return ScraperResponse(
             status="success",
-            message=f"Successfully ingested {synced_count} OpenDota meta & pro player match chunks into pgvector.",
-            updated_count=synced_count
+            message="Successfully ingested full Dota 2 encyclopedia (heroes, abilities, items, builds) into pgvector.",
+            updated_count=synced_count or 0
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Meta sync failed: {str(e)}")

@@ -1,0 +1,2161 @@
+{
+  "1": {
+    "hero_name": "Anti-Mage",
+    "strong_against": [
+      "Lifestealer (86.7%)",
+      "Tinker (69.6%)",
+      "Ring Master (65.6%)",
+      "Dragon Knight (64.1%)",
+      "Lina (63.6%)"
+    ],
+    "counters": [
+      "Weaver (27.3%)",
+      "Kunkka (31.2%)",
+      "Keeper of the Light (32.0%)",
+      "Wraith King (32.0%)",
+      "Tiny (32.4%)"
+    ]
+  },
+  "2": {
+    "hero_name": "Axe",
+    "strong_against": [
+      "Death Prophet (63.8%)",
+      "Faceless Void (62.0%)",
+      "Morphling (60.0%)",
+      "Bristleback (59.6%)",
+      "Terrorblade (59.6%)"
+    ],
+    "counters": [
+      "Meepo (26.3%)",
+      "Bane (30.5%)",
+      "Enchantress (35.1%)",
+      "Monkey King (35.4%)",
+      "Bounty Hunter (35.7%)"
+    ]
+  },
+  "3": {
+    "hero_name": "Bane",
+    "strong_against": [
+      "Razor (75.0%)",
+      "Vengeful Spirit (72.2%)",
+      "Warlock (70.4%)",
+      "Crystal Maiden (70.0%)",
+      "Axe (69.5%)"
+    ],
+    "counters": [
+      "Monkey King (32.3%)",
+      "Lone Druid (33.3%)",
+      "Dazzle (33.3%)",
+      "Death Prophet (33.3%)",
+      "Centaur Warrunner (33.7%)"
+    ]
+  },
+  "4": {
+    "hero_name": "Bloodseeker",
+    "strong_against": [
+      "Timbersaw (80.0%)",
+      "Hoodwink (64.7%)",
+      "Dragon Knight (60.0%)",
+      "Windranger (56.5%)",
+      "Invoker (55.6%)"
+    ],
+    "counters": [
+      "Rubick (25.9%)",
+      "Disruptor (34.8%)",
+      "Spirit Breaker (35.0%)",
+      "Lion (43.5%)",
+      "Snapfire (44.0%)"
+    ]
+  },
+  "5": {
+    "hero_name": "Crystal Maiden",
+    "strong_against": [
+      "Outworld Devourer (64.0%)",
+      "Pugna (63.2%)",
+      "Oracle (62.5%)",
+      "Sand King (61.9%)",
+      "Tinker (61.9%)"
+    ],
+    "counters": [
+      "Enigma (26.7%)",
+      "Nyx Assassin (28.9%)",
+      "Batrider (30.0%)",
+      "Bane (30.0%)",
+      "Razor (30.2%)"
+    ]
+  },
+  "6": {
+    "hero_name": "Drow Ranger",
+    "strong_against": [
+      "Outworld Devourer (75.0%)",
+      "Sand King (72.7%)",
+      "Witch Doctor (70.6%)",
+      "Pudge (69.0%)",
+      "Tinker (68.4%)"
+    ],
+    "counters": [
+      "Enigma (22.2%)",
+      "Earth Spirit (27.7%)",
+      "Alchemist (31.4%)",
+      "Nature's Prophet (35.0%)",
+      "Lycan (35.7%)"
+    ]
+  },
+  "7": {
+    "hero_name": "Earthshaker",
+    "strong_against": [
+      "Morphling (80.0%)",
+      "Wraith King (72.2%)",
+      "Winter Wyvern (72.0%)",
+      "Pugna (68.2%)",
+      "Kez (66.7%)"
+    ],
+    "counters": [
+      "Gyrocopter (22.6%)",
+      "Bristleback (23.5%)",
+      "Treant Protector (25.0%)",
+      "Clockwerk (27.6%)",
+      "Doom (30.3%)"
+    ]
+  },
+  "8": {
+    "hero_name": "Juggernaut",
+    "strong_against": [
+      "Magnus (73.7%)",
+      "Dark Seer (68.2%)",
+      "Zeus (66.7%)",
+      "Faceless Void (65.5%)",
+      "Beastmaster (64.9%)"
+    ],
+    "counters": [
+      "Treant Protector (31.7%)",
+      "Night Stalker (36.7%)",
+      "Brewmaster (36.8%)",
+      "Keeper of the Light (37.5%)",
+      "Troll Warlord (38.6%)"
+    ]
+  },
+  "9": {
+    "hero_name": "Mirana",
+    "strong_against": [
+      "Sand King (73.9%)",
+      "Ogre Magi (72.2%)",
+      "Earthshaker (69.6%)",
+      "Storm Spirit (69.3%)",
+      "Ursa (68.4%)"
+    ],
+    "counters": [
+      "Treant Protector (24.0%)",
+      "Batrider (25.0%)",
+      "Brewmaster (33.3%)",
+      "Sven (33.3%)",
+      "Venomancer (33.3%)"
+    ]
+  },
+  "10": {
+    "hero_name": "Morphling",
+    "strong_against": [
+      "Weaver (77.0%)",
+      "Medusa (70.8%)",
+      "Troll Warlord (68.2%)",
+      "Terrorblade (67.6%)",
+      "Lifestealer (65.9%)"
+    ],
+    "counters": [
+      "Broodmother (11.8%)",
+      "Earthshaker (20.0%)",
+      "Chen (26.1%)",
+      "Alchemist (29.6%)",
+      "Death Prophet (30.0%)"
+    ]
+  },
+  "11": {
+    "hero_name": "Shadow Fiend",
+    "strong_against": [
+      "Medusa (63.7%)",
+      "Night Stalker (60.8%)",
+      "Pugna (59.0%)",
+      "Oracle (58.7%)",
+      "Io (58.5%)"
+    ],
+    "counters": [
+      "Enigma (31.8%)",
+      "Lone Druid (37.1%)",
+      "Mirana (39.0%)",
+      "Monkey King (40.0%)",
+      "Meepo (40.0%)"
+    ]
+  },
+  "12": {
+    "hero_name": "Phantom Lancer",
+    "strong_against": [
+      "Medusa (61.9%)",
+      "Slardar (60.7%)",
+      "Mars (60.0%)",
+      "Ring Master (60.0%)",
+      "Outworld Devourer (60.0%)"
+    ],
+    "counters": [
+      "Abaddon (11.1%)",
+      "Necrophos (25.0%)",
+      "Pugna (26.7%)",
+      "Monkey King (29.4%)",
+      "Queen of Pain (31.6%)"
+    ]
+  },
+  "13": {
+    "hero_name": "Puck",
+    "strong_against": [
+      "Outworld Devourer (73.3%)",
+      "Phantom Lancer (63.6%)",
+      "Silencer (63.3%)",
+      "Troll Warlord (63.2%)",
+      "Tinker (60.9%)"
+    ],
+    "counters": [
+      "Lone Druid (19.4%)",
+      "Oracle (32.4%)",
+      "Morphling (35.0%)",
+      "Nyx Assassin (37.2%)",
+      "Naga Siren (37.2%)"
+    ]
+  },
+  "14": {
+    "hero_name": "Pudge",
+    "strong_against": [
+      "Winter Wyvern (75.0%)",
+      "Phantom Assassin (68.0%)",
+      "Troll Warlord (66.0%)",
+      "Morphling (64.6%)",
+      "Tinker (63.5%)"
+    ],
+    "counters": [
+      "Drow Ranger (31.0%)",
+      "Bane (33.3%)",
+      "Earth Spirit (35.0%)",
+      "Phoenix (37.2%)",
+      "Lone Druid (37.5%)"
+    ]
+  },
+  "15": {
+    "hero_name": "Razor",
+    "strong_against": [
+      "Medusa (76.0%)",
+      "Crystal Maiden (69.8%)",
+      "Silencer (65.0%)",
+      "Phantom Lancer (65.0%)",
+      "Gyrocopter (63.9%)"
+    ],
+    "counters": [
+      "Bane (25.0%)",
+      "Enchantress (26.7%)",
+      "Treant Protector (29.2%)",
+      "Nature's Prophet (33.3%)",
+      "Phoenix (35.1%)"
+    ]
+  },
+  "16": {
+    "hero_name": "Sand King",
+    "strong_against": [
+      "Night Stalker (73.7%)",
+      "Templar Assassin (65.9%)",
+      "Morphling (65.4%)",
+      "Witch Doctor (63.6%)",
+      "Muerta (62.2%)"
+    ],
+    "counters": [
+      "Largo (22.5%)",
+      "Zeus (25.0%)",
+      "Mirana (26.1%)",
+      "Dark Seer (26.3%)",
+      "Magnus (26.3%)"
+    ]
+  },
+  "17": {
+    "hero_name": "Storm Spirit",
+    "strong_against": [
+      "Bounty Hunter (70.0%)",
+      "Naga Siren (64.7%)",
+      "Io (64.5%)",
+      "Legion Commander (63.3%)",
+      "Omniknight (63.0%)"
+    ],
+    "counters": [
+      "Mirana (30.7%)",
+      "Treant Protector (36.4%)",
+      "Huskar (37.9%)",
+      "Enigma (38.9%)",
+      "Chen (40.4%)"
+    ]
+  },
+  "18": {
+    "hero_name": "Sven",
+    "strong_against": [
+      "Mirana (66.7%)",
+      "Undying (62.9%)",
+      "Dark Seer (61.9%)",
+      "Morphling (61.9%)",
+      "Marci (61.5%)"
+    ],
+    "counters": [
+      "Chen (26.3%)",
+      "Nyx Assassin (30.0%)",
+      "Treant Protector (31.6%)",
+      "Lich (31.8%)",
+      "Sniper (32.8%)"
+    ]
+  },
+  "19": {
+    "hero_name": "Tiny",
+    "strong_against": [
+      "Meepo (69.6%)",
+      "Anti-Mage (67.6%)",
+      "Weaver (64.8%)",
+      "Broodmother (61.3%)",
+      "Vengeful Spirit (61.2%)"
+    ],
+    "counters": [
+      "Enigma (31.2%)",
+      "Sniper (36.6%)",
+      "Bane (37.9%)",
+      "Keeper of the Light (38.9%)",
+      "Kez (39.8%)"
+    ]
+  },
+  "20": {
+    "hero_name": "Vengeful Spirit",
+    "strong_against": [
+      "Legion Commander (76.2%)",
+      "Largo (71.4%)",
+      "Medusa (66.7%)",
+      "Clinkz (65.5%)",
+      "Huskar (65.2%)"
+    ],
+    "counters": [
+      "Enigma (26.7%)",
+      "Bane (27.8%)",
+      "Clockwerk (30.8%)",
+      "Leshrac (33.3%)",
+      "Alchemist (33.3%)"
+    ]
+  },
+  "21": {
+    "hero_name": "Windranger",
+    "strong_against": [
+      "Grimstroke (66.7%)",
+      "Tinker (66.7%)",
+      "Chaos Knight (64.4%)",
+      "Zeus (62.9%)",
+      "Weaver (61.4%)"
+    ],
+    "counters": [
+      "Treant Protector (31.5%)",
+      "Arc Warden (33.3%)",
+      "Enigma (34.7%)",
+      "Broodmother (36.0%)",
+      "Lone Druid (36.6%)"
+    ]
+  },
+  "22": {
+    "hero_name": "Zeus",
+    "strong_against": [
+      "Sand King (75.0%)",
+      "Winter Wyvern (71.8%)",
+      "Earth Spirit (66.7%)",
+      "Viper (62.8%)",
+      "Gyrocopter (61.3%)"
+    ],
+    "counters": [
+      "Chen (6.7%)",
+      "Wraith King (26.7%)",
+      "Io (26.7%)",
+      "Void Spirit (30.4%)",
+      "Bane (31.2%)"
+    ]
+  },
+  "23": {
+    "hero_name": "Kunkka",
+    "strong_against": [
+      "Huskar (77.3%)",
+      "Abaddon (76.0%)",
+      "Grimstroke (72.2%)",
+      "Outworld Devourer (68.8%)",
+      "Anti-Mage (68.8%)"
+    ],
+    "counters": [
+      "Ancient Apparition (31.2%)",
+      "Earth Spirit (33.3%)",
+      "Broodmother (33.3%)",
+      "Enigma (35.0%)",
+      "Dazzle (35.3%)"
+    ]
+  },
+  "25": {
+    "hero_name": "Lina",
+    "strong_against": [
+      "Sand King (62.1%)",
+      "Spectre (60.0%)",
+      "Void Spirit (58.3%)",
+      "Phoenix (57.8%)",
+      "Phantom Assassin (57.7%)"
+    ],
+    "counters": [
+      "Omniknight (28.0%)",
+      "Keeper of the Light (32.8%)",
+      "Enchantress (34.5%)",
+      "Anti-Mage (36.4%)",
+      "Leshrac (36.7%)"
+    ]
+  },
+  "26": {
+    "hero_name": "Lion",
+    "strong_against": [
+      "Spectre (66.7%)",
+      "Earthshaker (65.3%)",
+      "Omniknight (63.0%)",
+      "Sven (61.8%)",
+      "Pugna (61.4%)"
+    ],
+    "counters": [
+      "Enigma (30.8%)",
+      "Treant Protector (35.2%)",
+      "Undying (36.4%)",
+      "Bounty Hunter (36.7%)",
+      "Visage (36.8%)"
+    ]
+  },
+  "27": {
+    "hero_name": "Shadow Shaman",
+    "strong_against": [
+      "Troll Warlord (65.8%)",
+      "Tinker (63.0%)",
+      "Medusa (61.9%)",
+      "Huskar (61.9%)",
+      "Razor (59.8%)"
+    ],
+    "counters": [
+      "Lone Druid (11.8%)",
+      "Oracle (23.8%)",
+      "Outworld Devourer (26.7%)",
+      "Arc Warden (33.3%)",
+      "Io (36.8%)"
+    ]
+  },
+  "28": {
+    "hero_name": "Slardar",
+    "strong_against": [
+      "Outworld Devourer (65.4%)",
+      "Lifestealer (62.9%)",
+      "Void Spirit (61.1%)",
+      "Omniknight (60.9%)",
+      "Oracle (60.9%)"
+    ],
+    "counters": [
+      "Bounty Hunter (32.4%)",
+      "Lycan (34.6%)",
+      "Dark Seer (36.0%)",
+      "Mirana (36.2%)",
+      "Marci (37.1%)"
+    ]
+  },
+  "29": {
+    "hero_name": "Tidehunter",
+    "strong_against": [
+      "Faceless Void (65.2%)",
+      "Earthshaker (62.2%)",
+      "Bounty Hunter (60.0%)",
+      "Medusa (58.2%)",
+      "Lycan (58.1%)"
+    ],
+    "counters": [
+      "Lone Druid (21.6%)",
+      "Clockwerk (32.1%)",
+      "Treant Protector (34.4%)",
+      "Huskar (38.5%)",
+      "Ember Spirit (39.2%)"
+    ]
+  },
+  "30": {
+    "hero_name": "Witch Doctor",
+    "strong_against": [
+      "Weaver (71.4%)",
+      "Slark (67.6%)",
+      "Terrorblade (66.7%)",
+      "Anti-Mage (66.7%)",
+      "Underlord (65.1%)"
+    ],
+    "counters": [
+      "Sniper (28.3%)",
+      "Treant Protector (28.6%)",
+      "Drow Ranger (29.4%)",
+      "Night Stalker (32.1%)",
+      "Void Spirit (32.4%)"
+    ]
+  },
+  "31": {
+    "hero_name": "Lich",
+    "strong_against": [
+      "Sven (68.2%)",
+      "Oracle (66.7%)",
+      "Meepo (66.7%)",
+      "Ursa (61.3%)",
+      "Sand King (58.1%)"
+    ],
+    "counters": [
+      "Nyx Assassin (22.2%)",
+      "Chen (23.8%)",
+      "Lone Druid (26.7%)",
+      "Naga Siren (27.8%)",
+      "Chaos Knight (28.6%)"
+    ]
+  },
+  "32": {
+    "hero_name": "Riki",
+    "strong_against": [
+      "Mars (55.0%)",
+      "Lich (54.5%)",
+      "Puck (54.5%)",
+      "Axe (52.6%)",
+      "Tusk (50.0%)"
+    ],
+    "counters": [
+      "Warlock (33.3%)",
+      "Disruptor (35.3%)",
+      "Shadow Demon (36.0%)",
+      "Queen of Pain (36.8%)",
+      "Rubick (38.7%)"
+    ]
+  },
+  "33": {
+    "hero_name": "Enigma",
+    "strong_against": [
+      "Lifestealer (85.7%)",
+      "Winter Wyvern (82.4%)",
+      "Underlord (79.2%)",
+      "Drow Ranger (77.8%)",
+      "Skywrath Mage (77.3%)"
+    ],
+    "counters": [
+      "Terrorblade (30.0%)",
+      "Sniper (35.3%)",
+      "Pudge (40.0%)",
+      "Queen of Pain (40.0%)",
+      "Primal Beast (40.0%)"
+    ]
+  },
+  "34": {
+    "hero_name": "Tinker",
+    "strong_against": [
+      "Razor (60.0%)",
+      "Clinkz (60.0%)",
+      "Silencer (59.1%)",
+      "Ursa (59.1%)",
+      "Terrorblade (58.8%)"
+    ],
+    "counters": [
+      "Treant Protector (20.0%)",
+      "Grimstroke (20.0%)",
+      "Batrider (20.0%)",
+      "Leshrac (23.8%)",
+      "Primal Beast (28.6%)"
+    ]
+  },
+  "35": {
+    "hero_name": "Sniper",
+    "strong_against": [
+      "Death Prophet (79.5%)",
+      "Witch Doctor (71.7%)",
+      "Primal Beast (71.4%)",
+      "Morphling (69.6%)",
+      "Pugna (69.2%)"
+    ],
+    "counters": [
+      "Arc Warden (31.2%)",
+      "Lone Druid (31.6%)",
+      "Ember Spirit (31.9%)",
+      "Slark (34.3%)",
+      "Chen (36.8%)"
+    ]
+  },
+  "36": {
+    "hero_name": "Necrophos",
+    "strong_against": [
+      "Phantom Lancer (75.0%)",
+      "Huskar (75.0%)",
+      "Pugna (64.7%)",
+      "Underlord (64.1%)",
+      "Terrorblade (63.9%)"
+    ],
+    "counters": [
+      "Enchantress (28.6%)",
+      "Batrider (34.3%)",
+      "Shadow Demon (36.4%)",
+      "Ancient Apparition (37.5%)",
+      "Largo (37.5%)"
+    ]
+  },
+  "37": {
+    "hero_name": "Warlock",
+    "strong_against": [
+      "Wraith King (82.6%)",
+      "Riki (66.7%)",
+      "Phantom Assassin (65.5%)",
+      "Broodmother (64.0%)",
+      "Drow Ranger (63.4%)"
+    ],
+    "counters": [
+      "Bane (29.6%)",
+      "Visage (31.2%)",
+      "Lone Druid (31.2%)",
+      "Keeper of the Light (32.9%)",
+      "Enchantress (35.6%)"
+    ]
+  },
+  "38": {
+    "hero_name": "Beastmaster",
+    "strong_against": [
+      "Outworld Devourer (77.1%)",
+      "Vengeful Spirit (63.8%)",
+      "Phantom Assassin (62.5%)",
+      "Undying (61.4%)",
+      "Winter Wyvern (60.7%)"
+    ],
+    "counters": [
+      "Juggernaut (35.1%)",
+      "Lone Druid (35.3%)",
+      "Slark (35.4%)",
+      "Dazzle (36.4%)",
+      "Grimstroke (39.6%)"
+    ]
+  },
+  "39": {
+    "hero_name": "Queen of Pain",
+    "strong_against": [
+      "Phantom Lancer (68.4%)",
+      "Meepo (68.0%)",
+      "Timbersaw (63.3%)",
+      "Riki (63.2%)",
+      "Naga Siren (62.5%)"
+    ],
+    "counters": [
+      "Chen (27.8%)",
+      "Broodmother (30.0%)",
+      "Largo (31.5%)",
+      "Bounty Hunter (32.5%)",
+      "Keeper of the Light (33.3%)"
+    ]
+  },
+  "40": {
+    "hero_name": "Venomancer",
+    "strong_against": [
+      "Magnus (69.6%)",
+      "Omniknight (68.8%)",
+      "Night Stalker (68.8%)",
+      "Oracle (66.7%)",
+      "Ancient Apparition (66.7%)"
+    ],
+    "counters": [
+      "Bane (32.0%)",
+      "Winter Wyvern (33.3%)",
+      "Legion Commander (36.1%)",
+      "Lycan (36.8%)",
+      "Ember Spirit (38.0%)"
+    ]
+  },
+  "41": {
+    "hero_name": "Faceless Void",
+    "strong_against": [
+      "Gyrocopter (68.8%)",
+      "Alchemist (66.7%)",
+      "Ursa (65.5%)",
+      "Dawnbreaker (65.4%)",
+      "Disruptor (60.3%)"
+    ],
+    "counters": [
+      "Chaos Knight (23.8%)",
+      "Magnus (29.6%)",
+      "Viper (32.4%)",
+      "Centaur Warrunner (33.3%)",
+      "Kunkka (34.5%)"
+    ]
+  },
+  "42": {
+    "hero_name": "Wraith King",
+    "strong_against": [
+      "Abaddon (81.0%)",
+      "Zeus (73.3%)",
+      "Bristleback (68.8%)",
+      "Anti-Mage (68.0%)",
+      "Timbersaw (65.4%)"
+    ],
+    "counters": [
+      "Warlock (17.4%)",
+      "Earthshaker (27.8%)",
+      "Monkey King (33.3%)",
+      "Dawnbreaker (33.3%)",
+      "Mirana (35.0%)"
+    ]
+  },
+  "43": {
+    "hero_name": "Death Prophet",
+    "strong_against": [
+      "Morphling (70.0%)",
+      "Underlord (66.7%)",
+      "Bane (66.7%)",
+      "Bristleback (65.0%)",
+      "Alchemist (63.2%)"
+    ],
+    "counters": [
+      "Terrorblade (17.4%)",
+      "Sniper (20.5%)",
+      "Clockwerk (25.0%)",
+      "Legion Commander (26.3%)",
+      "Spirit Breaker (29.5%)"
+    ]
+  },
+  "44": {
+    "hero_name": "Phantom Assassin",
+    "strong_against": [
+      "Doom (70.0%)",
+      "Dark Willow (66.7%)",
+      "Faceless Void (62.5%)",
+      "Sand King (61.1%)",
+      "Grimstroke (60.0%)"
+    ],
+    "counters": [
+      "Chen (12.5%)",
+      "Underlord (24.0%)",
+      "Huskar (26.7%)",
+      "Leshrac (26.7%)",
+      "Hoodwink (29.7%)"
+    ]
+  },
+  "45": {
+    "hero_name": "Pugna",
+    "strong_against": [
+      "Phantom Lancer (73.3%)",
+      "Night Stalker (68.0%)",
+      "Ogre Magi (67.2%)",
+      "Pangolier (65.3%)",
+      "Gyrocopter (63.6%)"
+    ],
+    "counters": [
+      "Chen (29.2%)",
+      "Sniper (30.8%)",
+      "Earthshaker (31.8%)",
+      "Necrophos (35.3%)",
+      "Treant Protector (35.3%)"
+    ]
+  },
+  "46": {
+    "hero_name": "Templar Assassin",
+    "strong_against": [
+      "Phantom Assassin (62.5%)",
+      "Kunkka (60.3%)",
+      "Weaver (60.0%)",
+      "Crystal Maiden (59.3%)",
+      "Visage (59.1%)"
+    ],
+    "counters": [
+      "Bounty Hunter (28.1%)",
+      "Io (33.3%)",
+      "Treant Protector (33.9%)",
+      "Sand King (34.1%)",
+      "Monkey King (34.9%)"
+    ]
+  },
+  "47": {
+    "hero_name": "Viper",
+    "strong_against": [
+      "Outworld Devourer (70.0%)",
+      "Magnus (69.0%)",
+      "Faceless Void (67.6%)",
+      "Night Stalker (66.7%)",
+      "Phantom Assassin (65.2%)"
+    ],
+    "counters": [
+      "Lone Druid (26.5%)",
+      "Omniknight (30.0%)",
+      "Io (33.3%)",
+      "Troll Warlord (33.3%)",
+      "Wraith King (34.8%)"
+    ]
+  },
+  "48": {
+    "hero_name": "Luna",
+    "strong_against": [
+      "Morphling (67.9%)",
+      "Death Prophet (60.8%)",
+      "Silencer (60.4%)",
+      "Sand King (60.0%)",
+      "Spectre (58.8%)"
+    ],
+    "counters": [
+      "Naga Siren (14.3%)",
+      "Chen (29.6%)",
+      "Bounty Hunter (34.5%)",
+      "Legion Commander (37.0%)",
+      "Clockwerk (37.7%)"
+    ]
+  },
+  "49": {
+    "hero_name": "Dragon Knight",
+    "strong_against": [
+      "Arc Warden (75.0%)",
+      "Oracle (66.7%)",
+      "Naga Siren (61.1%)",
+      "Ancient Apparition (60.8%)",
+      "Phantom Lancer (60.5%)"
+    ],
+    "counters": [
+      "Venomancer (34.8%)",
+      "Brewmaster (35.7%)",
+      "Anti-Mage (35.9%)",
+      "Abaddon (37.8%)",
+      "Pugna (39.2%)"
+    ]
+  },
+  "50": {
+    "hero_name": "Dazzle",
+    "strong_against": [
+      "Troll Warlord (86.7%)",
+      "Skywrath Mage (68.8%)",
+      "Bane (66.7%)",
+      "Kunkka (64.7%)",
+      "Clinkz (64.1%)"
+    ],
+    "counters": [
+      "Gyrocopter (29.5%)",
+      "Enchantress (31.6%)",
+      "Abaddon (33.3%)",
+      "Monkey King (34.6%)",
+      "Shadow Demon (36.9%)"
+    ]
+  },
+  "51": {
+    "hero_name": "Clockwerk",
+    "strong_against": [
+      "Death Prophet (75.0%)",
+      "Earthshaker (72.4%)",
+      "Outworld Devourer (71.4%)",
+      "Tinker (70.6%)",
+      "Vengeful Spirit (69.2%)"
+    ],
+    "counters": [
+      "Naga Siren (30.0%)",
+      "Clinkz (31.2%)",
+      "Lone Druid (31.9%)",
+      "Bounty Hunter (34.6%)",
+      "Abaddon (35.7%)"
+    ]
+  },
+  "52": {
+    "hero_name": "Leshrac",
+    "strong_against": [
+      "Tinker (76.2%)",
+      "Chaos Knight (73.3%)",
+      "Phantom Assassin (73.3%)",
+      "Ancient Apparition (70.4%)",
+      "Slark (66.7%)"
+    ],
+    "counters": [
+      "Brewmaster (33.3%)",
+      "Chen (33.3%)",
+      "Doom (35.7%)",
+      "Treant Protector (36.6%)",
+      "Grimstroke (38.1%)"
+    ]
+  },
+  "53": {
+    "hero_name": "Nature's Prophet",
+    "strong_against": [
+      "Razor (66.7%)",
+      "Outworld Devourer (66.7%)",
+      "Vengeful Spirit (65.7%)",
+      "Drow Ranger (65.0%)",
+      "Troll Warlord (64.1%)"
+    ],
+    "counters": [
+      "Broodmother (36.4%)",
+      "Clinkz (36.6%)",
+      "Chaos Knight (37.5%)",
+      "Nyx Assassin (38.9%)",
+      "Lone Druid (39.0%)"
+    ]
+  },
+  "54": {
+    "hero_name": "Lifestealer",
+    "strong_against": [
+      "Earthshaker (64.5%)",
+      "Phantom Assassin (64.4%)",
+      "Night Stalker (59.1%)",
+      "Muerta (58.5%)",
+      "Witch Doctor (58.1%)"
+    ],
+    "counters": [
+      "Anti-Mage (13.3%)",
+      "Enigma (14.3%)",
+      "Doom (28.3%)",
+      "Io (30.0%)",
+      "Morphling (34.1%)"
+    ]
+  },
+  "55": {
+    "hero_name": "Dark Seer",
+    "strong_against": [
+      "Sand King (73.7%)",
+      "Void Spirit (72.4%)",
+      "Bristleback (72.2%)",
+      "Terrorblade (64.7%)",
+      "Enchantress (64.7%)"
+    ],
+    "counters": [
+      "Phoenix (28.3%)",
+      "Juggernaut (31.8%)",
+      "Gyrocopter (31.8%)",
+      "Kunkka (32.0%)",
+      "Lycan (33.3%)"
+    ]
+  },
+  "56": {
+    "hero_name": "Clinkz",
+    "strong_against": [
+      "Chaos Knight (80.0%)",
+      "Night Stalker (73.3%)",
+      "Medusa (70.0%)",
+      "Marci (69.6%)",
+      "Clockwerk (68.8%)"
+    ],
+    "counters": [
+      "Enchantress (28.0%)",
+      "Treant Protector (32.6%)",
+      "Spirit Breaker (32.7%)",
+      "Silencer (33.3%)",
+      "Lone Druid (33.3%)"
+    ]
+  },
+  "57": {
+    "hero_name": "Omniknight",
+    "strong_against": [
+      "Spirit Breaker (75.0%)",
+      "Lina (72.0%)",
+      "Viper (70.0%)",
+      "Lich (65.2%)",
+      "Gyrocopter (65.2%)"
+    ],
+    "counters": [
+      "Venomancer (31.2%)",
+      "Lion (37.0%)",
+      "Storm Spirit (37.0%)",
+      "Slardar (39.1%)",
+      "Razor (40.0%)"
+    ]
+  },
+  "58": {
+    "hero_name": "Enchantress",
+    "strong_against": [
+      "Razor (73.3%)",
+      "Clinkz (72.0%)",
+      "Necrophos (71.4%)",
+      "Earthshaker (68.4%)",
+      "Dazzle (68.4%)"
+    ],
+    "counters": [
+      "Chen (29.4%)",
+      "Dark Seer (35.3%)",
+      "Keeper of the Light (35.7%)",
+      "Earth Spirit (36.4%)",
+      "Io (37.5%)"
+    ]
+  },
+  "59": {
+    "hero_name": "Huskar",
+    "strong_against": [
+      "Chen (77.8%)",
+      "Lone Druid (73.7%)",
+      "Phantom Assassin (73.3%)",
+      "Medusa (68.8%)",
+      "Silencer (68.4%)"
+    ],
+    "counters": [
+      "Kunkka (22.7%)",
+      "Necrophos (25.0%)",
+      "Broodmother (25.0%)",
+      "Ancient Apparition (33.3%)",
+      "Vengeful Spirit (34.8%)"
+    ]
+  },
+  "60": {
+    "hero_name": "Night Stalker",
+    "strong_against": [
+      "Winter Wyvern (68.6%)",
+      "Witch Doctor (67.9%)",
+      "Silencer (64.9%)",
+      "Ancient Apparition (64.3%)",
+      "Juggernaut (63.3%)"
+    ],
+    "counters": [
+      "Batrider (25.0%)",
+      "Monkey King (25.0%)",
+      "Sand King (26.3%)",
+      "Clinkz (26.7%)",
+      "Venomancer (31.2%)"
+    ]
+  },
+  "61": {
+    "hero_name": "Broodmother",
+    "strong_against": [
+      "Morphling (88.2%)",
+      "Huskar (75.0%)",
+      "Queen of Pain (70.0%)",
+      "Ring Master (66.7%)",
+      "Weaver (66.7%)"
+    ],
+    "counters": [
+      "Warlock (36.0%)",
+      "Shadow Demon (36.1%)",
+      "Tiny (38.7%)",
+      "Primal Beast (41.2%)",
+      "Skywrath Mage (42.9%)"
+    ]
+  },
+  "62": {
+    "hero_name": "Bounty Hunter",
+    "strong_against": [
+      "Silencer (80.0%)",
+      "Templar Assassin (71.9%)",
+      "Techies (70.0%)",
+      "Slardar (67.6%)",
+      "Queen of Pain (67.5%)"
+    ],
+    "counters": [
+      "Marci (27.8%)",
+      "Storm Spirit (30.0%)",
+      "Shadow Demon (33.3%)",
+      "Largo (36.8%)",
+      "Tidehunter (40.0%)"
+    ]
+  },
+  "63": {
+    "hero_name": "Weaver",
+    "strong_against": [
+      "Anti-Mage (72.7%)",
+      "Phantom Lancer (63.2%)",
+      "Crystal Maiden (62.1%)",
+      "Leshrac (61.8%)",
+      "Vengeful Spirit (61.1%)"
+    ],
+    "counters": [
+      "Legion Commander (16.7%)",
+      "Morphling (23.0%)",
+      "Doom (25.7%)",
+      "Naga Siren (26.7%)",
+      "Witch Doctor (28.6%)"
+    ]
+  },
+  "64": {
+    "hero_name": "Jakiro",
+    "strong_against": [
+      "Night Stalker (65.3%)",
+      "Undying (63.8%)",
+      "Chaos Knight (62.1%)",
+      "Anti-Mage (62.0%)",
+      "Medusa (60.0%)"
+    ],
+    "counters": [
+      "Spectre (26.7%)",
+      "Lone Druid (33.3%)",
+      "Treant Protector (36.5%)",
+      "Io (38.1%)",
+      "Alchemist (38.6%)"
+    ]
+  },
+  "65": {
+    "hero_name": "Batrider",
+    "strong_against": [
+      "Tinker (80.0%)",
+      "Night Stalker (75.0%)",
+      "Mirana (75.0%)",
+      "Death Prophet (70.0%)",
+      "Crystal Maiden (70.0%)"
+    ],
+    "counters": [
+      "Naga Siren (26.1%)",
+      "Lycan (33.3%)",
+      "Io (33.3%)",
+      "Enigma (34.4%)",
+      "Oracle (35.7%)"
+    ]
+  },
+  "66": {
+    "hero_name": "Chen",
+    "strong_against": [
+      "Zeus (93.3%)",
+      "Phantom Assassin (87.5%)",
+      "Brewmaster (82.4%)",
+      "Dawnbreaker (81.0%)",
+      "Lich (76.2%)"
+    ],
+    "counters": [
+      "Huskar (22.2%)",
+      "Largo (36.4%)",
+      "Nyx Assassin (37.5%)",
+      "Necrophos (44.4%)",
+      "Abaddon (44.8%)"
+    ]
+  },
+  "67": {
+    "hero_name": "Spectre",
+    "strong_against": [
+      "Jakiro (73.3%)",
+      "Mars (68.0%)",
+      "Techies (66.7%)",
+      "Timbersaw (63.6%)",
+      "Windranger (63.3%)"
+    ],
+    "counters": [
+      "Doom (27.8%)",
+      "Tusk (30.0%)",
+      "Centaur Warrunner (31.8%)",
+      "Lion (33.3%)",
+      "Ember Spirit (33.3%)"
+    ]
+  },
+  "68": {
+    "hero_name": "Ancient Apparition",
+    "strong_against": [
+      "Legion Commander (68.8%)",
+      "Kunkka (68.8%)",
+      "Doom (68.4%)",
+      "Huskar (66.7%)",
+      "Phantom Lancer (66.7%)"
+    ],
+    "counters": [
+      "Leshrac (29.6%)",
+      "Alchemist (30.0%)",
+      "Primal Beast (31.0%)",
+      "Monkey King (31.2%)",
+      "Spirit Breaker (31.6%)"
+    ]
+  },
+  "69": {
+    "hero_name": "Doom",
+    "strong_against": [
+      "Weaver (74.3%)",
+      "Spectre (72.2%)",
+      "Lifestealer (71.7%)",
+      "Earthshaker (69.7%)",
+      "Death Prophet (69.6%)"
+    ],
+    "counters": [
+      "Phantom Assassin (30.0%)",
+      "Ancient Apparition (31.6%)",
+      "Enigma (33.3%)",
+      "Abaddon (35.3%)",
+      "Legion Commander (38.1%)"
+    ]
+  },
+  "70": {
+    "hero_name": "Ursa",
+    "strong_against": [
+      "Underlord (62.2%)",
+      "Earthshaker (61.5%)",
+      "Death Prophet (60.6%)",
+      "Dark Seer (60.6%)",
+      "Timbersaw (59.2%)"
+    ],
+    "counters": [
+      "Naga Siren (30.0%)",
+      "Chen (30.2%)",
+      "Mirana (31.6%)",
+      "Treant Protector (31.7%)",
+      "Enigma (32.4%)"
+    ]
+  },
+  "71": {
+    "hero_name": "Spirit Breaker",
+    "strong_against": [
+      "Death Prophet (70.5%)",
+      "Ancient Apparition (68.4%)",
+      "Clinkz (67.3%)",
+      "Anti-Mage (66.7%)",
+      "Phantom Assassin (65.7%)"
+    ],
+    "counters": [
+      "Io (21.4%)",
+      "Omniknight (25.0%)",
+      "Treant Protector (28.1%)",
+      "Oracle (31.6%)",
+      "Keeper of the Light (34.6%)"
+    ]
+  },
+  "72": {
+    "hero_name": "Gyrocopter",
+    "strong_against": [
+      "Earthshaker (77.4%)",
+      "Dazzle (70.5%)",
+      "Dark Seer (68.2%)",
+      "Tinker (66.7%)",
+      "Chaos Knight (65.2%)"
+    ],
+    "counters": [
+      "Treant Protector (26.8%)",
+      "Faceless Void (31.2%)",
+      "Alchemist (34.5%)",
+      "Bane (34.7%)",
+      "Omniknight (34.8%)"
+    ]
+  },
+  "73": {
+    "hero_name": "Alchemist",
+    "strong_against": [
+      "Brewmaster (73.7%)",
+      "Earth Spirit (72.4%)",
+      "Ring Master (71.7%)",
+      "Morphling (70.4%)",
+      "Ancient Apparition (70.0%)"
+    ],
+    "counters": [
+      "Terrorblade (32.3%)",
+      "Keeper of the Light (32.4%)",
+      "Faceless Void (33.3%)",
+      "Batrider (33.3%)",
+      "Death Prophet (36.8%)"
+    ]
+  },
+  "74": {
+    "hero_name": "Invoker",
+    "strong_against": [
+      "Visage (81.2%)",
+      "Magnus (63.5%)",
+      "Dark Seer (62.5%)",
+      "Chaos Knight (62.3%)",
+      "Outworld Devourer (61.9%)"
+    ],
+    "counters": [
+      "Treant Protector (26.0%)",
+      "Chen (36.7%)",
+      "Lone Druid (38.1%)",
+      "Monkey King (40.3%)",
+      "Naga Siren (40.6%)"
+    ]
+  },
+  "75": {
+    "hero_name": "Silencer",
+    "strong_against": [
+      "Clinkz (66.7%)",
+      "Dark Willow (64.2%)",
+      "Ancient Apparition (64.0%)",
+      "Pugna (63.3%)",
+      "Lina (62.7%)"
+    ],
+    "counters": [
+      "Bounty Hunter (20.0%)",
+      "Treant Protector (29.2%)",
+      "Largo (30.2%)",
+      "Huskar (31.6%)",
+      "Broodmother (33.3%)"
+    ]
+  },
+  "76": {
+    "hero_name": "Outworld Devourer",
+    "strong_against": [
+      "Shadow Shaman (73.3%)",
+      "Slark (65.2%)",
+      "Mirana (61.1%)",
+      "Doom (60.0%)",
+      "Dark Willow (59.6%)"
+    ],
+    "counters": [
+      "Beastmaster (22.9%)",
+      "Earth Spirit (25.0%)",
+      "Drow Ranger (25.0%)",
+      "Brewmaster (25.0%)",
+      "Keeper of the Light (25.0%)"
+    ]
+  },
+  "77": {
+    "hero_name": "Lycan",
+    "strong_against": [
+      "Oracle (81.2%)",
+      "Dawnbreaker (74.1%)",
+      "Ring Master (72.4%)",
+      "Sand King (70.6%)",
+      "Void Spirit (69.0%)"
+    ],
+    "counters": [
+      "Nyx Assassin (27.8%)",
+      "Broodmother (33.3%)",
+      "Naga Siren (36.4%)",
+      "Ogre Magi (37.0%)",
+      "Huskar (37.5%)"
+    ]
+  },
+  "78": {
+    "hero_name": "Brewmaster",
+    "strong_against": [
+      "Outworld Devourer (75.0%)",
+      "Mirana (66.7%)",
+      "Leshrac (66.7%)",
+      "Void Spirit (64.5%)",
+      "Dragon Knight (64.3%)"
+    ],
+    "counters": [
+      "Chen (17.6%)",
+      "Alchemist (26.3%)",
+      "Bristleback (34.0%)",
+      "Bounty Hunter (35.0%)",
+      "Dawnbreaker (36.4%)"
+    ]
+  },
+  "79": {
+    "hero_name": "Shadow Demon",
+    "strong_against": [
+      "Medusa (81.2%)",
+      "Bounty Hunter (66.7%)",
+      "Weaver (64.8%)",
+      "Riki (64.0%)",
+      "Broodmother (63.9%)"
+    ],
+    "counters": [
+      "Io (22.2%)",
+      "Chaos Knight (23.5%)",
+      "Lone Druid (34.5%)",
+      "Alchemist (36.2%)",
+      "Wraith King (39.3%)"
+    ]
+  },
+  "80": {
+    "hero_name": "Lone Druid",
+    "strong_against": [
+      "Shadow Shaman (88.2%)",
+      "Puck (80.6%)",
+      "Tidehunter (78.4%)",
+      "Viper (73.5%)",
+      "Lich (73.3%)"
+    ],
+    "counters": [
+      "Huskar (26.3%)",
+      "Nyx Assassin (35.3%)",
+      "Dark Seer (38.5%)",
+      "Ancient Apparition (46.7%)",
+      "Witch Doctor (47.4%)"
+    ]
+  },
+  "81": {
+    "hero_name": "Chaos Knight",
+    "strong_against": [
+      "Void Spirit (76.5%)",
+      "Shadow Demon (76.5%)",
+      "Faceless Void (76.2%)",
+      "Lich (71.4%)",
+      "Earthshaker (65.2%)"
+    ],
+    "counters": [
+      "Clinkz (20.0%)",
+      "Phoenix (26.7%)",
+      "Leshrac (26.7%)",
+      "Marci (26.7%)",
+      "Drow Ranger (33.3%)"
+    ]
+  },
+  "82": {
+    "hero_name": "Meepo",
+    "strong_against": [
+      "Axe (73.7%)",
+      "Ring Master (63.6%)",
+      "Luna (61.9%)",
+      "Hoodwink (60.6%)",
+      "Shadow Fiend (60.0%)"
+    ],
+    "counters": [
+      "Snapfire (29.4%)",
+      "Tiny (30.4%)",
+      "Queen of Pain (32.0%)",
+      "Lich (33.3%)",
+      "Monkey King (37.5%)"
+    ]
+  },
+  "83": {
+    "hero_name": "Treant Protector",
+    "strong_against": [
+      "Medusa (82.6%)",
+      "Tinker (80.0%)",
+      "Mirana (76.0%)",
+      "Earthshaker (75.0%)",
+      "Winter Wyvern (74.1%)"
+    ],
+    "counters": [
+      "Chen (25.0%)",
+      "Huskar (45.7%)",
+      "Enchantress (47.5%)",
+      "Crystal Maiden (48.3%)",
+      "Earth Spirit (48.4%)"
+    ]
+  },
+  "84": {
+    "hero_name": "Ogre Magi",
+    "strong_against": [
+      "Visage (81.8%)",
+      "Medusa (63.6%)",
+      "Bristleback (63.3%)",
+      "Lycan (63.0%)",
+      "Meepo (61.1%)"
+    ],
+    "counters": [
+      "Mirana (27.8%)",
+      "Enigma (30.8%)",
+      "Pugna (32.8%)",
+      "Bane (33.3%)",
+      "Broodmother (34.4%)"
+    ]
+  },
+  "85": {
+    "hero_name": "Undying",
+    "strong_against": [
+      "Medusa (81.8%)",
+      "Tinker (65.0%)",
+      "Night Stalker (64.9%)",
+      "Spectre (64.7%)",
+      "Death Prophet (64.7%)"
+    ],
+    "counters": [
+      "Naga Siren (29.2%)",
+      "Lone Druid (30.3%)",
+      "Keeper of the Light (31.0%)",
+      "Alchemist (33.3%)",
+      "Monkey King (33.3%)"
+    ]
+  },
+  "86": {
+    "hero_name": "Rubick",
+    "strong_against": [
+      "Bloodseeker (74.1%)",
+      "Elder Titan (64.7%)",
+      "Magnus (63.0%)",
+      "Weaver (62.8%)",
+      "Phantom Assassin (62.2%)"
+    ],
+    "counters": [
+      "Chen (35.9%)",
+      "Naga Siren (37.9%)",
+      "Earth Spirit (39.1%)",
+      "Lone Druid (40.0%)",
+      "Enigma (42.0%)"
+    ]
+  },
+  "87": {
+    "hero_name": "Disruptor",
+    "strong_against": [
+      "Bloodseeker (65.2%)",
+      "Riki (64.7%)",
+      "Phantom Assassin (62.0%)",
+      "Visage (60.0%)",
+      "Phantom Lancer (57.7%)"
+    ],
+    "counters": [
+      "Kez (33.6%)",
+      "Io (34.0%)",
+      "Enigma (35.0%)",
+      "Broodmother (35.1%)",
+      "Chen (36.8%)"
+    ]
+  },
+  "88": {
+    "hero_name": "Nyx Assassin",
+    "strong_against": [
+      "Lich (77.8%)",
+      "Lycan (72.2%)",
+      "Crystal Maiden (71.1%)",
+      "Sven (70.0%)",
+      "Void Spirit (69.5%)"
+    ],
+    "counters": [
+      "Earth Spirit (23.3%)",
+      "Venomancer (36.8%)",
+      "Terrorblade (37.5%)",
+      "Bounty Hunter (37.9%)",
+      "Enchantress (38.1%)"
+    ]
+  },
+  "89": {
+    "hero_name": "Naga Siren",
+    "strong_against": [
+      "Luna (85.7%)",
+      "Batrider (73.9%)",
+      "Weaver (73.3%)",
+      "Lich (72.2%)",
+      "Undying (70.8%)"
+    ],
+    "counters": [
+      "Marci (33.3%)",
+      "Ring Master (34.8%)",
+      "Storm Spirit (35.3%)",
+      "Queen of Pain (37.5%)",
+      "Dragon Knight (38.9%)"
+    ]
+  },
+  "90": {
+    "hero_name": "Keeper of the Light",
+    "strong_against": [
+      "Troll Warlord (82.4%)",
+      "Outworld Devourer (75.0%)",
+      "Magnus (73.7%)",
+      "Undying (69.0%)",
+      "Legion Commander (68.2%)"
+    ],
+    "counters": [
+      "Chen (31.8%)",
+      "Treant Protector (38.0%)",
+      "Lycan (38.1%)",
+      "Huskar (39.3%)",
+      "Enigma (40.0%)"
+    ]
+  },
+  "91": {
+    "hero_name": "Io",
+    "strong_against": [
+      "Spirit Breaker (78.6%)",
+      "Shadow Demon (77.8%)",
+      "Slark (75.0%)",
+      "Zeus (73.3%)",
+      "Monkey King (71.4%)"
+    ],
+    "counters": [
+      "Primal Beast (31.2%)",
+      "Troll Warlord (31.6%)",
+      "Largo (33.3%)",
+      "Treant Protector (33.3%)",
+      "Storm Spirit (35.5%)"
+    ]
+  },
+  "92": {
+    "hero_name": "Visage",
+    "strong_against": [
+      "Dawnbreaker (75.0%)",
+      "Timbersaw (72.2%)",
+      "Warlock (68.8%)",
+      "Skywrath Mage (64.7%)",
+      "Ursa (63.6%)"
+    ],
+    "counters": [
+      "Ogre Magi (18.2%)",
+      "Invoker (18.8%)",
+      "Hoodwink (31.8%)",
+      "Pudge (38.1%)",
+      "Shadow Demon (38.9%)"
+    ]
+  },
+  "93": {
+    "hero_name": "Slark",
+    "strong_against": [
+      "Muerta (69.0%)",
+      "Phantom Assassin (66.7%)",
+      "Sniper (65.7%)",
+      "Magnus (65.4%)",
+      "Beastmaster (64.6%)"
+    ],
+    "counters": [
+      "Io (25.0%)",
+      "Enigma (32.0%)",
+      "Witch Doctor (32.4%)",
+      "Clockwerk (32.5%)",
+      "Leshrac (33.3%)"
+    ]
+  },
+  "94": {
+    "hero_name": "Medusa",
+    "strong_against": [
+      "Techies (68.8%)",
+      "Weaver (61.3%)",
+      "Legion Commander (61.1%)",
+      "Marci (58.3%)",
+      "Beastmaster (55.9%)"
+    ],
+    "counters": [
+      "Treant Protector (17.4%)",
+      "Undying (18.2%)",
+      "Shadow Demon (18.8%)",
+      "Razor (24.0%)",
+      "Centaur Warrunner (26.8%)"
+    ]
+  },
+  "95": {
+    "hero_name": "Troll Warlord",
+    "strong_against": [
+      "Io (68.4%)",
+      "Dark Willow (66.7%)",
+      "Viper (66.7%)",
+      "Bristleback (62.9%)",
+      "Razor (62.5%)"
+    ],
+    "counters": [
+      "Dazzle (13.3%)",
+      "Keeper of the Light (17.6%)",
+      "Earth Spirit (22.2%)",
+      "Abaddon (24.0%)",
+      "Treant Protector (29.4%)"
+    ]
+  },
+  "96": {
+    "hero_name": "Centaur Warrunner",
+    "strong_against": [
+      "Medusa (73.2%)",
+      "Spectre (68.2%)",
+      "Faceless Void (66.7%)",
+      "Bane (66.3%)",
+      "Weaver (64.3%)"
+    ],
+    "counters": [
+      "Treant Protector (31.6%)",
+      "Oracle (35.3%)",
+      "Io (35.5%)",
+      "Bounty Hunter (38.0%)",
+      "Sniper (38.1%)"
+    ]
+  },
+  "97": {
+    "hero_name": "Magnus",
+    "strong_against": [
+      "Sand King (73.7%)",
+      "Faceless Void (70.4%)",
+      "Abaddon (69.6%)",
+      "Primal Beast (65.0%)",
+      "Chaos Knight (65.0%)"
+    ],
+    "counters": [
+      "Juggernaut (26.3%)",
+      "Keeper of the Light (26.3%)",
+      "Venomancer (30.4%)",
+      "Viper (31.0%)",
+      "Ember Spirit (33.3%)"
+    ]
+  },
+  "98": {
+    "hero_name": "Timbersaw",
+    "strong_against": [
+      "Earthshaker (67.4%)",
+      "Anti-Mage (63.9%)",
+      "Troll Warlord (63.0%)",
+      "Techies (60.0%)",
+      "Drow Ranger (59.7%)"
+    ],
+    "counters": [
+      "Bloodseeker (20.0%)",
+      "Visage (27.8%)",
+      "Legion Commander (30.0%)",
+      "Nyx Assassin (33.9%)",
+      "Wraith King (34.6%)"
+    ]
+  },
+  "99": {
+    "hero_name": "Bristleback",
+    "strong_against": [
+      "Earthshaker (76.5%)",
+      "Brewmaster (66.0%)",
+      "Tinker (65.0%)",
+      "Oracle (64.7%)",
+      "Medusa (61.8%)"
+    ],
+    "counters": [
+      "Dark Seer (27.8%)",
+      "Wraith King (31.2%)",
+      "Clockwerk (33.3%)",
+      "Keeper of the Light (33.3%)",
+      "Io (33.3%)"
+    ]
+  },
+  "100": {
+    "hero_name": "Tusk",
+    "strong_against": [
+      "Legion Commander (73.5%)",
+      "Spectre (70.0%)",
+      "Oracle (65.8%)",
+      "Wraith King (64.5%)",
+      "Vengeful Spirit (62.5%)"
+    ],
+    "counters": [
+      "Treant Protector (33.0%)",
+      "Elder Titan (37.5%)",
+      "Broodmother (38.9%)",
+      "Venomancer (39.8%)",
+      "Muerta (41.0%)"
+    ]
+  },
+  "101": {
+    "hero_name": "Skywrath Mage",
+    "strong_against": [
+      "Witch Doctor (60.3%)",
+      "Faceless Void (59.6%)",
+      "Ancient Apparition (59.4%)",
+      "Necrophos (58.3%)",
+      "Broodmother (57.1%)"
+    ],
+    "counters": [
+      "Enigma (22.7%)",
+      "Lone Druid (27.3%)",
+      "Treant Protector (28.0%)",
+      "Monkey King (30.2%)",
+      "Dazzle (31.2%)"
+    ]
+  },
+  "102": {
+    "hero_name": "Abaddon",
+    "strong_against": [
+      "Phantom Lancer (88.9%)",
+      "Troll Warlord (76.0%)",
+      "Legion Commander (75.0%)",
+      "Dazzle (66.7%)",
+      "Dark Willow (65.5%)"
+    ],
+    "counters": [
+      "Wraith King (19.0%)",
+      "Kunkka (24.0%)",
+      "Magnus (30.4%)",
+      "Enchantress (33.3%)",
+      "Treant Protector (35.1%)"
+    ]
+  },
+  "103": {
+    "hero_name": "Elder Titan",
+    "strong_against": [
+      "Tusk (62.5%)",
+      "Ember Spirit (53.3%)",
+      "Shadow Fiend (46.7%)",
+      "Rubick (35.3%)",
+      "Hoodwink (12.5%)"
+    ],
+    "counters": [
+      "Hoodwink (12.5%)",
+      "Rubick (35.3%)",
+      "Shadow Fiend (46.7%)",
+      "Ember Spirit (53.3%)",
+      "Tusk (62.5%)"
+    ]
+  },
+  "104": {
+    "hero_name": "Legion Commander",
+    "strong_against": [
+      "Weaver (83.3%)",
+      "Death Prophet (73.7%)",
+      "Timbersaw (70.0%)",
+      "Venomancer (63.9%)",
+      "Luna (63.0%)"
+    ],
+    "counters": [
+      "Vengeful Spirit (23.8%)",
+      "Abaddon (25.0%)",
+      "Tusk (26.5%)",
+      "Ancient Apparition (31.2%)",
+      "Keeper of the Light (31.8%)"
+    ]
+  },
+  "105": {
+    "hero_name": "Techies",
+    "strong_against": [
+      "Chaos Knight (65.7%)",
+      "Razor (64.3%)",
+      "Outworld Devourer (63.2%)",
+      "Viper (63.1%)",
+      "Night Stalker (63.0%)"
+    ],
+    "counters": [
+      "Bounty Hunter (30.0%)",
+      "Medusa (31.2%)",
+      "Spectre (33.3%)",
+      "Oracle (35.0%)",
+      "Phoenix (35.3%)"
+    ]
+  },
+  "106": {
+    "hero_name": "Ember Spirit",
+    "strong_against": [
+      "Sniper (68.1%)",
+      "Magnus (66.7%)",
+      "Spectre (66.7%)",
+      "Phantom Assassin (65.9%)",
+      "Dark Seer (65.6%)"
+    ],
+    "counters": [
+      "Io (34.7%)",
+      "Lone Druid (40.9%)",
+      "Clinkz (41.8%)",
+      "Treant Protector (42.7%)",
+      "Slark (44.4%)"
+    ]
+  },
+  "107": {
+    "hero_name": "Earth Spirit",
+    "strong_against": [
+      "Troll Warlord (77.8%)",
+      "Nyx Assassin (76.7%)",
+      "Outworld Devourer (75.0%)",
+      "Oracle (73.3%)",
+      "Drow Ranger (72.3%)"
+    ],
+    "counters": [
+      "Alchemist (27.6%)",
+      "Enigma (29.4%)",
+      "Zeus (33.3%)",
+      "Io (33.3%)",
+      "Naga Siren (33.3%)"
+    ]
+  },
+  "108": {
+    "hero_name": "Underlord",
+    "strong_against": [
+      "Phantom Assassin (76.0%)",
+      "Ancient Apparition (68.2%)",
+      "Abaddon (62.5%)",
+      "Legion Commander (61.1%)",
+      "Wraith King (58.6%)"
+    ],
+    "counters": [
+      "Enigma (20.8%)",
+      "Treant Protector (29.9%)",
+      "Lycan (32.5%)",
+      "Drow Ranger (33.3%)",
+      "Lone Druid (33.3%)"
+    ]
+  },
+  "109": {
+    "hero_name": "Terrorblade",
+    "strong_against": [
+      "Death Prophet (82.6%)",
+      "Enigma (70.0%)",
+      "Alchemist (67.7%)",
+      "Void Spirit (66.7%)",
+      "Troll Warlord (66.7%)"
+    ],
+    "counters": [
+      "Chen (26.7%)",
+      "Lone Druid (32.0%)",
+      "Morphling (32.4%)",
+      "Witch Doctor (33.3%)",
+      "Primal Beast (35.2%)"
+    ]
+  },
+  "110": {
+    "hero_name": "Phoenix",
+    "strong_against": [
+      "Chaos Knight (73.3%)",
+      "Dark Seer (71.7%)",
+      "Death Prophet (69.0%)",
+      "Outworld Devourer (68.2%)",
+      "Marci (67.9%)"
+    ],
+    "counters": [
+      "Keeper of the Light (33.3%)",
+      "Lone Druid (34.2%)",
+      "Juggernaut (36.3%)",
+      "Bane (36.4%)",
+      "Huskar (38.5%)"
+    ]
+  },
+  "111": {
+    "hero_name": "Oracle",
+    "strong_against": [
+      "Shadow Shaman (76.2%)",
+      "Spirit Breaker (68.4%)",
+      "Skywrath Mage (68.0%)",
+      "Puck (67.6%)",
+      "Winter Wyvern (66.7%)"
+    ],
+    "counters": [
+      "Lycan (18.8%)",
+      "Earth Spirit (26.7%)",
+      "Dragon Knight (33.3%)",
+      "Venomancer (33.3%)",
+      "Lich (33.3%)"
+    ]
+  },
+  "112": {
+    "hero_name": "Winter Wyvern",
+    "strong_against": [
+      "Venomancer (66.7%)",
+      "Underlord (65.7%)",
+      "Weaver (65.0%)",
+      "Death Prophet (64.7%)",
+      "Dawnbreaker (64.5%)"
+    ],
+    "counters": [
+      "Enigma (17.6%)",
+      "Pudge (25.0%)",
+      "Treant Protector (25.9%)",
+      "Earthshaker (28.0%)",
+      "Zeus (28.2%)"
+    ]
+  },
+  "113": {
+    "hero_name": "Arc Warden",
+    "strong_against": [
+      "Sniper (68.8%)",
+      "Shadow Shaman (66.7%)",
+      "Windranger (66.7%)",
+      "Lina (56.2%)",
+      "Tusk (52.9%)"
+    ],
+    "counters": [
+      "Dragon Knight (25.0%)",
+      "Hoodwink (40.0%)",
+      "Zeus (41.2%)",
+      "Ogre Magi (41.4%)",
+      "Crystal Maiden (42.1%)"
+    ]
+  },
+  "114": {
+    "hero_name": "Monkey King",
+    "strong_against": [
+      "Night Stalker (75.0%)",
+      "Phantom Lancer (70.6%)",
+      "Skywrath Mage (69.8%)",
+      "Weaver (69.6%)",
+      "Ancient Apparition (68.8%)"
+    ],
+    "counters": [
+      "Treant Protector (27.1%)",
+      "Chen (27.6%)",
+      "Lone Druid (27.9%)",
+      "Io (28.6%)",
+      "Naga Siren (31.2%)"
+    ]
+  },
+  "119": {
+    "hero_name": "Dark Willow",
+    "strong_against": [
+      "Spectre (63.6%)",
+      "Oracle (63.2%)",
+      "Crystal Maiden (60.9%)",
+      "Zeus (60.5%)",
+      "Weaver (58.9%)"
+    ],
+    "counters": [
+      "Treant Protector (31.1%)",
+      "Bounty Hunter (32.7%)",
+      "Troll Warlord (33.3%)",
+      "Phantom Assassin (33.3%)",
+      "Abaddon (34.5%)"
+    ]
+  },
+  "120": {
+    "hero_name": "Pangolier",
+    "strong_against": [
+      "Outworld Devourer (65.5%)",
+      "Clinkz (64.4%)",
+      "Lina (62.5%)",
+      "Earthshaker (62.1%)",
+      "Spectre (61.1%)"
+    ],
+    "counters": [
+      "Largo (33.3%)",
+      "Lone Druid (34.2%)",
+      "Pugna (34.7%)",
+      "Juggernaut (35.2%)",
+      "Treant Protector (38.5%)"
+    ]
+  },
+  "121": {
+    "hero_name": "Grimstroke",
+    "strong_against": [
+      "Tinker (80.0%)",
+      "Muerta (66.7%)",
+      "Phantom Lancer (65.0%)",
+      "Abaddon (63.3%)",
+      "Dark Seer (63.2%)"
+    ],
+    "counters": [
+      "Kunkka (27.8%)",
+      "Io (30.4%)",
+      "Mirana (32.0%)",
+      "Lycan (32.0%)",
+      "Windranger (33.3%)"
+    ]
+  },
+  "123": {
+    "hero_name": "Hoodwink",
+    "strong_against": [
+      "Elder Titan (87.5%)",
+      "Phantom Assassin (70.3%)",
+      "Visage (68.2%)",
+      "Oracle (64.9%)",
+      "Huskar (62.0%)"
+    ],
+    "counters": [
+      "Bloodseeker (35.3%)",
+      "Keeper of the Light (37.5%)",
+      "Ancient Apparition (38.7%)",
+      "Magnus (39.3%)",
+      "Meepo (39.4%)"
+    ]
+  },
+  "126": {
+    "hero_name": "Void Spirit",
+    "strong_against": [
+      "Tinker (71.4%)",
+      "Zeus (69.6%)",
+      "Witch Doctor (67.6%)",
+      "Phantom Assassin (63.0%)",
+      "Wraith King (62.5%)"
+    ],
+    "counters": [
+      "Chaos Knight (23.5%)",
+      "Dark Seer (27.6%)",
+      "Nyx Assassin (30.5%)",
+      "Lycan (31.0%)",
+      "Naga Siren (32.0%)"
+    ]
+  },
+  "128": {
+    "hero_name": "Snapfire",
+    "strong_against": [
+      "Meepo (70.6%)",
+      "Tinker (66.7%)",
+      "Phantom Lancer (63.3%)",
+      "Sand King (62.9%)",
+      "Spectre (62.9%)"
+    ],
+    "counters": [
+      "Bane (35.2%)",
+      "Lone Druid (38.6%)",
+      "Clinkz (39.6%)",
+      "Bounty Hunter (40.0%)",
+      "Keeper of the Light (40.2%)"
+    ]
+  },
+  "129": {
+    "hero_name": "Mars",
+    "strong_against": [
+      "Chaos Knight (65.0%)",
+      "Drow Ranger (58.2%)",
+      "Slark (57.8%)",
+      "Tinker (57.8%)",
+      "Dawnbreaker (55.8%)"
+    ],
+    "counters": [
+      "Spectre (32.0%)",
+      "Monkey King (32.9%)",
+      "Lone Druid (35.3%)",
+      "Chen (35.7%)",
+      "Treant Protector (35.8%)"
+    ]
+  },
+  "131": {
+    "hero_name": "Ring Master",
+    "strong_against": [
+      "Outworld Devourer (66.7%)",
+      "Naga Siren (65.2%)",
+      "Chaos Knight (65.0%)",
+      "Troll Warlord (64.3%)",
+      "Io (61.5%)"
+    ],
+    "counters": [
+      "Lycan (27.6%)",
+      "Alchemist (28.3%)",
+      "Lone Druid (29.7%)",
+      "Chen (32.8%)",
+      "Broodmother (33.3%)"
+    ]
+  },
+  "135": {
+    "hero_name": "Dawnbreaker",
+    "strong_against": [
+      "Wraith King (66.7%)",
+      "Medusa (65.8%)",
+      "Phantom Lancer (64.3%)",
+      "Brewmaster (63.6%)",
+      "Vengeful Spirit (62.8%)"
+    ],
+    "counters": [
+      "Chen (19.0%)",
+      "Visage (25.0%)",
+      "Lycan (25.9%)",
+      "Treant Protector (30.2%)",
+      "Faceless Void (34.6%)"
+    ]
+  },
+  "136": {
+    "hero_name": "Marci",
+    "strong_against": [
+      "Chaos Knight (73.3%)",
+      "Bounty Hunter (72.2%)",
+      "Naga Siren (66.7%)",
+      "Earth Spirit (63.6%)",
+      "Witch Doctor (63.3%)"
+    ],
+    "counters": [
+      "Clinkz (30.4%)",
+      "Phoenix (32.1%)",
+      "Earthshaker (36.0%)",
+      "Terrorblade (36.6%)",
+      "Ancient Apparition (37.5%)"
+    ]
+  },
+  "137": {
+    "hero_name": "Primal Beast",
+    "strong_against": [
+      "Tinker (71.4%)",
+      "Ancient Apparition (69.0%)",
+      "Io (68.8%)",
+      "Death Prophet (65.4%)",
+      "Terrorblade (64.8%)"
+    ],
+    "counters": [
+      "Sniper (28.6%)",
+      "Lycan (31.2%)",
+      "Largo (34.5%)",
+      "Magnus (35.0%)",
+      "Bane (37.5%)"
+    ]
+  },
+  "138": {
+    "hero_name": "Muerta",
+    "strong_against": [
+      "Medusa (67.9%)",
+      "Phantom Assassin (66.7%)",
+      "Dark Seer (63.2%)",
+      "Lina (62.5%)",
+      "Lich (61.0%)"
+    ],
+    "counters": [
+      "Slark (31.0%)",
+      "Grimstroke (33.3%)",
+      "Lone Druid (33.3%)",
+      "Sand King (37.8%)",
+      "Primal Beast (38.5%)"
+    ]
+  },
+  "145": {
+    "hero_name": "Kez",
+    "strong_against": [
+      "Sand King (71.4%)",
+      "Troll Warlord (69.6%)",
+      "Tinker (66.7%)",
+      "Disruptor (66.4%)",
+      "Medusa (65.7%)"
+    ],
+    "counters": [
+      "Enigma (25.0%)",
+      "Earthshaker (33.3%)",
+      "Lone Druid (35.9%)",
+      "Keeper of the Light (36.5%)",
+      "Wraith King (36.8%)"
+    ]
+  },
+  "155": {
+    "hero_name": "Largo",
+    "strong_against": [
+      "Sand King (77.5%)",
+      "Silencer (69.8%)",
+      "Tinker (69.2%)",
+      "Queen of Pain (68.5%)",
+      "Pangolier (66.7%)"
+    ],
+    "counters": [
+      "Vengeful Spirit (28.6%)",
+      "Venomancer (38.2%)",
+      "Night Stalker (40.0%)",
+      "Huskar (40.5%)",
+      "Enigma (41.7%)"
+    ]
+  }
+}

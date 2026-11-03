@@ -198,7 +198,7 @@ class DotaItemGraph:
         mid_r = get_ranked("mid_game_items")
         late_r = get_ranked("late_game_items")
 
-        # 1. Boot choice (resolved early to protect early game from raw boots)
+        # 1. Boot choice: Strictly ONE boot for the entire hero build
         chosen_boot = None
         for k, _ in early_r + start_r:
             if self.is_completed_boot(k):
@@ -215,6 +215,8 @@ class DotaItemGraph:
                 continue
             if self.is_raw_component(k) and not self.is_standalone_item(k):
                 continue
+            if self.is_completed_boot(k) or k == "hand_of_midas":
+                continue
             if cost >= 2200 or it.get("created"):
                 if k not in late_candidates:
                     late_candidates.append(k)
@@ -225,6 +227,7 @@ class DotaItemGraph:
 
         # 3. Mid Game Core Spikes (15-30m)
         mid_candidates = []
+        has_major_farming_item = any(x in late_keys for x in ["radiance", "battle_fury"])
         for k, _ in mid_r:
             it = self.key_to_item.get(k, {})
             cost = it.get("cost", 0)
@@ -234,25 +237,37 @@ class DotaItemGraph:
                 continue
             if self.is_raw_component(k) and not self.is_standalone_item(k):
                 continue
+            # NEVER allow any boot in mid game (exactly 1 boot in early game)
+            if self.is_completed_boot(k):
+                continue
+            # NEVER allow Hand of Midas as a 4th/5th mid item, especially with Radiance/Battle Fury
+            if k == "hand_of_midas":
+                continue
             if cost >= 1400 or it.get("created"):
                 if k not in mid_candidates:
                     mid_candidates.append(k)
+                    if k in ["radiance", "battle_fury"]:
+                        has_major_farming_item = True
         mid_keys = self.absorb_subcomponents(mid_candidates)[:4]
         mid_subcomps = set()
         for k in mid_keys:
             mid_subcomps.update(self.subcomponents.get(k, set()))
 
-        # 4. Early Game Core (0-15m)
+        # 4. Early Game Core (0-15m) - Exactly ONE boot + early core items
         all_higher_subcomps = late_subcomps.union(mid_subcomps).union(boot_subs)
         early_candidates = [chosen_boot] if chosen_boot else []
         for k, _ in early_r:
-            if k == chosen_boot or k in early_candidates:
+            # Skip if already chosen boot or another boot (strict 1 boot rule!)
+            if self.is_completed_boot(k):
+                continue
+            if k in early_candidates or k in late_keys or k in mid_keys:
                 continue
             if self.is_valid_start_item(k) or k in all_higher_subcomps:
                 continue
-            if k in late_keys or k in mid_keys:
-                continue
             if self.is_raw_component(k) and not self.is_standalone_item(k):
+                continue
+            # Only allow Midas in early game if hero does not build Radiance/Battle Fury
+            if k == "hand_of_midas" and has_major_farming_item:
                 continue
             it = self.key_to_item.get(k, {})
             if it.get("created") or self.is_standalone_item(k) or it.get("cost", 0) >= 400:
@@ -270,7 +285,7 @@ class DotaItemGraph:
 
         def to_dnames(keys: List[str]) -> str:
             names = [self.key_to_item[k]["dname"] for k in keys if k in self.key_to_item and self.key_to_item[k]["dname"]]
-            return ", ".join(names) if names else "Standard meta items"
+            return ", ".join(names) if names else "Situational meta items"
 
         return {
             "starting": to_dnames(start_keys),
@@ -322,6 +337,25 @@ def get_current_patch_name() -> str:
     return "Current Competitive Meta"
 
 
+def fetch_json_with_retry(url: str, max_retries: int = 3, initial_delay: float = 1.0) -> Any:
+    """Fetch OpenDota JSON with exponential backoff on HTTP 429 rate limits."""
+    delay = initial_delay
+    for attempt in range(max_retries):
+        try:
+            res = requests.get(url, headers=HEADERS, timeout=12)
+            if res.status_code == 200:
+                return res.json()
+            elif res.status_code == 429:
+                print(f"Notice: OpenDota rate limit (429) on {url}. Backing off {delay}s...")
+                time.sleep(delay)
+                delay *= 2
+            else:
+                time.sleep(0.3)
+        except Exception:
+            time.sleep(0.3)
+    return None
+
+
 def parse_hero_meta_and_matchups(
     item_graph: DotaItemGraph, 
     heroes_dict: Dict[int, Dict[str, Any]],
@@ -348,11 +382,10 @@ def parse_hero_meta_and_matchups(
         roles = ", ".join(hero.get("roles", []))
 
         # 1. Item popularity resolved via Item Graph
-        try:
-            pop_res = requests.get(f"{BASE_URL}/heroes/{hid}/itemPopularity", headers=HEADERS, timeout=10)
-            pop_data = pop_res.json() if pop_res.status_code == 200 else {}
-        except Exception:
-            pop_data = {}
+        pop_data = fetch_json_with_retry(f"{BASE_URL}/heroes/{hid}/itemPopularity")
+        if not pop_data or not isinstance(pop_data, dict) or not pop_data.get("early_game_items"):
+            print(f"Skipping {name}: incomplete or rate-limited itemPopularity.")
+            continue
 
         build = item_graph.resolve_hero_build(pop_data)
         start_items = build["starting"]
@@ -361,10 +394,8 @@ def parse_hero_meta_and_matchups(
         late_items = build["late"]
 
         # 2. Matchups
-        try:
-            m_res = requests.get(f"{BASE_URL}/heroes/{hid}/matchups", headers=HEADERS, timeout=10)
-            m_data = m_res.json() if m_res.status_code == 200 else []
-        except Exception:
+        m_data = fetch_json_with_retry(f"{BASE_URL}/heroes/{hid}/matchups")
+        if not m_data or not isinstance(m_data, list):
             m_data = []
 
         valid_matchups = []
@@ -402,7 +433,7 @@ Verified High-MMR Item Build Progression (OpenDota Match Data):
 • Countered By (Low Win Rate / Struggles Against): {weak_str}"""
 
         chunks.append((cat, title, content))
-        time.sleep(0.12)  # Respect OpenDota rate limits
+        time.sleep(0.3)  # Respect OpenDota rate limits
 
     print(f"Generated {len(chunks)} Hero Meta & Matchup documents.")
     return chunks
