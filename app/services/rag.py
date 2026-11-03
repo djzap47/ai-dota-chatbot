@@ -59,7 +59,9 @@ def search_dota_knowledge(query: str, limit: int = 4, threshold: float = 0.45) -
             stop_words = {
                 "what", "should", "build", "builds", "item", "items", "best", "play", "guide",
                 "hero", "heroes", "dota", "patch", "current", "when", "with", "does", "from",
-                "game", "like", "order", "meta", "timing", "timings", "tell", "about"
+                "game", "like", "order", "meta", "timing", "timings", "tell", "about",
+                "buy", "buying", "get", "getting", "purchase", "purchases", "suggest",
+                "give", "for", "the", "you", "can", "how", "make", "take", "taking", "show"
             }
             words = [
                 w.strip().lower() for w in re.findall(r'[a-zA-Z0-9_\-]+', query)
@@ -68,19 +70,25 @@ def search_dota_knowledge(query: str, limit: int = 4, threshold: float = 0.45) -
 
             for word in words:
                 pattern = f"%{word}%"
+                pattern_nospaces = f"%{word.replace(' ', '')}%"
                 match_sql = text("""
                     SELECT hero_name, section_title, content, 1.0 AS similarity
                     FROM hero_documents
-                    WHERE hero_name ILIKE :pattern OR section_title ILIKE :pattern
+                    WHERE hero_name ILIKE :pattern 
+                       OR section_title ILIKE :pattern
+                       OR REPLACE(LOWER(hero_name), ' ', '') ILIKE :pattern_nospaces
                     ORDER BY updated_at DESC
-                    LIMIT 2;
+                    LIMIT 3;
                 """)
-                rows = db.execute(match_sql, {"pattern": pattern}).mappings().all()
+                rows = db.execute(match_sql, {
+                    "pattern": pattern,
+                    "pattern_nospaces": pattern_nospaces
+                }).mappings().all()
                 for row in rows:
                     if row["section_title"] not in seen_titles:
                         results.append(dict(row))
                         seen_titles.add(row["section_title"])
-                if len(results) >= 2:
+                if len(results) >= 3:
                     break
 
             # 2. Vector Cosine Similarity Search
@@ -91,13 +99,12 @@ def search_dota_knowledge(query: str, limit: int = 4, threshold: float = 0.45) -
                 SELECT hero_name, section_title, content,
                        1 - (embedding <=> CAST(:query_vec AS vector)) AS similarity
                 FROM hero_documents
-                WHERE 1 - (embedding <=> CAST(:query_vec AS vector)) > :threshold
-                ORDER BY similarity DESC
+                WHERE embedding IS NOT NULL
+                ORDER BY embedding <=> CAST(:query_vec AS vector) ASC
                 LIMIT :limit;
             """)
             vec_rows = db.execute(vec_sql, {
                 "query_vec": vector_str,
-                "threshold": threshold,
                 "limit": limit
             }).mappings().all()
 
