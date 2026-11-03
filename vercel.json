@@ -1,8 +1,8 @@
 {
   "functions": {
     "api/index.py": {
-      "maxDuration": 60,
-      "includeFiles": "app/**"
+      "maxDuration": 300,
+      "includeFiles": "{app/**,scripts/**}"
     }
   },
   "rewrites": [

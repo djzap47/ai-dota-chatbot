@@ -74,17 +74,23 @@ def get_heroes_dict() -> Dict[int, Dict[str, Any]]:
 
 def parse_hero_meta_and_matchups(
     items_dict: Dict[int, Dict[str, Any]], 
-    heroes_dict: Dict[int, Dict[str, Any]]
+    heroes_dict: Dict[int, Dict[str, Any]],
+    hero_limit: Optional[int] = None
 ) -> List[Tuple[str, str, str]]:
     """
-    For all heroes, fetch:
+    For heroes, fetch:
     1. /heroes/{hero_id}/itemPopularity (Starting, Early, Mid, Late item distributions)
     2. /heroes/{hero_id}/matchups (Hardest counters & favorable matchups)
     """
     print("\n--- 1. Parsing Hero Meta, Item Popularity & Matchup Counters ---")
     chunks = []
 
-    for hid, hero in heroes_dict.items():
+    target_heroes = list(heroes_dict.items())
+    if hero_limit is not None and hero_limit > 0:
+        target_heroes = target_heroes[:hero_limit]
+        print(f"Limiting to first {hero_limit} heroes for fast execution.")
+
+    for hid, hero in target_heroes:
         name = hero.get("localized_name")
         attr = str(hero.get("primary_attr", "")).upper()
         attack = hero.get("attack_type", "")
@@ -319,7 +325,7 @@ def embed_batch_with_retry(batch: List[str], max_retries: int = 5) -> List[List[
     raise RuntimeError("Failed to embed batch after retries.")
 
 
-def run_meta_and_pros_sync():
+def run_meta_and_pros_sync(hero_limit: Optional[int] = None) -> int:
     print("=" * 65)
     print("STARTING 2026 OPENDOTA META & PRO PLAYER INGESTION (PATCH 7.41+)")
     print("=" * 65)
@@ -329,7 +335,7 @@ def run_meta_and_pros_sync():
 
     all_chunks = []
     # 1. Hero Meta & Matchups
-    all_chunks.extend(parse_hero_meta_and_matchups(items_dict, heroes_dict))
+    all_chunks.extend(parse_hero_meta_and_matchups(items_dict, heroes_dict, hero_limit=hero_limit))
     # 2. Pro Player Matches
     all_chunks.extend(parse_pro_player_matches(items_dict, heroes_dict))
 
@@ -361,6 +367,7 @@ def run_meta_and_pros_sync():
         print("\n" + "=" * 65)
         print(f"SUCCESS: 2026 META SYNC COMPLETE! Total indexed chunks in DB: {total_in_db}")
         print("=" * 65)
+        return len(all_chunks)
     finally:
         db.close()
 

@@ -139,16 +139,27 @@ def get_top_heroes(
     return top_stats
 
 
+def verify_auth(authorization: Optional[str]):
+    """Verify authorization header against CRON_SECRET (accepts raw secret or Bearer token)."""
+    if not settings.CRON_SECRET:
+        return
+    token = (authorization or "").strip()
+    if token.startswith("Bearer "):
+        token = token[7:].strip()
+    if token != settings.CRON_SECRET:
+        raise HTTPException(
+            status_code=401,
+            detail="Unauthorized. Enter your CRON_SECRET or 'Bearer <CRON_SECRET>' in the Authorization header."
+        )
+
+
 @app.get("/api/cron", response_model=ScraperResponse, tags=["Scraper"])
-async def cron_scraper(authorization: Optional[str] = Header(None)):
+async def cron_scraper(authorization: Optional[str] = Header(None, description="CRON_SECRET or Bearer token")):
     """
     Daily cron endpoint intended for Vercel Cron.
     Secured by comparing Authorization header against CRON_SECRET if configured.
     """
-    if settings.CRON_SECRET:
-        expected = f"Bearer {settings.CRON_SECRET}"
-        if authorization != expected:
-            raise HTTPException(status_code=401, detail="Unauthorized cron request.")
+    verify_auth(authorization)
 
     try:
         updated_count = await asyncio.to_thread(run_scraper_task)
@@ -163,15 +174,12 @@ async def cron_scraper(authorization: Optional[str] = Header(None)):
 
 
 @app.post("/scraper/run", response_model=ScraperResponse, tags=["Scraper"])
-async def manual_scraper(authorization: Optional[str] = Header(None)):
+async def manual_scraper(authorization: Optional[str] = Header(None, description="CRON_SECRET or Bearer token")):
     """
     Manually trigger data scraper to update hero stats from STRATZ API.
-    Secured with Bearer token against CRON_SECRET if configured.
+    Can be executed directly from Swagger UI (/docs).
     """
-    if settings.CRON_SECRET:
-        expected = f"Bearer {settings.CRON_SECRET}"
-        if authorization != expected:
-            raise HTTPException(status_code=401, detail="Unauthorized scraper request. Provide Bearer token.")
+    verify_auth(authorization)
 
     try:
         updated_count = await asyncio.to_thread(run_scraper_task)
@@ -186,23 +194,20 @@ async def manual_scraper(authorization: Optional[str] = Header(None)):
 
 
 @app.post("/scraper/sync-meta", response_model=ScraperResponse, tags=["Scraper"])
-async def sync_opendota_meta(authorization: Optional[str] = Header(None)):
+async def sync_opendota_meta(authorization: Optional[str] = Header(None, description="CRON_SECRET or Bearer token")):
     """
-    Trigger 2026 OpenDota Meta & Pro Player match sync (Patch 7.41+).
-    Secured with Bearer token against CRON_SECRET if configured.
+    Trigger full 2026 OpenDota Meta & Pro Player match sync (Patch 7.41+).
+    Can be executed directly from Swagger UI (/docs). Runs on Vercel up to 300s.
     """
-    if settings.CRON_SECRET:
-        expected = f"Bearer {settings.CRON_SECRET}"
-        if authorization != expected:
-            raise HTTPException(status_code=401, detail="Unauthorized request. Provide Bearer token.")
+    verify_auth(authorization)
 
     try:
         from scripts.sync_opendota_meta_and_pros import run_meta_and_pros_sync
-        await asyncio.to_thread(run_meta_and_pros_sync)
+        synced_count = await asyncio.to_thread(run_meta_and_pros_sync)
         return ScraperResponse(
             status="success",
-            message="Successfully ingested 2026 OpenDota meta & pro player match data into pgvector.",
-            updated_count=1
+            message=f"Successfully ingested {synced_count} 2026 OpenDota meta & pro player match chunks into pgvector.",
+            updated_count=synced_count
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Meta sync failed: {str(e)}")
