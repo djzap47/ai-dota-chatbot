@@ -109,14 +109,25 @@ TALENT TREE:
         chunks.append((cat_kit, title_kit, content_kit))
 
         # Document 2: Item Build Progression & Counters
-        b = hero_builds.get(hid_str, {})
+        b_data = hero_builds.get(hid_str, {})
+        build_list = b_data.get("builds", [])
         m = hero_matchups.get(hid_str, {})
 
-        start_str = b.get("starting", "Quelling Blade, Tango, Iron Branch, Magic Stick")
-        early_str = b.get("early", "Phase Boots, Magic Wand")
-        mid_str = b.get("mid", "Armlet of Mordiggian, Radiance, Black King Bar")
-        late_str = b.get("late", "Assault Cuirass, Abyssal Blade, Nullifier")
+        build_blocks = []
+        for idx, build in enumerate(build_list, 1):
+            b_name = build.get("name", f"Build {idx}")
+            s_items = build.get("starting", "Quelling Blade, Tango, Iron Branch, Magic Stick")
+            e_items = build.get("early", "Phase Boots, Magic Wand")
+            m_items = build.get("mid", "Black King Bar, Manta Style")
+            l_items = build.get("late", "Eye of Skadi, Butterfly, Refresher Orb")
+            
+            build_blocks.append(f"""Build {idx} ({b_name}):
+• Starting Items: {s_items}
+• Early Game: {e_items}
+• Mid Game Core: {m_items}
+• Late Game: {l_items}""")
 
+        build_text = "\n\n".join(build_blocks)
         strong_str = ", ".join(m.get("strong_against", [])) if m.get("strong_against") else "High win-rate against favorable heroes"
         weak_str = ", ".join(m.get("counters", [])) if m.get("counters") else "Struggles against heavy control/disables"
 
@@ -125,11 +136,8 @@ TALENT TREE:
         content_meta = f"""Hero Meta & Item Build Guide: {hname}
 Attribute: {attr} | Attack Type: {attack} | Roles: {roles}
 
-Verified High-MMR Item Build Progression:
-• Starting Items: {start_str}
-• Early Game Core (0-15m): {early_str}
-• Mid Game Core Spikes (15-30m): {mid_str}
-• Late Game / Extensions (30m+): {late_str}
+High-MMR Item Build Progression:
+{build_text}
 
 Matchups & Counters:
 • Strong Against (High Win Rate): {strong_str}
