@@ -14,10 +14,6 @@
   <a href="https://ai-dota-chatbot.vercel.app/docs">API docs</a>
   &nbsp;·&nbsp;
   <a href="#quick-start">Run locally</a>
-  &nbsp;·&nbsp;
-  <a href="CONTRIBUTING.md">Contribute</a>
-  &nbsp;·&nbsp;
-  <a href="SECURITY.md">Security</a>
 </p>
 
 <p align="center">
@@ -72,7 +68,7 @@ flowchart LR
     Ingest --> DB
 ```
 
-The chat service retrieves game knowledge, adds the stored statistics to its system prompt, and makes one Gemini chat call. It uses LangChain's Google integration; it does not ask an SQL agent to write queries. See [architecture and behavior](docs/architecture.md) for the request flow, storage model, and limitations.
+FastAPI serves the browser interface and API. The chat service retrieves game knowledge from PostgreSQL, adds stored statistics, and makes one Gemini chat call through LangChain's Google integration. There is no frontend build step. If statistics or retrieval are unavailable, the model may answer with less context.
 
 ## Quick start
 
@@ -191,7 +187,7 @@ Successful responses contain `reply` and `status` fields. Chat accepts up to 2,0
 2. Install the pinned dependencies with `python -m pip install -r requirements.txt`, configure the variables in `.env.example`, and redeploy.
 3. Run `python scripts/bulk_ingest_all_dota_knowledge.py` locally to rebuild the knowledge index and tag vectors with `EMBEDDING_MODEL`. Existing untagged vectors are excluded from semantic search; their text remains available to keyword search.
 
-The application does not run migrations automatically. Chat fails closed with HTTP 503 if the budget table is missing or inaccessible. `CHAT_REQUESTS_PER_MINUTE` is shared across all instances, so one caller can exhaust the public demo's budget; use provider spending limits and hosting controls as well. See [architecture](docs/architecture.md) for configuration details.
+The application does not run migrations automatically. Chat returns HTTP 503 if the budget table is missing or inaccessible. Changing `EMBEDDING_MODEL` also requires rebuilding the index; vectors from different models are not compared.
 
 ## Deploy to Vercel
 
@@ -202,48 +198,32 @@ The application does not run migrations automatically. Chat fails closed with HT
 
 The configuration routes requests to `api/index.py` and schedules `/api/cron` with `0 0 * * *` (daily at 00:00 UTC). Vercel sends the configured cron secret in the authorization header; see [Vercel's cron documentation](https://vercel.com/docs/cron-jobs/manage-cron-jobs). The cron refreshes **statistics only**. Run bulk ingestion locally because embedding the complete dataset may exceed a function's execution limit.
 
-## Repository map
-
-```text
-api/index.py                    FastAPI routes and web entry point
-app/
-  config.py                     Environment settings
-  database.py                   SQLAlchemy engine and sessions
-  models.py, schemas.py          Database models and API schemas
-  services/                     Chat, retrieval, and STRATZ sync
-  templates/index.html          Browser chat UI (HTML, CSS, JavaScript)
-  data/                         Bundled game knowledge and build datasets
-scripts/                        Ingestion, data refresh, and build generation
-tests/                          Offline API, configuration, and data checks
-docs/                           Architecture and data-maintenance guides
-migrations/                     SQL upgrades for existing installations
-.github/                        CI workflow and contribution templates
-bot.py                          Terminal chat client
-requirements.in                 Direct dependencies and security minimums
-requirements.txt                Pinned cross-platform dependency lock
-schema.sql                      Database initialization
-vercel.json                     Deployment routes and cron schedule
-```
-
-## Development and data maintenance
+## Working on the project
 
 ```bash
 python -m unittest discover -s tests -v
 python -m compileall -q api app scripts bot.py
+git diff --check
 ```
 
 Offline tests use local datasets and mocked services, requiring no API keys. GitHub Actions runs them on Python 3.12 and 3.14, audits the dependency lock, and runs PostgreSQL/pgvector integration tests for rollback, concurrent rate limiting, model isolation, and RLS. Those integration tests are skipped locally unless `TEST_DATABASE_URL` points to a disposable database named `dota_test`.
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow and [data maintenance](docs/data-maintenance.md) before running refresh or migration scripts. All ingestion paths use one configured embedding model and atomic document replacement. The optional scripts replace different categories of knowledge; review their scope first.
+For dependency updates, edit `requirements.in`, regenerate the pinned `requirements.txt` with uv, then reinstall and run the checks above:
 
-See the [changelog](CHANGELOG.md) for pending changes and [security policy](SECURITY.md) for reporting vulnerabilities.
+```bash
+uv pip compile requirements.in --universal --python-version 3.12 --upgrade --output-file requirements.txt
+python -m pip install -r requirements.txt
+python -m pip check
+```
+
+Read [data maintenance](docs/data-maintenance.md) before refreshing datasets or rebuilding the index. It explains which scripts overwrite files or replace database contents. For bugs or incorrect answers, open an issue with the question, result, and steps to reproduce. Keep API keys and database credentials out of reports.
 
 ## Current limits
 
 - Statistics reflect the latest successful sync, with a 10-minute chat cache. Game knowledge and curated builds can lag behind patches.
 - Generated answers can be wrong. Build rules are prompt instructions and heuristics, not a gameplay correctness guarantee.
 - There is no player-account tracking, match-history dashboard, persistent chat memory, or user authentication. Chat has a shared request budget rather than individual user quotas.
-- The public chat endpoint uses the deployer's Gemini quota. Service availability and usage limits depend on the configured providers.
+- The public chat endpoint uses the deployer's Gemini quota. Its request budget is shared across all visitors, so one caller can use it up. It is not a monthly spending cap; configure provider spending limits separately.
 - `/health` checks database connectivity only; it does not verify table contents or access to Gemini and STRATZ.
 
 ## Credits and license
