@@ -1,4 +1,5 @@
 from sqlalchemy import create_engine
+from sqlalchemy.engine import make_url
 from sqlalchemy.orm import declarative_base, sessionmaker, Session
 from sqlalchemy.pool import NullPool
 from typing import Generator
@@ -20,11 +21,8 @@ def get_engine():
         # Disable prepared statements for psycopg 3 to prevent DuplicatePreparedStatement
         # errors ("prepared statement _pg3_0 already exists") in Supabase transaction pooler mode
         connect_args = {}
-        try:
-            import psycopg  # psycopg v3
+        if make_url(db_url).get_dialect().driver == "psycopg":
             connect_args["prepare_threshold"] = None
-        except ImportError:
-            pass
 
         _engine = create_engine(
             db_url,

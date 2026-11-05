@@ -1,5 +1,7 @@
 # Environments
 .env
+.env.*
+!.env.example
 .venv/
 venv/
 ENV/
@@ -10,11 +12,10 @@ __pycache__/
 *$py.class
 *.so
 
-# Django
+# Local runtime files
 *.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+*.sqlite3
+*.sqlite3-journal
 
 # IDEs / Editors
 .idea/
@@ -46,3 +47,4 @@ Thumbs.db
 dist/
 build/
 scratch/
+.vercel/

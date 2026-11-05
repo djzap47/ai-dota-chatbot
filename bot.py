@@ -1,6 +1,6 @@
 """
 Local CLI Chatbot for AI Dota 2 Tracker.
-Allows interacting with the LangChain SQL Agent directly from the terminal.
+Uses the same Gemini and knowledge-retrieval pipeline as the web chat.
 Usage:
     python bot.py
 """

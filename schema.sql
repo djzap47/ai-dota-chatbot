@@ -1,6 +1,9 @@
 -- Run this script in your Supabase SQL Editor if creating tables from scratch
 -- or running schema updates.
 
+-- pgvector must be enabled before creating vector columns and indexes.
+CREATE EXTENSION IF NOT EXISTS vector;
+
 -- Table: heroes
 -- Stores base hero information with official Valve/STRATZ roles
 CREATE TABLE IF NOT EXISTS heroes (
@@ -23,7 +26,7 @@ CREATE TABLE IF NOT EXISTS hero_stats (
 );
 
 -- Table: hero_documents
--- Stores chunked Liquipedia knowledge with 768-dimension vector embeddings
+-- Stores hero, item, and mechanics knowledge with 768-dimension embeddings
 CREATE TABLE IF NOT EXISTS hero_documents (
     id SERIAL PRIMARY KEY,
     hero_id INTEGER REFERENCES heroes(id) ON DELETE CASCADE,

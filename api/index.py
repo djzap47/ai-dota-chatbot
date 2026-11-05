@@ -30,7 +30,7 @@ from app.services.stratz import run_scraper_task
 
 app = FastAPI(
     title="AI Dota 2 Tracker API",
-    description="FastAPI backend and Web UI for Dota 2 analytics and AI chatbot powered by Gemini 2.5 Flash and STRATZ.",
+    description="Dota 2 web chat and analytics API powered by Google Gemini, hybrid knowledge retrieval, and STRATZ statistics.",
     version="2.0.0"
 )
 
@@ -106,7 +106,7 @@ def health_check():
 async def chat(request: ChatRequest):
     """
     Ask any Dota 2 question or statistical query.
-    Powered by Google Gemini 2.5 Flash and LangChain SQL Agent.
+    Powered by Google Gemini with retrieved game knowledge and stored STRATZ statistics.
     """
     if not request.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be empty.")
