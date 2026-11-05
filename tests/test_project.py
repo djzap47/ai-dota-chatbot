@@ -82,6 +82,9 @@ class ConfigurationTests(unittest.TestCase):
 
 class ApiTests(unittest.TestCase):
     def setUp(self):
+        budget_patch = patch.object(index, "consume_chat_budget")
+        budget_patch.start()
+        self.addCleanup(budget_patch.stop)
         self.client = TestClient(index.app)
         self.addCleanup(self.client.close)
         secret_patch = patch.object(index.settings, "CRON_SECRET", "test-secret")
@@ -139,7 +142,7 @@ class ApiTests(unittest.TestCase):
         session.execute.side_effect = RuntimeError("database unavailable")
         with patch.object(index, "SessionLocal", return_value=session):
             response = self.client.get("/health")
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 503)
         self.assertEqual(response.json()["status"], "degraded")
         session.close.assert_called_once()
 

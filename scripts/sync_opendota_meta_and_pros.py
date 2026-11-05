@@ -13,9 +13,9 @@ from typing import List, Dict, Any, Tuple, Optional
 # Ensure project root is in sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from sqlalchemy import text
-from app.database import SessionLocal
-from app.services.rag import get_genai_client
+from app.services.embeddings import embed_batch_with_retry
+from app.services.knowledge_store import replace_documents
+
 
 HEADERS = {
     "User-Agent": "DotaBotTracker/2026.1 (OpenDota 7.41 meta sync; contact: study@example.com)"
@@ -583,7 +583,7 @@ def parse_pro_player_matches(
         timeline_summary = " • " + "\n • ".join(timeline_items[:10]) if timeline_items else "Timeline not recorded"
 
         cat = f"Pro Match: {pname} on {hero_name}"
-        title = f"Pro Build: {hero_name} by {pname} ({team}) — {patch_name}"
+        title = f"Pro Build: {hero_name} by {pname} ({team}) — {patch_name}, match {match_id}"
 
         content = f"""Verified Pro Match Record: {hero_name} played by {pname} ({team}) — {patch_name}
 Result: {result_str} (KDA: {k}/{d}/{a} | GPM: {gpm}) | Match ID: {match_id}
@@ -601,41 +601,6 @@ Final Items Slotted:
     return chunks
 
 
-def embed_batch_with_retry(batch: List[str], max_retries: int = 5) -> List[List[float]]:
-    client = get_genai_client()
-    models_to_try = ["gemini-embedding-2-preview", "gemini-embedding-2", "gemini-embedding-001"]
-    individual_embeddings = []
-
-    for text_item in batch:
-        item_emb = None
-        for model_name in models_to_try:
-            delay = 1.0
-            for attempt in range(max_retries):
-                try:
-                    res = client.models.embed_content(
-                        model=model_name,
-                        contents=text_item,
-                        config={"output_dimensionality": 768}
-                    )
-                    item_emb = res.embeddings[0].values
-                    break
-                except Exception as e:
-                    err_str = str(e)
-                    if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str or "quota" in err_str.lower():
-                        time.sleep(delay)
-                        delay *= 1.5
-                    elif "404" in err_str or "NOT_FOUND" in err_str or "not found" in err_str.lower():
-                        break
-                    else:
-                        time.sleep(1.0)
-            if item_emb is not None:
-                break
-        if item_emb is not None:
-            individual_embeddings.append(item_emb)
-        else:
-            raise RuntimeError(f"Failed to embed item with all models: {batch}")
-
-    return individual_embeddings
 
 
 def run_meta_and_pros_sync(hero_limit: Optional[int] = None) -> int:
@@ -657,33 +622,11 @@ def run_meta_and_pros_sync(hero_limit: Optional[int] = None) -> int:
     print(f"TOTAL PARSED META CHUNKS ({patch_name}): {len(all_chunks)}")
     print("=" * 65)
 
-    db = SessionLocal()
-    try:
-        batch_size = 10
-        for i in range(0, len(all_chunks), batch_size):
-            batch = all_chunks[i:i + batch_size]
-            texts_to_embed = [f"{c[1]}\n{c[2]}" for c in batch]
-            embeddings = embed_batch_with_retry(texts_to_embed)
-
-            for (cat, title, content), emb in zip(batch, embeddings):
-                # Clean up old version if exists
-                db.execute(text("DELETE FROM hero_documents WHERE hero_name = :h"), {"h": cat})
-                vector_str = "[" + ",".join(map(str, emb)) + "]"
-                db.execute(text("""
-                    INSERT INTO hero_documents (hero_name, section_title, content, embedding)
-                    VALUES (:h, :t, :c, CAST(:e AS vector))
-                """), {"h": cat, "t": title, "c": content, "e": vector_str})
-            db.commit()
-            print(f"Indexed batch [{i + 1} to {min(i + batch_size, len(all_chunks))}] / {len(all_chunks)}")
-            time.sleep(2.0)
-
-        total_in_db = db.execute(text("SELECT count(*) FROM hero_documents")).scalar()
-        print("\n" + "=" * 65)
-        print(f"SUCCESS: 2026 META SYNC COMPLETE! Total indexed chunks in DB: {total_in_db}")
-        print("=" * 65)
-        return len(all_chunks)
-    finally:
-        db.close()
+    if not all_chunks:
+        raise ValueError("No knowledge fetched; existing documents are preserved.")
+    embeddings = embed_batch_with_retry([f"{c[1]}\n{c[2]}" for c in all_chunks])
+    replace_documents(all_chunks, embeddings=embeddings)
+    return len(all_chunks)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,22 @@
+# Direct application dependencies; compile to requirements.txt with uv --universal.
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg[binary]
+psycopg2-binary
+pydantic
+pydantic-settings>=2.14.2
+python-dotenv
+requests
+httpx
+google-genai
+langchain-core
+langchain-google-genai
+
+# Security floors for transitive dependencies identified by the audit.
+anyio>=4.14.2
+certifi>=2026.10.19
+cryptography>=50.0.0
+langsmith>=0.8.18
+pyasn1>=0.6.5
+urllib3>=2.8.0

@@ -8,9 +8,9 @@ from typing import List, Dict, Any, Tuple
 # Ensure project root is in sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from sqlalchemy import text
-from app.database import SessionLocal
-from app.services.rag import get_genai_client
+from app.services.embeddings import embed_batch_with_retry
+from app.services.knowledge_store import replace_documents
+
 
 HEADERS = {
     "User-Agent": "DotaBotTracker/2.0 (OpenDota automated sync; contact: study@example.com)"
@@ -379,27 +379,6 @@ def parse_latest_patchnotes() -> List[Tuple[str, str, str]]:
 # =====================================================================
 # EMBEDDING & INGESTION PIPELINE
 # =====================================================================
-def embed_batch_with_retry(batch: List[str], max_retries: int = 5) -> List[List[float]]:
-    client = get_genai_client()
-    delay = 4.0
-    for attempt in range(max_retries):
-        try:
-            response = client.models.embed_content(
-                model="models/gemini-embedding-001",
-                contents=batch,
-                config={"output_dimensionality": 768}
-            )
-            return [emb.values for emb in response.embeddings]
-        except Exception as e:
-            err_str = str(e)
-            if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str or "quota" in err_str.lower():
-                print(f"Rate limit hit. Waiting {delay:.1f}s (attempt {attempt + 1}/{max_retries})...")
-                time.sleep(delay)
-                delay *= 1.5
-            else:
-                print(f"Embedding error: {e}")
-                time.sleep(2.0)
-    raise RuntimeError("Failed to embed batch after retries.")
 
 
 def sync_all():
@@ -419,36 +398,11 @@ def sync_all():
     print(f"TOTAL PARSED CHUNKS: {len(all_chunks)}")
     print("=" * 65)
 
-    db = SessionLocal()
-    try:
-        # Check what's already ingested
-        existing = set(r[0] for r in db.execute(text("SELECT hero_name FROM hero_documents")).fetchall())
-        chunks_to_ingest = [c for c in all_chunks if c[0] not in existing]
-        print(f"Already in database: {len(existing)} | Chunks to embed and insert: {len(chunks_to_ingest)}")
-
-        batch_size = 15
-        for i in range(0, len(chunks_to_ingest), batch_size):
-            batch = chunks_to_ingest[i:i + batch_size]
-            texts_to_embed = [f"{c[1]}\n{c[2]}" for c in batch]
-            embeddings = embed_batch_with_retry(texts_to_embed)
-
-            for (cat, title, content), emb in zip(batch, embeddings):
-                db.execute(text("DELETE FROM hero_documents WHERE hero_name = :h"), {"h": cat})
-                vector_str = "[" + ",".join(map(str, emb)) + "]"
-                db.execute(text("""
-                    INSERT INTO hero_documents (hero_name, section_title, content, embedding)
-                    VALUES (:h, :t, :c, CAST(:e AS vector))
-                """), {"h": cat, "t": title, "c": content, "e": vector_str})
-            db.commit()
-            print(f"Indexed batch [{i + 1} to {min(i + batch_size, len(chunks_to_ingest))}] / {len(chunks_to_ingest)}")
-            time.sleep(1.5)
-
-        total_in_db = db.execute(text("SELECT count(*) FROM hero_documents")).scalar()
-        print("\n" + "=" * 65)
-        print(f"SUCCESS: 100% AUTOMATED SYNC COMPLETE! Total indexed chunks: {total_in_db}")
-        print("=" * 65)
-    finally:
-        db.close()
+    if not all_chunks:
+        raise ValueError("No knowledge fetched; existing documents are preserved.")
+    embeddings = embed_batch_with_retry([f"{c[1]}\n{c[2]}" for c in all_chunks])
+    replace_documents(all_chunks, embeddings=embeddings)
+    return len(all_chunks)
 
 
 if __name__ == "__main__":

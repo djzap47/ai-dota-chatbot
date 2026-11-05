@@ -1,30 +1,44 @@
 """
-Bulk Dota 2 Knowledge Ingestion Pipeline.
-Loads complete authoritative game data (heroes, abilities, facets, talents, aghs, items, builds, matchups)
-from precomputed local datasets in app/data/ and bulk-embeds them directly into Supabase pgvector.
-Zero one-by-one hero scraping, zero rate-limits.
+Compile bundled Dota 2 datasets into searchable knowledge documents.
+Atomically replace the text index, then generate embeddings within provider quota.
 """
 
 import os
 import sys
 import json
-import time
-from typing import List, Dict, Any, Tuple
+from pathlib import Path
+from typing import List, Any, Tuple
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from sqlalchemy import text
 from app.database import SessionLocal
-from scripts.sync_opendota_meta_and_pros import embed_batch_with_retry
+from app.services.embeddings import embed_batch_with_retry
+from app.services.knowledge_store import replace_documents
+from app.config import settings
 
-DATA_DIR = "app/data"
+DATA_DIR = Path(__file__).resolve().parents[1] / "app" / "data"
 
 def load_json(filename: str) -> Any:
-    path = os.path.join(DATA_DIR, filename)
-    if os.path.exists(path):
-        with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {}
+    with (DATA_DIR / filename).open(encoding="utf-8") as source:
+        value = json.load(source)
+    expected = list if filename in {"aghs_desc.json", "game_mechanics.json"} else dict
+    if not isinstance(value, expected) or not value:
+        raise ValueError(f"Missing or invalid dataset: {filename}")
+    return value
+
+def describe_item(item):
+    def stringify(value):
+        return " / ".join(map(str, value)) if isinstance(value, list) else str(value or "")
+    effects = [stringify(item.get(key)) for key in ("notes", "hint", "desc") if item.get(key)]
+    for ability in item.get("abilities", []):
+        effects.append(f"{ability.get('type', '').title()}: {ability.get('title', '')}: {stringify(ability.get('description'))}")
+    stats = []
+    for attribute in item.get("attrib", []):
+        value = stringify(attribute.get("value"))
+        label = attribute.get("display") or attribute.get("key", "Stat").replace("_", " ").title()
+        stats.append(label.replace("{value}", value) if "{value}" in label else f"{label}: {value}")
+    return "\n".join(effects), ", ".join(stats)
 
 def build_all_knowledge_chunks() -> List[Tuple[str, str, str]]:
     heroes = load_json("heroes.json")
@@ -35,6 +49,15 @@ def build_all_knowledge_chunks() -> List[Tuple[str, str, str]]:
     hero_builds = load_json("hero_builds.json")
     hero_matchups = load_json("hero_matchups.json")
 
+    for hero_id in heroes:
+        builds = hero_builds.get(hero_id, {}).get("builds")
+        if not isinstance(builds, list) or not builds or any(
+            not isinstance(build.get(phase), str) or not build[phase].strip()
+            for build in builds for phase in ("starting", "early", "mid", "late")
+        ):
+            raise ValueError(f"Invalid build data for hero {hero_id}")
+        if hero_id not in hero_matchups:
+            raise ValueError(f"Missing matchup data for hero {hero_id}")
     chunks = []
 
     # 1. HERO COMPREHENSIVE GUIDE & ABILITY KITS
@@ -163,9 +186,7 @@ Matchups & Counters:
         comps = item.get("components") or []
         comp_names = [items.get(c, {}).get("dname", c.replace("_", " ").title()) for c in comps if c and not c.startswith("recipe_")]
 
-        desc = item.get("notes", "") or item.get("hint", "") or ""
-        attribs = item.get("attrib", [])
-        attr_str = ", ".join([f"{a.get('header', '')} {a.get('value', '')} {a.get('footer', '')}".strip() for a in attribs if isinstance(a, dict)])
+        desc, attr_str = describe_item(item)
 
         cat_item = dname
         title_item = f"Item Guide & Recipe: {dname} ({cost} Gold)" if cost else f"Neutral Item Guide: {dname} (Tier {tier})"
@@ -191,57 +212,27 @@ Description / Effects: {desc if desc else 'Core tactical item.'}"""
     return chunks
 
 def bulk_ingest_into_supabase(batch_size: int = 15):
+    if not 1 <= batch_size <= 100:
+        raise ValueError("batch_size must be between 1 and 100")
     chunks = build_all_knowledge_chunks()
-    print(f"Starting bulk ingestion of {len(chunks)} knowledge chunks into Supabase...")
-
-    db = SessionLocal()
-    try:
-        # Wipe old stale/broken/facet chunks first to guarantee a pure, clean state
-        print("Purging old knowledge documents from Supabase...")
-        db.execute(text("TRUNCATE TABLE hero_documents;"))
-        db.commit()
-        print("Cleaned hero_documents table. Inserting all fresh chunks...")
-
-        total = len(chunks)
-        insert_sql = text("""
-            INSERT INTO hero_documents (hero_name, section_title, content)
-            VALUES (:h, :t, :c)
-        """)
-        for cat, title, content in chunks:
-            db.execute(insert_sql, {"h": cat, "t": title, "c": content})
-        db.commit()
-        print(f"Successfully loaded all {total} knowledge chunks into Supabase hero_documents!")
-
-        # Attempt to compute vector embeddings where quota permits
-        print("Attempting to compute vector embeddings where quota permits...")
+    # Validate first, then replace in a single transaction. Readers keep the old snapshot.
+    ids = replace_documents(chunks, replace_all=True)
+    for start in range(0, len(chunks), batch_size):
+        batch = chunks[start:start + batch_size]
         try:
-            for i in range(0, total, batch_size):
-                batch = chunks[i:i + batch_size]
-                texts_to_embed = [f"{c[1]}\n{c[2]}" for c in batch]
-                try:
-                    embeddings = embed_batch_with_retry(texts_to_embed, max_retries=1)
-                except Exception as emb_e:
-                    print(f"Notice: Gemini embedding API quota limit reached ({emb_e}). All documents are already safely stored and accessible via hybrid keyword/FTS search.")
-                    break
-
-                for (cat, title, content), emb in zip(batch, embeddings):
-                    vector_str = "[" + ",".join(map(str, emb)) + "]"
+            embeddings = embed_batch_with_retry([f"{c[1]}\n{c[2]}" for c in batch], max_retries=1)
+            with SessionLocal() as db, db.begin():
+                for document_id, embedding in zip(ids[start:start + batch_size], embeddings):
+                    # IDs prevent a concurrent replacement receiving vectors for older text.
                     db.execute(text("""
-                        UPDATE hero_documents 
-                        SET embedding = CAST(:e AS vector)
-                        WHERE hero_name = :h AND section_title = :t
-                    """), {"h": cat, "t": title, "e": vector_str})
-                db.commit()
-                print(f"Vectorized [{i + 1} to {min(i + batch_size, total)}] / {total} chunks.")
-        except Exception as vec_err:
-            print(f"Vectorization note: {vec_err}")
-
-        total_db = db.execute(text("SELECT count(*) FROM hero_documents")).scalar()
-        print(f"\nBULK INGESTION COMPLETE! Total documents in Supabase: {total_db}")
-        return total_db
-    finally:
-        db.close()
+                        UPDATE hero_documents SET embedding = CAST(:embedding AS vector), embedding_model = :model
+                        WHERE id = :id
+                    """), {"id": document_id, "embedding": str(embedding), "model": settings.EMBEDDING_MODEL})
+        except Exception as error:
+            print(f"Vectorization unavailable ({type(error).__name__}); text search remains available.")
+            break
+    print(f"Loaded {len(chunks)} knowledge documents.")
+    return len(chunks)
 
 if __name__ == "__main__":
     bulk_ingest_into_supabase()
-

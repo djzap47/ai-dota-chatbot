@@ -38,9 +38,9 @@ Requires `SUPABASE_DB_URL` and `STRATZ_API_KEY`. Updates `heroes` and `hero_stat
 python scripts/bulk_ingest_all_dota_knowledge.py
 ```
 
-Requires `SUPABASE_DB_URL`; `GOOGLE_API_KEY` is needed for embeddings. **This truncates `hero_documents` and commits the deletion before inserting new data.** It also removes any documents previously added by alternate ingestion scripts. Save custom knowledge separately before running it.
+Requires `SUPABASE_DB_URL`; `GOOGLE_API_KEY` is needed for embeddings. **This validates the datasets, then replaces `hero_documents` in one transaction.** Missing, malformed, or empty input stops the refresh; insertion errors roll back the replacement. It also removes any documents previously added by alternate ingestion scripts. Save custom knowledge separately before running it.
 
-Text is committed before vector generation. If embedding quota is exhausted, the text remains searchable by keywords, while some rows may have no vector. The reported document count is not an embedding-coverage count. The `/scraper/sync-meta` endpoint invokes this loader as well.
+Text is committed before vector generation. If embedding quota is exhausted, the text remains searchable by keywords, while some rows may have no vector. Vectors are tagged with `EMBEDDING_MODEL`; only matching models are searched. Updates use document IDs so overlapping refreshes cannot attach old vectors to new text. All writers share a transaction advisory lock. The reported document count is not an embedding-coverage count. The `/scraper/sync-meta` endpoint invokes this loader as well.
 
 ### Refresh game constants
 
@@ -72,11 +72,11 @@ These are separate maintenance paths, not prerequisites for the quick start.
 
 | Script | What it does | Important behavior |
 | --- | --- | --- |
-| `fetch_hero_builds_and_matchups.py` | Downloads OpenDota popularity and matchups into local files | Uses the older flat build format. Run the current build generator afterward before bulk ingestion. Existing matchup entries are reused. |
-| `sync_opendota_meta_and_pros.py` | Fetches hero meta and pro match records, then writes embedded documents | Calls OpenDota and Gemini; replaces documents by category/name. Also contains the item graph and embedding helper used by other scripts. |
-| `sync_opendota_knowledge.py` | Fetches items, heroes, teams, tournaments, and patch notes | Uses a separate embedding helper and skips categories already present. It is not a complete refresh of existing knowledge. |
-| `ingest_all_heroes_rag.py` | Fetches Valve hero data and writes ability/upgrade documents | Deletes existing documents per hero. Referenced heroes must already exist in `heroes`. |
-| `ingest_liquipedia.py` | Fetches selected Liquipedia hero sections | Deletes existing documents per hero; its CLI targets five example heroes. Configure an appropriate contact user-agent before use. |
+| `fetch_hero_builds_and_matchups.py` | Downloads OpenDota popularity and matchups into local files | Preserves curated nested builds and converts valid older flat entries to the current format. Existing matchup entries are reused. |
+| `sync_opendota_meta_and_pros.py` | Fetches hero meta and pro match records, then writes embedded documents | Calls OpenDota and Gemini; replaces documents by category/name. Also contains the item graph used by build scripts. Embedding helpers are shared in `app/services/embeddings.py`. |
+| `sync_opendota_knowledge.py` | Fetches items, heroes, teams, tournaments, and patch notes | Embeds the fetched documents before atomically replacing their categories. Unrelated categories remain intact. |
+| `ingest_all_heroes_rag.py` | Fetches Valve hero data and writes ability/upgrade documents | Embeds each hero first, then atomically replaces its documents. Referenced heroes must exist in `heroes`. |
+| `ingest_liquipedia.py` | Fetches selected Liquipedia hero sections | Embeds each hero first, then atomically replaces its documents; its CLI targets five example heroes. Configure an appropriate contact user-agent before use. |
 | `migrate_and_sync.py` | Adds roles, deduplicates old stats, adds uniqueness, then syncs STRATZ | Deletes older duplicate stats rows. Review before using on an existing database; unnecessary for a new database initialized with `schema.sql`. |
 
 Some download scripts execute network requests and file writes at import time. Run them intentionally as commands; avoid importing them from tests or application startup. Live ingestion may consume provider quota and can take longer than a serverless request allows.
@@ -91,7 +91,9 @@ Some download scripts execute network requests and file writes at import time. R
 | Chat says no statistics are available | Check database connectivity and the last successful scraper run. |
 | Hero builds contain missing sections | Verify that `hero_builds.json` uses a `builds` list with `starting`, `early`, `mid`, and `late` fields. |
 | New local data does not appear in chat | Re-run bulk ingestion against the same database the app uses. |
-| Embedding or model errors | Check Google API access, model availability, and quota. `GEMINI_MODEL` controls chat only. |
-| Scraper API returns HTTP 401 | Send the configured `CRON_SECRET` in an authorization header. |
+| Embedding or model errors | Check Google API access, model availability, and quota. `GEMINI_MODEL` controls chat; `EMBEDDING_MODEL` controls vectors and must match the ingested index. |
+| Scraper API returns HTTP 401 | Send `Authorization: Bearer <CRON_SECRET>`. |
+| Maintenance returns HTTP 503 | Set a nonblank `CRON_SECRET`; check server configuration if sync fails. |
+| Chat returns HTTP 503 after upgrade | Apply `migrations/001_security.sql` and check the backend database role. |
 
 For a bug report, include the command, sanitized error, Python version, and whether you ran locally or on Vercel. Do not include API tokens or your full database URI.

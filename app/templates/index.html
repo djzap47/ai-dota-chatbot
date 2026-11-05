@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ask about Dota 2 hero builds, items, matchups, and stored Immortal bracket statistics with a Gemini-powered assistant.">
   <title>AI Dota 2 Tracker & Chatbot</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -324,9 +325,9 @@
     <div style="display: flex; align-items: center; gap: 0.75rem;">
       <div class="status-badge">
         <span class="status-dot"></span>
-        <span>Immortal Stats Online</span>
+        <span>Immortal Bracket Stats</span>
       </div>
-      <a href="/docs" target="_blank" class="docs-link">API Docs</a>
+      <a href="/docs" target="_blank" rel="noopener noreferrer" class="docs-link">API Docs</a>
     </div>
   </header>
 
@@ -335,9 +336,9 @@
       <div class="message bot">
         <div class="avatar">🤖</div>
         <div class="bubble">
-          Greetings! I am your <strong>Dota 2 AI Assistant</strong> powered by Gemini and real-time Immortal bracket statistics from STRATZ. 
+          Ask your <strong>Dota 2 AI Assistant</strong> about hero builds, game knowledge, and the latest stored Immortal bracket statistics from STRATZ.
           <br><br>
-          Ask me about current hero win rates, counters, items, lore, or esports meta!
+          Include the hero and role in each question. Try a build, matchup, item recipe, or win-rate question to get started.
         </div>
       </div>
     </div>
@@ -358,11 +359,12 @@
     </div>
 
     <form class="input-form" id="chatForm">
-      <input 
-        type="text" 
-        class="input-field" 
-        id="userInput" 
-        placeholder="Ask about Dota 2 heroes, stats, lore, or items..." 
+      <input
+        type="text"
+        class="input-field" maxlength="2000"
+        id="userInput"
+        aria-label="Your Dota 2 question"
+        placeholder="Ask about Dota 2 heroes, stats, lore, or items..."
         autocomplete="off"
         required
       />
@@ -444,8 +446,10 @@
       if (el) el.remove();
     }
 
+    let inFlight = false;
     async function sendMessage(text) {
-      if (!text.trim()) return;
+      if (inFlight || !text.trim() || text.length > 2000) return;
+      inFlight = true;
 
       appendMessage(text, true);
       userInput.value = '';
@@ -464,7 +468,6 @@
           signal: controller.signal
         });
 
-        clearTimeout(timeoutId);
         removeTypingIndicator();
 
         const contentType = response.headers.get("content-type") || "";
@@ -473,8 +476,7 @@
         if (contentType.includes("application/json")) {
           data = await response.json();
         } else {
-          const rawText = await response.text();
-          data = { detail: `Server response (${response.status}): ${rawText.slice(0, 150)}` };
+          data = { detail: `Service unavailable (${response.status}). Please try again later.` };
         }
 
         if (response.ok && data.reply) {
@@ -483,7 +485,6 @@
           appendMessage(`⚠️ ${data.detail || 'Failed to receive reply.'}`, false);
         }
       } catch (err) {
-        clearTimeout(timeoutId);
         removeTypingIndicator();
         if (err.name === 'AbortError') {
           appendMessage(`⚠️ Request timed out after 50 seconds. Please try again.`, false);
@@ -491,6 +492,8 @@
           appendMessage(`⚠️ Connection error: ${err.message}`, false);
         }
       } finally {
+        clearTimeout(timeoutId);
+        inFlight = false;
         sendBtn.disabled = false;
         userInput.focus();
       }

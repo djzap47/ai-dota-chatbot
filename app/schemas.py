@@ -1,9 +1,9 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional, List
 from datetime import datetime
 
 class ChatRequest(BaseModel):
-    message: str
+    message: str = Field(max_length=2000)
 
 class ChatResponse(BaseModel):
     reply: str
@@ -17,8 +17,7 @@ class HeroStatItem(BaseModel):
     win_count: Optional[int] = None
     recorded_at: Optional[datetime] = None
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class ScraperResponse(BaseModel):
     status: str

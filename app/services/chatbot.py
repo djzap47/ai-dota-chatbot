@@ -1,12 +1,17 @@
-import os
+import logging
 import time
 import asyncio
+from threading import BoundedSemaphore
 from typing import Optional, List, Dict, Any
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import SystemMessage, HumanMessage
 from app.config import settings
 from app.database import SessionLocal
 from app.models import HeroStat
+from app.services.errors import ServiceError
+
+logger = logging.getLogger(__name__)
+_chat_slots = BoundedSemaphore(settings.CHAT_MAX_CONCURRENT)
 
 # In-memory cache for the 127 hero stats (cached for 10 minutes to minimize DB queries)
 _stats_cache: Optional[str] = None
@@ -38,7 +43,7 @@ def get_hero_stats_summary() -> str:
         finally:
             db.close()
     except Exception as e:
-        print(f"Warning: Failed to fetch hero stats from DB: {e}")
+        logger.warning("Statistics lookup failed (%s)", type(e).__name__)
         if _stats_cache:
             return _stats_cache
 
@@ -92,12 +97,17 @@ def get_llm(temperature: Optional[float] = None) -> ChatGoogleGenerativeAI:
         model=settings.GEMINI_MODEL,
         google_api_key=settings.GOOGLE_API_KEY,
         temperature=temp,
-        max_output_tokens=1000
+        max_output_tokens=1000,
+        timeout=settings.UPSTREAM_TIMEOUT_SECONDS,
+        # This adapter counts the initial request; zero enables SDK defaults.
+        max_retries=1,
     )
 
 
 def _extract_text(content: Any) -> str:
     """Safely extract plain text string from model response content."""
+    if content is None:
+        return ""
     if isinstance(content, str):
         return content.strip()
     if isinstance(content, list):
@@ -113,10 +123,8 @@ def _extract_text(content: Any) -> str:
 
 def _run_chatbot_sync(user_input: str) -> str:
     """
-    Executes a single, lightning-fast LLM call grounded in:
-    1. Real-time Immortal bracket stats (STRATZ).
-    2. Real-time official Liquipedia / game wiki RAG knowledge (Heroes, Items, Mechanics, Esports).
-    Executes in ~3 to 5 seconds.
+    Generate one answer using stored STRATZ statistics and retrieved knowledge.
+    Available context depends on the last successful ingestion and retrieval.
     """
     prompt = build_system_prompt()
     
@@ -129,7 +137,7 @@ def _run_chatbot_sync(user_input: str) -> str:
             rag_context = "\n\nVERIFIED COMPETITIVE DOTA 2 META & PRO MATCH GROUND TRUTH:\n" + "\n\n".join(snippets)
             prompt += rag_context
     except Exception as rag_err:
-        print(f"RAG lookup notice: {rag_err}")
+        logger.warning("Knowledge lookup failed (%s)", type(rag_err).__name__)
 
     llm = get_llm(temperature=settings.CHATBOT_TEMPERATURE)
     messages = [
@@ -139,14 +147,31 @@ def _run_chatbot_sync(user_input: str) -> str:
     
     try:
         response = llm.invoke(messages)
-        return _extract_text(response.content)
+        reply = _extract_text(response.content)
+        if not reply:
+            raise ServiceError("The model returned no answer. Please try again.")
+        return reply
+    except ServiceError:
+        raise
     except Exception as e:
         err = str(e)
         if "429" in err or "RESOURCE_EXHAUSTED" in err:
-            return "⏳ Rate limit reached on Google Gemini. Please wait 15–20 seconds and ask again!"
-        return f"⚠️ Error communicating with Gemini: {err}"
+            raise ServiceError("The AI service is busy. Please try again in a minute.", 429) from None
+        logger.warning("Model request failed (%s)", type(e).__name__)
+        raise ServiceError("The AI service is temporarily unavailable. Please try again later.") from None
 
 
 async def get_chat_response(user_input: str) -> str:
     """Run Chatbot asynchronously without blocking the FastAPI event loop."""
-    return await asyncio.to_thread(_run_chatbot_sync, user_input)
+    if not user_input.strip() or len(user_input) > 2000:
+        raise ServiceError("Enter a question between 1 and 2,000 characters.", 400)
+    # Acquire inside the worker. A cancelled HTTP request cannot release the slot
+    # while its synchronous provider call is still running.
+    def run_with_slot():
+        if not _chat_slots.acquire(blocking=False):
+            raise ServiceError("The assistant is busy. Please try again shortly.", 429)
+        try:
+            return _run_chatbot_sync(user_input)
+        finally:
+            _chat_slots.release()
+    return await asyncio.to_thread(run_with_slot)

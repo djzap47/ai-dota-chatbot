@@ -15,7 +15,7 @@ python -m compileall -q api app scripts bot.py
 git diff --check
 ```
 
-Tests use Python's standard-library `unittest`, FastAPI's test client, local datasets, and mocked external calls. CI runs on Python 3.12 and 3.14. It does not call Gemini, STRATZ, or a live database.
+Tests use Python's standard-library `unittest`, FastAPI's test client, local datasets, and mocked external calls. CI runs on Python 3.12 and 3.14, with a separate disposable PostgreSQL/pgvector service for integration checks. It does not call Gemini, STRATZ, or the deployed database.
 
 ## Making changes
 
@@ -32,3 +32,18 @@ For build or mechanics corrections, include the hero, role, relevant patch, and 
 Describe the problem, the resulting behavior, and how you checked it. Keep unrelated refactors separate so the change is easy to review. Use the issue templates for reproducible bugs and feature proposals.
 
 When reporting an incorrect answer, include the exact question and response, whether it happened in the demo or locally, and any relevant data-refresh details. Omit credentials and personal data.
+
+For vulnerabilities, follow [SECURITY.md](SECURITY.md). Keep local logs, audit output, environments, and scratch work out of commits. Bundled JSON datasets, SQL migrations, and dependency files are project inputs and should stay tracked.
+
+## Dependency updates
+
+Edit direct requirements and security floors in `requirements.in`, then regenerate the cross-platform lock with uv:
+
+```bash
+uv pip compile requirements.in --universal --python-version 3.12 --upgrade --output-file requirements.txt
+python -m pip install -r requirements.txt
+python -m pip check
+python -m unittest discover -s tests -v
+```
+
+CI audits the pinned lock using `pip-audit`. Run audits in a separate tooling environment so the audit tool does not change application dependencies. PostgreSQL integration checks require a disposable database named `dota_test` with pgvector installed; set `TEST_DATABASE_URL` to its SQLAlchemy URL. Never point these tests at production.

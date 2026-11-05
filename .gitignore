@@ -5,23 +5,40 @@
 .venv/
 venv/
 ENV/
+.venv-*/
+.python_history
 
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+*.pyd
+.eggs/
+pip-wheel-metadata/
+*.whl
 
 # Local runtime files
 *.log
 *.sqlite3
 *.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+*.dump
+*.backup
+/backups/
+/logs/
+/tmp/
+*.prof
+*.pstats
 
 # IDEs / Editors
 .idea/
 .vscode/
 *.swp
 *.swo
+*~
+*.orig
 
 # Testing / Coverage
 htmlcov/
@@ -37,10 +54,14 @@ coverage.xml
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
+.pytype/
+.dmypy.json
+/test-results/
 
 # OS specific
 .DS_Store
 Thumbs.db
+Desktop.ini
 
 # Other
 *.egg-info/
@@ -48,3 +69,6 @@ dist/
 build/
 scratch/
 .vercel/
+
+# Keep bundled app/data inputs, documentation assets, migrations, and the
+# dependency lock tracked: they are required for setup and reproducible builds.

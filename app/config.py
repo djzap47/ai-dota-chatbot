@@ -1,4 +1,4 @@
-import os
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Optional
 
@@ -7,7 +7,11 @@ class Settings(BaseSettings):
     GOOGLE_API_KEY: str = ""
     STRATZ_API_KEY: str = ""
     GEMINI_MODEL: str = "gemini-3.5-flash-lite"
+    EMBEDDING_MODEL: str = "gemini-embedding-2"
     CHATBOT_TEMPERATURE: float = 0.7
+    CHAT_REQUESTS_PER_MINUTE: int = Field(default=30, ge=1, le=10000)
+    CHAT_MAX_CONCURRENT: int = Field(default=4, ge=1, le=32)
+    UPSTREAM_TIMEOUT_SECONDS: int = Field(default=20, ge=1, le=60)
     CRON_SECRET: Optional[str] = None
     PORT: int = 8000
 

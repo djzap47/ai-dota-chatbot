@@ -357,45 +357,7 @@ CURATED_BUILDS = {
         ]
     },
     # Tiny
-    "19": {
-        "hero_name": "Tiny",
-        "builds": [
-            {
-                "name": "Carry / Echo Sabre & Tree Burst Build",
-                "starting": "Quelling Blade, Tango, Iron Branch, Magic Stick, Gauntlets of Strength",
-                "early": "Power Treads, Magic Wand, Echo Sabre",
-                "mid": "Blink Dagger, Black King Bar, Harpoon",
-                "late": "Daedalus, Assault Cuirass, Satanic, Swift Blink"
-            },
-            {
-                "name": "Mid / Bottle & Blink Ganking Build",
-                "starting": "Tango, Iron Branch, Gauntlets of Strength, Faerie Fire, Bottle",
-                "early": "Power Treads, Bottle, Blink Dagger",
-                "mid": "Black King Bar, Aghanim's Scepter, Daedalus",
-                "late": "Assault Cuirass, Satanic, Swift Blink, Refresher Orb"
-            }
-        ]
-    },
     # Lina
-    "25": {
-        "hero_name": "Lina",
-        "builds": [
-            {
-                "name": "Physical Carry / Falcon Blade & Maelstrom Build",
-                "starting": "Quelling Blade, Tango, Iron Branch, Circlet, Slippers of Agility",
-                "early": "Power Treads, Falcon Blade, Maelstrom",
-                "mid": "Dragon Lance, Black King Bar, Gleipnir",
-                "late": "Daedalus, Satanic, Butterfly, Swift Blink"
-            },
-            {
-                "name": "Magic / Eul's & Aghanim's Burst Build",
-                "starting": "Tango, Iron Branch, Circlet, Mantle of Intelligence, Bottle",
-                "early": "Power Treads, Bottle, Eul's Scepter",
-                "mid": "Aghanim's Scepter, Black King Bar, Octarine Core",
-                "late": "Scythe of Vyse, Ethereal Blade, Refresher Orb, Wind Waker"
-            }
-        ]
-    },
     # Doom
     "69": {
         "hero_name": "Doom",

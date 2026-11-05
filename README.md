@@ -16,6 +16,8 @@
   <a href="#quick-start">Run locally</a>
   &nbsp;·&nbsp;
   <a href="CONTRIBUTING.md">Contribute</a>
+  &nbsp;·&nbsp;
+  <a href="SECURITY.md">Security</a>
 </p>
 
 <p align="center">
@@ -117,13 +119,19 @@ Edit `.env` using [.env.example](.env.example) as the reference:
 | `STRATZ_API_KEY` | Fetching hero definitions and Immortal bracket statistics. |
 | `CRON_SECRET` | Shared secret for scraper and ingestion routes. **Set this before deploying.** |
 | `GEMINI_MODEL` | Chat model; defaults to `gemini-3.5-flash-lite` in [config.py](app/config.py). Choose a model available to your API key. |
-| `CHATBOT_TEMPERATURE` | Chat sampling temperature; defaults to `0.7`. |
+| `CHATBOT_TEMPERATURE` | Sampling temperature, where supported by the model; defaults to `0.7`. |
+| `EMBEDDING_MODEL` | Vector model; defaults to `gemini-embedding-2`. Use the same setting for ingestion and queries. |
+| `CHAT_REQUESTS_PER_MINUTE` | Shared chat budget across all instances and visitors; defaults to `30`. |
+| `CHAT_MAX_CONCURRENT` | Concurrent chat workers per process; defaults to `4`. |
+| `UPSTREAM_TIMEOUT_SECONDS` | Timeout per Gemini request; defaults to `20` seconds. |
+
+The last four settings are optional; omitting them uses these defaults. Set `CRON_SECRET` to a random value to enable maintenance endpoints. Keep `.env` local—Vercel reads its own project environment variables.
 
 Copy the transaction pooler connection string from your Supabase project and keep its actual host and username. URL-encode special characters in the password. The application adds `sslmode=require` unless the URI already specifies an SSL mode.
 
 ### 3. Initialize and populate the database
 
-Run [schema.sql](schema.sql) in the Supabase SQL Editor. It enables pgvector and creates `heroes`, `hero_stats`, `hero_documents`, and the vector index.
+Run [schema.sql](schema.sql) in the Supabase SQL Editor. It enables pgvector, creates `heroes`, `hero_stats`, `hero_documents`, and `chat_request_limits`, adds the vector index, and restricts browser-role access to these backend tables.
 
 Then load the bundled knowledge and fetch statistics:
 
@@ -132,7 +140,7 @@ python scripts/bulk_ingest_all_dota_knowledge.py
 python scripts/run_scraper.py
 ```
 
-**The bulk loader replaces all rows in `hero_documents`.** It stores the text first, then attempts to generate embeddings using your Gemini quota. Use a development database when experimenting. You do not need to download the datasets again for the initial setup.
+**The bulk loader replaces all rows in `hero_documents` in one transaction after validating the datasets.** If insertion fails, the previous index stays intact. It then generates embeddings using your Gemini quota. Use a development database when experimenting. You do not need to download the datasets again for the initial setup.
 
 ### 4. Start the app
 
@@ -159,7 +167,7 @@ For terminal chat, run `python bot.py` in a separate terminal with the environme
 | `GET` | `/api/cron` | Scheduled STRATZ sync |
 | `POST` | `/scraper/sync-meta` | Replace the knowledge index from local datasets |
 
-The three scraper routes require `Authorization: Bearer <CRON_SECRET>` when the secret is configured. If it is unset, those routes accept unauthenticated requests. `/scraper/sync-meta` does not download fresh game data.
+The three scraper routes require `Authorization: Bearer <CRON_SECRET>`. Missing or blank `CRON_SECRET` disables them with HTTP 503; invalid tokens return HTTP 401. Query-string secrets are not accepted. `/scraper/sync-meta` does not download fresh game data.
 
 Example chat request using Python, on any supported shell:
 
@@ -175,7 +183,15 @@ response.raise_for_status()
 print(response.json()["reply"])
 ```
 
-The response contains `reply` and `status` fields. Model output varies; the example questions above are prompts to try, not recorded benchmark results.
+Successful responses contain `reply` and `status` fields. Chat accepts up to 2,000 characters and a 16 KiB request body. The default deployment-wide budget is 30 requests per minute, backed by PostgreSQL, with four concurrent generation workers per process. HTTP 429 means the budget, concurrency limit, or provider quota was reached; HTTP 503 indicates an unavailable dependency. Failed generation is never returned as a successful reply. Model output varies; the example questions above are prompts to try, not recorded benchmark results.
+
+## Upgrade an existing installation
+
+1. Run [migrations/001_security.sql](migrations/001_security.sql) in the Supabase SQL Editor **before deploying this code**. It adds embedding model metadata, creates the shared chat-budget table, and restricts browser-role access to backend tables. Use a database-owner connection for the backend. New installations get these changes from `schema.sql`.
+2. Install the pinned dependencies with `python -m pip install -r requirements.txt`, configure the variables in `.env.example`, and redeploy.
+3. Run `python scripts/bulk_ingest_all_dota_knowledge.py` locally to rebuild the knowledge index and tag vectors with `EMBEDDING_MODEL`. Existing untagged vectors are excluded from semantic search; their text remains available to keyword search.
+
+The application does not run migrations automatically. Chat fails closed with HTTP 503 if the budget table is missing or inaccessible. `CHAT_REQUESTS_PER_MINUTE` is shared across all instances, so one caller can exhaust the public demo's budget; use provider spending limits and hosting controls as well. See [architecture](docs/architecture.md) for configuration details.
 
 ## Deploy to Vercel
 
@@ -200,8 +216,11 @@ app/
 scripts/                        Ingestion, data refresh, and build generation
 tests/                          Offline API, configuration, and data checks
 docs/                           Architecture and data-maintenance guides
+migrations/                     SQL upgrades for existing installations
 .github/                        CI workflow and contribution templates
 bot.py                          Terminal chat client
+requirements.in                 Direct dependencies and security minimums
+requirements.txt                Pinned cross-platform dependency lock
 schema.sql                      Database initialization
 vercel.json                     Deployment routes and cron schedule
 ```
@@ -213,15 +232,17 @@ python -m unittest discover -s tests -v
 python -m compileall -q api app scripts bot.py
 ```
 
-The test suite uses local datasets and mocked services; it needs no API keys or running database. GitHub Actions runs the checks on Python 3.12 and 3.14.
+Offline tests use local datasets and mocked services, requiring no API keys. GitHub Actions runs them on Python 3.12 and 3.14, audits the dependency lock, and runs PostgreSQL/pgvector integration tests for rollback, concurrent rate limiting, model isolation, and RLS. Those integration tests are skipped locally unless `TEST_DATABASE_URL` points to a disposable database named `dota_test`.
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow and [data maintenance](docs/data-maintenance.md) before running refresh or migration scripts. Some older ingestion scripts use different document or build formats.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow and [data maintenance](docs/data-maintenance.md) before running refresh or migration scripts. All ingestion paths use one configured embedding model and atomic document replacement. The optional scripts replace different categories of knowledge; review their scope first.
+
+See the [changelog](CHANGELOG.md) for pending changes and [security policy](SECURITY.md) for reporting vulnerabilities.
 
 ## Current limits
 
 - Statistics reflect the latest successful sync, with a 10-minute chat cache. Game knowledge and curated builds can lag behind patches.
 - Generated answers can be wrong. Build rules are prompt instructions and heuristics, not a gameplay correctness guarantee.
-- There is no player-account tracking, match-history dashboard, persistent chat memory, user authentication, or application-level rate limiting.
+- There is no player-account tracking, match-history dashboard, persistent chat memory, or user authentication. Chat has a shared request budget rather than individual user quotas.
 - The public chat endpoint uses the deployer's Gemini quota. Service availability and usage limits depend on the configured providers.
 - `/health` checks database connectivity only; it does not verify table contents or access to Gemini and STRATZ.
 

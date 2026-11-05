@@ -8,9 +8,11 @@ if root_dir not in sys.path:
     sys.path.insert(0, root_dir)
 
 import asyncio
+import logging
+import secrets
 from typing import Optional, List
 from fastapi import FastAPI, Depends, HTTPException, Header, Query
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import text, func
@@ -27,6 +29,11 @@ from app.schemas import (
 )
 from app.services.chatbot import get_chat_response, invalidate_stats_cache
 from app.services.stratz import run_scraper_task
+from app.services.errors import ServiceError
+from app.services.rate_limit import consume_chat_budget
+from app.middleware import ChatBodyLimitMiddleware
+
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="AI Dota 2 Tracker API",
@@ -38,10 +45,23 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(ChatBodyLimitMiddleware)
+
+
+@app.exception_handler(ServiceError)
+async def service_error_handler(request, error: ServiceError):
+    headers = {"Retry-After": "60"} if error.status_code == 429 else None
+    return JSONResponse({"detail": str(error)}, status_code=error.status_code, headers=headers)
+
+
+@app.exception_handler(Exception)
+async def unexpected_error_handler(request, error: Exception):
+    logger.error("Request failed (%s)", type(error).__name__)
+    return JSONResponse({"detail": "Service temporarily unavailable."}, status_code=503)
 
 
 @app.get("/", response_class=HTMLResponse, tags=["Frontend"])
@@ -92,14 +112,16 @@ def health_check():
             db.execute(text("SELECT 1"))
         finally:
             db.close()
-    except Exception as e:
-        db_status = f"error: {str(e)}"
+    except Exception as error:
+        logger.warning("Database health check failed (%s)", type(error).__name__)
+        db_status = "unavailable"
 
-    return HealthResponse(
+    result = HealthResponse(
         status="healthy" if db_status == "connected" else "degraded",
         database=db_status,
         version="2.0.0"
     )
+    return JSONResponse(result.model_dump(), status_code=200 if db_status == "connected" else 503)
 
 
 @app.post("/chat", response_model=ChatResponse, tags=["Chatbot"])
@@ -110,12 +132,16 @@ async def chat(request: ChatRequest):
     """
     if not request.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be empty.")
-        
+
     try:
+        await asyncio.to_thread(consume_chat_budget)
         reply = await get_chat_response(request.message)
         return ChatResponse(reply=reply)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"AI Agent error: {str(e)}")
+    except ServiceError:
+        raise
+    except Exception as error:
+        logger.warning("Chat failed (%s)", type(error).__name__)
+        raise HTTPException(status_code=500, detail="Unable to answer right now. Please try again.") from None
 
 
 @app.get("/heroes/top", response_model=List[HeroStatItem], tags=["Stats"])
@@ -128,7 +154,7 @@ def get_top_heroes(
     Fast direct SQL query without calling the AI agent.
     """
     latest_date_subquery = db.query(func.max(func.date(HeroStat.recorded_at))).scalar_subquery()
-    
+
     top_stats = (
         db.query(HeroStat)
         .filter(func.date(HeroStat.recorded_at) == latest_date_subquery)
@@ -139,30 +165,31 @@ def get_top_heroes(
     return top_stats
 
 
-def verify_auth(authorization: Optional[str] = None, secret: Optional[str] = None):
-    """Verify authorization header or secret query parameter against CRON_SECRET."""
-    if not settings.CRON_SECRET:
-        return
-    token = (secret or authorization or "").strip()
-    if token.startswith("Bearer "):
-        token = token[7:].strip()
-    if token != settings.CRON_SECRET:
+def verify_auth(authorization: Optional[str] = None):
+    """Maintenance is disabled without a secret; accept bearer headers only."""
+    configured = settings.CRON_SECRET
+    if not configured or not configured.strip():
+        raise HTTPException(status_code=503, detail="Maintenance endpoints are not configured.")
+    scheme, _, token = (authorization or "").partition(" ")
+    if scheme.lower() != "bearer" or not secrets.compare_digest(
+        token.strip().encode("utf-8"), configured.encode("utf-8")
+    ):
         raise HTTPException(
             status_code=401,
-            detail="Unauthorized. Enter your CRON_SECRET in the 'secret' parameter or Authorization header."
+            detail="A valid bearer token is required.",
+            headers={"WWW-Authenticate": "Bearer"},
         )
 
 
 @app.get("/api/cron", response_model=ScraperResponse, tags=["Scraper"])
 async def cron_scraper(
-    secret: Optional[str] = Query(None, description="CRON_SECRET query parameter"),
-    authorization: Optional[str] = Header(None, description="CRON_SECRET or Bearer token")
+    authorization: Optional[str] = Header(None, description="Bearer <CRON_SECRET>")
 ):
     """
     Daily cron endpoint intended for Vercel Cron.
-    Secured by comparing Authorization header or secret query against CRON_SECRET if configured.
+    Requires a configured CRON_SECRET and its matching bearer token.
     """
-    verify_auth(authorization=authorization, secret=secret)
+    verify_auth(authorization=authorization)
 
     try:
         updated_count = await asyncio.to_thread(run_scraper_task)
@@ -172,20 +199,20 @@ async def cron_scraper(
             message=f"Scraper completed successfully. Synced {updated_count} heroes.",
             updated_count=updated_count
         )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Scraper failed: {str(e)}")
+    except Exception as error:
+        logger.warning("Statistics sync failed (%s)", type(error).__name__)
+        raise HTTPException(status_code=503, detail="Statistics sync failed. Please try again later.") from None
 
 
 @app.post("/scraper/run", response_model=ScraperResponse, tags=["Scraper"])
 async def manual_scraper(
-    secret: Optional[str] = Query(None, description="Enter CRON_SECRET here (works reliably in Swagger)"),
-    authorization: Optional[str] = Header(None, description="CRON_SECRET or Bearer token")
+    authorization: Optional[str] = Header(None, description="Bearer <CRON_SECRET>")
 ):
     """
     Manually trigger data scraper to update hero stats from STRATZ API.
     Can be executed directly from Swagger UI (/docs).
     """
-    verify_auth(authorization=authorization, secret=secret)
+    verify_auth(authorization=authorization)
 
     try:
         updated_count = await asyncio.to_thread(run_scraper_task)
@@ -195,20 +222,20 @@ async def manual_scraper(
             message=f"Scraper completed successfully. Synced {updated_count} heroes.",
             updated_count=updated_count
         )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Scraper failed: {str(e)}")
+    except Exception as error:
+        logger.warning("Statistics sync failed (%s)", type(error).__name__)
+        raise HTTPException(status_code=503, detail="Statistics sync failed. Please try again later.") from None
 
 
 @app.post("/scraper/sync-meta", response_model=ScraperResponse, tags=["Scraper"])
 async def sync_opendota_meta(
-    secret: Optional[str] = Query(None, description="Enter CRON_SECRET here (works reliably in Swagger)"),
-    authorization: Optional[str] = Header(None, description="CRON_SECRET or Bearer token")
+    authorization: Optional[str] = Header(None, description="Bearer <CRON_SECRET>")
 ):
     """
     Trigger full Bulk Dota 2 Knowledge Ingestion (All Heroes, Abilities, Facets, Talents, Items, Builds).
     Can be executed directly from Swagger UI (/docs).
     """
-    verify_auth(authorization=authorization, secret=secret)
+    verify_auth(authorization=authorization)
 
     try:
         from scripts.bulk_ingest_all_dota_knowledge import bulk_ingest_into_supabase
@@ -218,5 +245,6 @@ async def sync_opendota_meta(
             message="Successfully ingested full Dota 2 encyclopedia (heroes, abilities, items, builds) into pgvector.",
             updated_count=synced_count or 0
         )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Meta sync failed: {str(e)}")
+    except Exception as error:
+        logger.warning("Knowledge sync failed (%s)", type(error).__name__)
+        raise HTTPException(status_code=503, detail="Knowledge sync failed. Check server configuration and retry.") from None
